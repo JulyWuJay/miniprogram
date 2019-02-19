@@ -1,0 +1,6 @@
+<!--miniprogram/pages/people/student/all/allStudent.wxml-->
+<view class='header'></view>
+<view class='main'>
+  <view class='left-bar'></view>
+  <view class='right-main'></view>
+</view>

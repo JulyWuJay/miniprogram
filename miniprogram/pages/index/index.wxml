@@ -50,7 +50,7 @@
   <!-- 师生管理 -->
   <view class='main' style='display:{{mainShow.people}}'>
     <view class="uploader">
-      <navigator url="../databaseGuide/databaseGuide" open-type="navigate" class="uploader-text">
+      <navigator url="../people/student/all/allStudent" open-type="navigate" class="uploader-text">
         <text>学生信息</text>
       </navigator>
     </view>
