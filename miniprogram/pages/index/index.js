@@ -1,5 +1,6 @@
 //index.js
-const app = getApp()
+const common = require('../../js/common/common.js');
+const app = getApp();
 
 Page({
   data: {
@@ -143,6 +144,10 @@ Page({
   chooseTab: function(event){
     if(event.currentTarget.id == 'school'){
       console.log('s');
+      // wx.showToast({
+      //   title: '无记录可删，请见创建一个记录',
+      // })
+      common.sayHello();
       this.setData({
         tabIconUrl: {
           school: '../../images/icon/index-footer/school-chosed.png',
