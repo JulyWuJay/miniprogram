@@ -1,5 +1,10 @@
 <!--miniprogram/pages/people/student/all/allStudent.wxml-->
-<view class='header'></view>
+<view class='header-search'>
+  <view class='header-search-circle'>
+    <image src='../../../../images/icon/common/search.png' class='header-search-circle-icon'></image>
+    <text class='header-search-circle-text'>输入姓名搜索</text>
+  </view>
+</view>
 <view class='main'>
   <view class='left-bar'></view>
   <view class='right-main'></view>

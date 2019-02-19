@@ -26,9 +26,9 @@ Page({
     }    
   },  
   onLoad: function() {
-    if (!wx.cloud) {
+    if (wx.cloud) {
       wx.redirectTo({
-        url: '../chooseLib/chooseLib',
+        url: '../people/student/all/allStudent',
       })
       return
     }

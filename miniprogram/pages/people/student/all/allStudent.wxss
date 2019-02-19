@@ -1,1 +1,2 @@
 /* miniprogram/pages/people/student/all/allStudent.wxss */
+@import "../../../../style/common.wxss";
