@@ -49,6 +49,16 @@
 
   <!-- 师生管理 -->
   <view class='main' style='display:{{mainShow.people}}'>
+    <view class="uploader">
+      <navigator url="../databaseGuide/databaseGuide" open-type="navigate" class="uploader-text">
+        <text>学生信息</text>
+      </navigator>
+    </view>
+    <view class="uploader">
+      <navigator url="../databaseGuide/databaseGuide" open-type="navigate" class="uploader-text">
+        <text>教员信息</text>
+      </navigator>
+    </view>
     师生管理
   </view>
 
