@@ -7,7 +7,22 @@ Page({
     userInfo: {},
     logged: false,
     takeSession: false,
-    requestResult: ''
+    requestResult: '',
+    tabIconUrl: {
+        school: '../../images/icon/index-footer/school-chosed.png',
+        thing: '../../images/icon/index-footer/thing.png',
+        people: '../../images/icon/index-footer/people.png' 
+    },
+    tabText: {
+      school: 'tab-text-chosed',
+      thing: '',
+      people: '' 
+    },
+    mainShow: {
+      school: '',
+      thing: 'none',
+      people: 'none'
+    }    
   },  
   onLoad: function() {
     if (!wx.cloud) {
@@ -24,6 +39,11 @@ Page({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
+              if (res.userInfo.nickName != '我不了地Jay'){
+                wx.redirectTo({
+                  url: '../error/needLogin/needLogin',
+                })
+              }
               this.setData({
                 avatarUrl: res.userInfo.avatarUrl,
                 userInfo: res.userInfo
@@ -57,15 +77,15 @@ Page({
         if (res.result.openid == 'oGVOe4nP51bXMbxoHQAAV5rby_dg' ){
           console.log('管理员');
         }
-        wx.navigateTo({
-          url: '../userConsole/userConsole',
-        })
+        // wx.navigateTo({
+        //   url: '../userConsole/userConsole',
+        // })
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)
-        wx.navigateTo({
-          url: '../deployFunctions/deployFunctions',
-        })
+        // wx.navigateTo({
+        //   url: '../deployFunctions/deployFunctions',
+        // })
       }
     })
   },
@@ -119,5 +139,66 @@ Page({
       }
     })
   },
+  // 切换底部栏
+  chooseTab: function(event){
+    if(event.currentTarget.id == 'school'){
+      console.log('s');
+      this.setData({
+        tabIconUrl: {
+          school: '../../images/icon/index-footer/school-chosed.png',
+          thing: '../../images/icon/index-footer/thing.png',
+          people: '../../images/icon/index-footer/people.png'
+        },
+        tabText: {
+          school: 'tab-text-chosed',
+          thing: '',
+          people: ''
+        },
+        mainShow: {
+          school: '',
+          thing: 'none',
+          people: 'none'
+        } 
+      });
+    }else if(event.currentTarget.id == 'thing'){
+      console.log('t');
+      this.setData({
+        tabIconUrl: {
+          school: '../../images/icon/index-footer/school.png',
+          thing: '../../images/icon/index-footer/thing-chosed.png',
+          people: '../../images/icon/index-footer/people.png'
+        },
+        tabText: {
+          school: '',
+          thing: 'tab-text-chosed',
+          people: ''
+        },
+        mainShow: {
+          school: 'none',
+          thing: '',
+          people: 'none'
+        } 
+      });
+    }else if(event.currentTarget.id == 'people'){
+      console.log('p');
+      this.setData({
+        tabIconUrl: {
+          school: '../../images/icon/index-footer/school.png',
+          thing: '../../images/icon/index-footer/thing.png',
+          people: '../../images/icon/index-footer/people-chosed.png'
+        },
+        tabText: {
+          school: '',
+          thing: '',
+          people: 'tab-text-chosed'
+        },
+        mainShow: {
+          school: 'none',
+          thing: 'none',
+          people: ''
+        } 
+      });
+    }
+  }
 
 })

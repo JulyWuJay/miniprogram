@@ -68,6 +68,12 @@
       <button class="prev" size="mini" type="default" bindtap="prevStep">上一步</button>
       <button class="next" size="mini" type="default" bindtap="nextStep" wx:if="{{counterId}}">下一步</button>
     </div>
+    <div>lll</div>
+    <div>lll</div>
+    <div>lll</div>
+    <div>lll</div>
+    <div>lll</div>
+    <div>lll</div>
   </view>
 
   <!-- 查询记录 -->

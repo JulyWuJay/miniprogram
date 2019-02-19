@@ -1,0 +1,2 @@
+<!--miniprogram/pages/error/needLogin/needLogin.wxml-->
+<text>对不起，您没有权限登陆，请联系管理员</text>
