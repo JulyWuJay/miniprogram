@@ -49,7 +49,7 @@
 
   <!-- 师生管理 -->
   <view class='main' style='display:{{mainShow.people}}'>
-    3
+    师生管理
   </view>
 
   <view class='footer-nav'>
