@@ -1,2 +1,39 @@
 /* miniprogram/pages/people/student/all/allStudent.wxss */
 @import "../../../../style/common.wxss";
+page{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  /* display: flex; */
+  /* flex-direction: column; */
+}
+.main{
+  /* flex-grow: 1; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.left-bar{
+  width:25%;
+  height: 92%;
+  /* flex-grow: 1; */
+  background-color: #e6e6e6;
+  /* padding-top: 5rpx; */
+  overflow: hidden;
+  box-sizing: border-box;
+  /* scroll-behavior: scroll-y; */
+}
+.left-bar-child{
+  width: 100%;
+  height: 120rpx;
+  /* background-color: white; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.right-main{
+  width: 75%;
+  /* flex-grow: 1; */
+}

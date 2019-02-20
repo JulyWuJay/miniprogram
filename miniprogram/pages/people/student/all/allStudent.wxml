@@ -2,10 +2,18 @@
 <view class='header-search'>
   <view class='header-search-circle'>
     <image src='../../../../images/icon/common/search.png' class='header-search-circle-icon'></image>
-    <text class='header-search-circle-text'>输入姓名搜索</text>
+    <text class='header-search-circle-text'>输入学生姓名搜索</text>
   </view>
 </view>
 <view class='main'>
-  <view class='left-bar'></view>
-  <view class='right-main'></view>
+
+  <scroll-view scroll-y class='left-bar'>
+    <view class='left-bar-child' bindtap='chooseClazz' id='1'>一班</view>
+
+  </scroll-view>
+
+  <view class='right-main'>
+
+  
+  </view>
 </view>
