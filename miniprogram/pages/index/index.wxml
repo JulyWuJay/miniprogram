@@ -15,7 +15,7 @@
   </view>
 
   <!-- 教学管理 -->
-  <view class='main' style='display:{{mainShow.school}}'>
+  <view class='main' style='display:{{footerChosed == "school" ? "" : "none"}}'>
     <!-- 上传图片 -->
     <!-- <view class="uploader">
       <view class="uploader-text" bindtap="doUpload">
@@ -43,12 +43,12 @@
   </view>
 
   <!-- 物品管理 -->
-  <view class='main' style='display:{{mainShow.thing}}'>
+  <view class='main' style='display:{{footerChosed == "thing" ? "" : "none"}}'>
     2
   </view>
 
   <!-- 师生管理 -->
-  <view class='main' style='display:{{mainShow.people}}'>
+  <view class='main' style='display:{{footerChosed == "people" ? "" : "none"}}'>
     <view class="uploader">
       <navigator url="../people/student/all/allStudent" open-type="navigate" class="uploader-text">
         <text>学生信息</text>
@@ -64,16 +64,16 @@
 
   <view class='footer-nav'>
     <view class='footer-nav-child' id='school' bindtap='chooseTab'>
-      <image class='footer-icon' src='{{tabIconUrl.school}}'></image>      
-      <text class='{{tabText.school}}'>教学管理</text>
+      <image class='footer-icon' src='{{footerChosed == "school" ? tabIconUrl.chosed.school : tabIconUrl.unchosed.school}}'></image>      
+      <text class='{{footerChosed == "school" ? "tab-text-chosed" : ""}}'>教学管理</text>
     </view>
     <view class='footer-nav-child' id='thing' bindtap='chooseTab'>
-      <image class='footer-icon' src="{{tabIconUrl.thing}}"></image>      
-      <text class='{{tabText.thing}}'>物品管理</text>      
+      <image class='footer-icon' src="{{footerChosed == 'thing' ? tabIconUrl.chosed.thing : tabIconUrl.unchosed.thing}}"></image>      
+      <text class='{{footerChosed == "thing" ? "tab-text-chosed" : "" }}'>物品管理</text>      
     </view>
     <view class='footer-nav-child' id='people' bindtap='chooseTab'>
-      <image class='footer-icon' src="{{tabIconUrl.people}}"></image>            
-      <text class='{{tabText.people}}'>师生管理</text>
+      <image class='footer-icon' src="{{footerChosed == 'people' ? tabIconUrl.chosed.people : tabIconUrl.unchosed.people}}"></image>            
+      <text class='{{footerChosed == "people" ? "tab-text-chosed" : ""}}'>师生管理</text>
     </view>
   </view>
 

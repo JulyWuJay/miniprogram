@@ -10,23 +10,21 @@ Page({
     takeSession: false,
     requestResult: '',
     tabIconUrl: {
-        school: '../../images/icon/index-footer/school-chosed.png',
-        thing: '../../images/icon/index-footer/thing.png',
-        people: '../../images/icon/index-footer/people.png' 
+        unchosed:{
+          school: '../../images/icon/index-footer/school.png',
+          thing: '../../images/icon/index-footer/thing.png',
+          people: '../../images/icon/index-footer/people.png'
+        },
+        chosed:{
+          school: '../../images/icon/index-footer/school-chosed.png',
+          thing: '../../images/icon/index-footer/thing-chosed.png',
+          people: '../../images/icon/index-footer/people-chosed.png'
+        }
     },
-    tabText: {
-      school: 'tab-text-chosed',
-      thing: '',
-      people: '' 
-    },
-    mainShow: {
-      school: '',
-      thing: 'none',
-      people: 'none'
-    }    
+    footerChosed: 'school'   
   },  
   onLoad: function() {
-    if (wx.cloud) {
+    if (!wx.cloud) {
       wx.redirectTo({
         url: '../people/student/all/allStudent',
       })
@@ -142,68 +140,12 @@ Page({
   },
   // 切换底部栏
   chooseTab: function(event){
-    if(event.currentTarget.id == 'school'){
-      console.log('s');
-      // wx.showToast({
-      //   title: '无记录可删，请见创建一个记录',
-      // })
-      common.sayHello();
-      this.setData({
-        tabIconUrl: {
-          school: '../../images/icon/index-footer/school-chosed.png',
-          thing: '../../images/icon/index-footer/thing.png',
-          people: '../../images/icon/index-footer/people.png'
-        },
-        tabText: {
-          school: 'tab-text-chosed',
-          thing: '',
-          people: ''
-        },
-        mainShow: {
-          school: '',
-          thing: 'none',
-          people: 'none'
-        } 
-      });
-    }else if(event.currentTarget.id == 'thing'){
-      console.log('t');
-      this.setData({
-        tabIconUrl: {
-          school: '../../images/icon/index-footer/school.png',
-          thing: '../../images/icon/index-footer/thing-chosed.png',
-          people: '../../images/icon/index-footer/people.png'
-        },
-        tabText: {
-          school: '',
-          thing: 'tab-text-chosed',
-          people: ''
-        },
-        mainShow: {
-          school: 'none',
-          thing: '',
-          people: 'none'
-        } 
-      });
-    }else if(event.currentTarget.id == 'people'){
-      console.log('p');
-      this.setData({
-        tabIconUrl: {
-          school: '../../images/icon/index-footer/school.png',
-          thing: '../../images/icon/index-footer/thing.png',
-          people: '../../images/icon/index-footer/people-chosed.png'
-        },
-        tabText: {
-          school: '',
-          thing: '',
-          people: 'tab-text-chosed'
-        },
-        mainShow: {
-          school: 'none',
-          thing: 'none',
-          people: ''
-        } 
-      });
-    }
+    console.log(event.currentTarget.id);
+    common.sayHello();
+    this.setData({
+      footerChosed: event.currentTarget.id
+    });
+        
   }
 
 })

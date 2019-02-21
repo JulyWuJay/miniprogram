@@ -20,18 +20,21 @@ page{
   height: 92%;
   /* flex-grow: 1; */
   background-color: #e6e6e6;
-  /* padding-top: 5rpx; */
+  padding-top: 5rpx;
   overflow: hidden;
   box-sizing: border-box;
   /* scroll-behavior: scroll-y; */
 }
 .left-bar-child{
   width: 100%;
-  height: 120rpx;
+  height: 100rpx;
   /* background-color: white; */
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.left-chosed{
+  background-color: white;
 }
 .right-main{
   width: 75%;

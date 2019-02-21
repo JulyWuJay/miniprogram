@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    // 左边是否选择中
+    leftChosed: ''
   },
 
   /**
@@ -58,5 +59,10 @@ Page({
   },
   chooseClazz: function (event){
     console.log(event.target.id);
+    console.log(event);
+    this.setData({
+      leftChosed: event.target.id
+    })
+
   }
 })

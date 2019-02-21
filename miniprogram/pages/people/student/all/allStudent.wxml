@@ -8,8 +8,16 @@
 <view class='main'>
 
   <scroll-view scroll-y class='left-bar'>
-    <view class='left-bar-child' bindtap='chooseClazz' id='1'>一班</view>
-
+    <view class='left-bar-child {{ leftChosed == "1" ? "left-chosed" : ""}}' bindtap='chooseClazz' id='1'>一班</view>
+    <view class='left-bar-child {{ leftChosed == "2" ? "left-chosed" : ""}}' bindtap='chooseClazz' id='2'>二班</view>
+    <view class='left-bar-child {{ leftChosed == "3" ? "left-chosed" : ""}}' bindtap='chooseClazz' id='3'>三班</view>
+    <view class='left-bar-child {{ leftChosed == "4" ? "left-chosed" : ""}}' bindtap='chooseClazz' id='4'>四班</view>
+    <view class='left-bar-child {{ leftChosed == "5" ? "left-chosed" : ""}}' bindtap='chooseClazz' id='5'>五班</view>
+    <view class='left-bar-child {{ leftChosed == "6" ? "left-chosed" : ""}}' bindtap='chooseClazz' id='6'>六班</view>
+    <view class='left-bar-child {{ leftChosed == "7" ? "left-chosed" : ""}}' bindtap='chooseClazz' id='7'>七班</view>
+    <view class='left-bar-child {{ leftChosed == "8" ? "left-chosed" : ""}}' bindtap='chooseClazz' id='8'>八班</view>
+    <view class='left-bar-child {{ leftChosed == "9" ? "left-chosed" : ""}}' bindtap='chooseClazz' id='9'>九班</view>
+    <view class='left-bar-child {{ leftChosed == "10" ? "left-chosed" : ""}}' bindtap='chooseClazz' id='10'>十班</view>
   </scroll-view>
 
   <view class='right-main'>
