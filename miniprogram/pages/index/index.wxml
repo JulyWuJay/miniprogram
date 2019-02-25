@@ -62,6 +62,7 @@
     师生管理
   </view>
 
+<!-- 底部切换 -->
   <view class='footer-nav'>
     <view class='footer-nav-child' id='school' bindtap='chooseTab'>
       <image class='footer-icon' src='{{footerChosed == "school" ? tabIconUrl.chosed.school : tabIconUrl.unchosed.school}}'></image>      

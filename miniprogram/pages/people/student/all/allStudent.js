@@ -6,13 +6,28 @@ Page({
    */
   data: {
     // 左边是否选择中
-    leftChosed: ''
+    leftChosed: '1'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'http',
+      // 传给云函数的参数
+      data: {
+        type: 'getAll',
+        collectionName: 'clazz',
+        prams: null
+      },
+      success(res) {
+        console.log(res);
+      },
+      fail: console.error
+    })
+
 
   },
 
@@ -58,8 +73,8 @@ Page({
 
   },
   chooseClazz: function (event){
-    console.log(event.target.id);
-    console.log(event);
+    // console.log(event.target.id);
+    // console.log(event);
     this.setData({
       leftChosed: event.target.id
     })

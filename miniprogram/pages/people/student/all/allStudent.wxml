@@ -18,6 +18,9 @@
     <view class='left-bar-child {{ leftChosed == "8" ? "left-chosed" : ""}}' bindtap='chooseClazz' id='8'>八班</view>
     <view class='left-bar-child {{ leftChosed == "9" ? "left-chosed" : ""}}' bindtap='chooseClazz' id='9'>九班</view>
     <view class='left-bar-child {{ leftChosed == "10" ? "left-chosed" : ""}}' bindtap='chooseClazz' id='10'>十班</view>
+    <view class='left-bar-child {{ leftChosed == "11" ? "left-chosed" : ""}}' bindtap='chooseClazz' id='11'>十一班</view>
+    <view class='left-bar-child {{ leftChosed == "12" ? "left-chosed" : ""}}' bindtap='chooseClazz' id='12'>十二班</view>
+    <view class='left-bar-child {{ leftChosed == "13" ? "left-chosed" : ""}}' bindtap='chooseClazz' id='13'>十三班</view>
   </scroll-view>
 
   <view class='right-main'>
