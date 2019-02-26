@@ -8,7 +8,6 @@ const db = cloud.database();
 // const MAX_LIMIT = 100
 // 云函数入口函数
 exports.main = (event, context) => {
-  // let result = null;
   // event: {
   //   type: 'getAll',
   //   collectionName: 'clazz',
@@ -24,6 +23,9 @@ function chooseFunction(event){
       const result = getAll(event.collectionName);
       return result;
     }
+    case 'getStudentByClazz':{
+      return getStudentByClazz(event);
+    }
   }
 }
 
@@ -38,4 +40,16 @@ function getAll(collectionName){
   });
   return result;
   // const countResult = await db.collection(collectionName).count();
+}
+
+
+// 根据班级查询
+function getStudentByClazz(event){
+  const result = db.collection(event.collectionName).where({
+    clazzId: event.prams
+  }).get({
+    success: console.log,
+    fail: console.error
+  });
+  return result;
 }

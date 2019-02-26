@@ -6,13 +6,16 @@ Page({
    */
   data: {
     // 左边是否选择中
-    leftChosed: '1'
+    leftChosed: '',
+    allClazz: null,
+    student: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let that = this;
     wx.cloud.callFunction({
       // 云函数名称
       name: 'http',
@@ -23,7 +26,13 @@ Page({
         prams: null
       },
       success(res) {
-        console.log(res);
+        // console.log(res);
+        that.setData({
+          // 第一个班级背景变白
+          leftChosed: res.result.data[0]._id,
+          allClazz: res.result.data
+        });
+        that.getStudentByClazz(res.result.data[0]._id);
       },
       fail: console.error
     })
@@ -73,11 +82,35 @@ Page({
 
   },
   chooseClazz: function (event){
-    // console.log(event.target.id);
     // console.log(event);
     this.setData({
       leftChosed: event.target.id
     })
+    // console.log(event.currentTarget.id)
+    console.log(event.target.id)
+    // 根据班级id获取学生信息
+    this.getStudentByClazz(event.target.id);
+  },
 
+  // 根据班级id查学生
+  getStudentByClazz: function(id){
+    const that = this;
+    // 根据班级id获取学生信息
+    wx.cloud.callFunction({
+      name: 'http',
+      data: {
+        type: 'getStudentByClazz',
+        collectionName: 'student',
+        prams: id
+      },
+      success: res => {
+        console.log(res);
+        that.setData({
+          student: res.result.data
+        });
+        console.log(that.data.student);
+      },
+      fail: console.error
+    })
   }
 })
