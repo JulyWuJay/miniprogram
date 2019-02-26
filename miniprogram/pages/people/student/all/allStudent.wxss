@@ -39,4 +39,12 @@ page{
 .right-main{
   width: 75%;
   /* flex-grow: 1; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.student-item{
+  width: 90%;
+  height:100rpx;
+  border: 1rpx solid black;
 }

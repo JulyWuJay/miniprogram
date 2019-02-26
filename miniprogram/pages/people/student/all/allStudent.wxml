@@ -12,8 +12,8 @@
   </scroll-view>
 
   <view class='right-main'>
-    <view>
-    
+    <view class='student-item' wx:for="{{student}}" wx:key="name">
+      {{item.name}}
     </view>
   
   </view>
