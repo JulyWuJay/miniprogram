@@ -39,12 +39,55 @@ page{
 .right-main{
   width: 75%;
   /* flex-grow: 1; */
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
+  /* justify-content: center; */
+  padding-bottom: 150rpx;
 }
 .student-item{
-  width: 90%;
-  height:100rpx;
-  border: 1rpx solid black;
+  width: 100%;
+  height:200rpx;
+  margin-bottom: 10rpx;
+  border-bottom: 1rpx solid #cdcdcd;
+  display: flex;
+  flex-direction: row;
+}
+.student-item-img{
+  width: 30%;
+  height: 100%;
+  /* background-color: blue; */
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+.student-item-content{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* background-color: red; */
+}
+
+/*上下箭头 */
+.up-arrow{
+  width: 80rpx;
+  height: 80rpx;
+  /* background-color: red; */
+  border-radius: 50%;
+  position: fixed;
+  bottom: 200rpx;
+  right: 50rpx;
+  opacity: 0.5;
+}
+.down-arrow{
+  width: 80rpx;
+  height: 80rpx;
+  position: fixed;
+  bottom: 100rpx;
+  right: 50rpx;
+  border-radius: 50%;
+  opacity: 0.5;
 }

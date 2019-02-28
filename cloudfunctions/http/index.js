@@ -47,7 +47,8 @@ function getAll(collectionName){
 function getStudentByClazz(event){
   const result = db.collection(event.collectionName).where({
     clazzId: event.prams
-  }).get({
+  }).skip(0) // 跳过结果集中的前 10 条，从第 11 条开始返回
+  .limit(10).get({
     success: console.log,
     fail: console.error
   });

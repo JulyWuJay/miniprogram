@@ -8,13 +8,38 @@
 <view class='main'>
 
   <scroll-view scroll-y class='left-bar'>
+
     <view wx:for="{{allClazz}}" wx:key="_id" class='left-bar-child {{ leftChosed == item._id ? "left-chosed" : ""}}' bindtap='chooseClazz' id='{{item._id}}'>{{item.name}}</view>
+
   </scroll-view>
 
-  <view class='right-main'>
-    <view class='student-item' wx:for="{{student}}" wx:key="name">
-      {{item.name}}
+  <scroll-view scroll-y class='right-main'>
+    <view class='student-item' wx:for="{{student}}">
+      <view class='student-item-img'>
+        <image style='width:100rpx;height:100rpx' src='{{item.gender == 0 ? imageUrl.girl : imageUrl.boy}}'></image>
+      </view>
+      <view class='student-item-content'>
+        <view style='height:60rpx;'>
+          <text style='font-size:24rpx'>姓名:  </text>
+          <text>{{item.name}}</text>
+        </view>
+        <view style='height:60rpx;'>
+          <text style='font-size:24rpx'>联系电话:  </text>
+          <text>{{item.contacts}}</text>
+        </view>
+        <view style='height:60rpx;'>
+          <text style='font-size:24rpx;color:#bfbfbf'>更多操作>></text>
+        </view>
+      </view>
     </view>
-  
+    <view style='width:100%;display:flex;justify-content:center'>
+      <text style='font-size:20rpx'>这一页到底了</text>
+    </view>
+  </scroll-view>
+  <view class='up-arrow'>
+    <image style='width:80rpx;height:80rpx' src='../../../../images/icon/common/up-arrow.png'></image>
+  </view>
+  <view class='down-arrow'>
+    <image style='width:80rpx;height:80rpx' src='../../../../images/icon/common/down-arrow.png'></image>    
   </view>
 </view>

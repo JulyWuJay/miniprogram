@@ -8,7 +8,15 @@ Page({
     // 左边是否选择中
     leftChosed: '',
     allClazz: null,
-    student: []
+    student: [],
+    PAGENUM: 6,
+    page:{
+      pages:1//页数
+    },
+    imageUrl:{
+      boy: '../../../../images/icon/common/boy.png',
+      girl: '../../../../images/icon/common/girl.png'
+    }
   },
 
   /**
