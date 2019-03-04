@@ -14,7 +14,7 @@
   </scroll-view>
 
   <scroll-view scroll-y class='right-main'>
-    <view class='student-item' wx:for="{{student}}">
+    <view class='student-item' wx:for="{{student}}" wx:key = "">
       <view class='student-item-img'>
         <image style='width:100rpx;height:100rpx' src='{{item.gender == 0 ? imageUrl.girl : imageUrl.boy}}'></image>
       </view>
@@ -36,10 +36,5 @@
       <text style='font-size:20rpx'>这一页到底了</text>
     </view>
   </scroll-view>
-  <view class='up-arrow'>
-    <image style='width:80rpx;height:80rpx' src='../../../../images/icon/common/up-arrow.png'></image>
-  </view>
-  <view class='down-arrow'>
-    <image style='width:80rpx;height:80rpx' src='../../../../images/icon/common/down-arrow.png'></image>    
-  </view>
+
 </view>

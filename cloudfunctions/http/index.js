@@ -26,6 +26,9 @@ function chooseFunction(event){
     case 'getStudentByClazz':{
       return getStudentByClazz(event);
     }
+    case 'getTotalNum' :{
+      return getTotalNum(event);
+    }
   }
 }
 
@@ -41,14 +44,19 @@ function getAll(collectionName){
   return result;
   // const countResult = await db.collection(collectionName).count();
 }
-
-
+// 获取集合有多少条数据
+function getTotalNum(event){
+  return db.collection(event.collectionName).count({
+    success(res) {
+      console.log(res.total)
+    }
+  })
+}
 // 根据班级查询
 function getStudentByClazz(event){
   const result = db.collection(event.collectionName).where({
     clazzId: event.prams
-  }).skip(0) // 跳过结果集中的前 10 条，从第 11 条开始返回
-  .limit(10).get({
+  }).get({
     success: console.log,
     fail: console.error
   });

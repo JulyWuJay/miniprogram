@@ -9,10 +9,8 @@ Page({
     leftChosed: '',
     allClazz: null,
     student: [],
-    PAGENUM: 6,
-    page:{
-      pages:1//页数
-    },
+    PAGESIZE: 8,
+    pageNum:1 ,//页数
     imageUrl:{
       boy: '../../../../images/icon/common/boy.png',
       girl: '../../../../images/icon/common/girl.png'
@@ -24,6 +22,7 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
+    // 获取班级
     wx.cloud.callFunction({
       // 云函数名称
       name: 'http',
@@ -44,8 +43,6 @@ Page({
       },
       fail: console.error
     })
-
-
   },
 
   /**
@@ -95,7 +92,7 @@ Page({
       leftChosed: event.target.id
     })
     // console.log(event.currentTarget.id)
-    console.log(event.target.id)
+    // console.log(event.target.id)
     // 根据班级id获取学生信息
     this.getStudentByClazz(event.target.id);
   },
@@ -112,11 +109,11 @@ Page({
         prams: id
       },
       success: res => {
-        console.log(res);
+        // console.log(res);
         that.setData({
           student: res.result.data
         });
-        console.log(that.data.student);
+        // console.log(that.data.student);
       },
       fail: console.error
     })
