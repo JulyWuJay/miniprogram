@@ -24,7 +24,7 @@ Page({
     footerChosed: 'school'   
   },  
   onLoad: function() {
-    if (wx.cloud) {
+    if (!wx.cloud) {
       wx.redirectTo({
         url: '../people/student/all/allStudent',
       })

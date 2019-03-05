@@ -117,5 +117,10 @@ Page({
       },
       fail: console.error
     })
+  },
+
+  // 更多操作
+  toStudentDetail: function(event){
+    console.log(event)
   }
 })

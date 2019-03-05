@@ -38,12 +38,13 @@ page{
 }
 .right-main{
   width: 75%;
+  /* height: 100%; */
   /* flex-grow: 1; */
   /* display: flex;
   flex-direction: column;
   align-items: center; */
   /* justify-content: center; */
-  padding-bottom: 150rpx;
+  /* padding-bottom: 150rpx; */
 }
 .student-item{
   width: 100%;
