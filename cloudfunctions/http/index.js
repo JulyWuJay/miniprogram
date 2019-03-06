@@ -29,6 +29,10 @@ function chooseFunction(event){
     case 'getTotalNum' :{
       return getTotalNum(event);
     }
+    // 根据id查个体
+    case 'getById' :{
+      return getById(event);
+    }
   }
 }
 
@@ -56,6 +60,16 @@ function getTotalNum(event){
 function getStudentByClazz(event){
   const result = db.collection(event.collectionName).where({
     clazzId: event.prams
+  }).get({
+    success: console.log,
+    fail: console.error
+  });
+  return result;
+}
+
+function getById(event){
+  const result = db.collection(event.collectionName).where({
+    _id: event.prams
   }).get({
     success: console.log,
     fail: console.error

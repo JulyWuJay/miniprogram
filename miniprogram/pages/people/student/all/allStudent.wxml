@@ -28,7 +28,9 @@
           <text>{{item.contacts}}</text>
         </view>
         <view style='height:60rpx;'>
-          <text bindtap='toStudentDetail' style='font-size:24rpx;color:#bfbfbf'>更多操作>></text>
+          <navigator url="../individual/individual?stuId={{item._id}}" open-type="navigate" class="uploader-text">
+            <text bindtap='toStudentDetail' style='font-size:24rpx;color:#bfbfbf'>更多操作>></text>
+          </navigator>
         </view>
       </view>
     </view>
