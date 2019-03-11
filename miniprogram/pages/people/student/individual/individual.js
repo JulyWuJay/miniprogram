@@ -5,13 +5,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    student: { 
+      _id: "", 
+      age: "", 
+      clazzId: "", 
+      contacts: "", 
+      contactsName: "", 
+      gender: '' , 
+      name: '' 
+    }
+      
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const that = this;
     wx.cloud.callFunction({
       name: 'http',
       data: {
@@ -21,6 +31,10 @@ Page({
       },
       success: res => {
         console.log(res);
+        that.setData({
+          student: res.result.data[0]
+        });
+        console.log(that.data.student)
       },
       fail: console.error
     })
@@ -32,6 +46,7 @@ Page({
   onReady: function () {
 
   },
+
 
   /**
    * 生命周期函数--监听页面显示
@@ -73,5 +88,40 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  toConfirm: function () {
+    console.log(this.data.student);
+  },
+  // 姓名
+  nameInput: function (e) {
+    console.log(e.detail.value);
+    this.setData({
+      ['student.name'] : e.detail.value
+    });
+  },
+  ageInput: function (e) {
+    this.setData({
+      ['student.age'] : e.detail.value
+    })
+  },
+  phoneInput: function (e) {
+    this.setData({
+      ['student.phone'] : e.detail.value
+    })
+  },
+  contactsNameInput: function(e) {
+    this.setData({
+      ['student.contactsName'] : e.detail.value
+    })
+  },
+  contactsInput: function(e) {
+    this.setData({
+      ['student.contacts'] : e.detail.value
+    })
+  },
+  genderChange: function(e) {
+    const val = e.detail.value;
+    console.log(e);
   }
+
 })

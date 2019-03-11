@@ -29,4 +29,11 @@
 }
 /* 侧边选择栏 */
 
-
+/* 默认的Input */
+.normal-input{
+  border-bottom: 1rpx solid #e6e6e6;
+  padding: 5rpx;
+  border-radius: 4rpx;
+  display: flex;
+  flex-direction: row-reverse;
+}

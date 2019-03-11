@@ -1,2 +1,41 @@
 <!--miniprogram/pages/people/student/individual/individual.wxml-->
-<text>miniprogram/pages/people/student/individual/individual.wxml</text>
+<view class='main'>
+  <view class='group'>
+    <text>姓名:</text>
+    <input class='normal-input' type='text' value='{{student.name}}' bindinput='nameInput' />
+  </view>
+  <view class='group'>
+    <text>班级:</text>
+    <input class='normal-input' type='text' value='{{student.clazzId}}' />
+  </view>
+  <view class='group'>
+    <text>年龄:</text>
+    <input class='normal-input' type='number' value='{{student.age}}'  bindinput='ageInput'/>
+  </view>
+  <view class='group'>
+    <text>性别:</text>
+    <picker-view style="width: 200rpx; height: 100%;" value="{{student.gender}}" bindchange="genderChange">
+      <picker-view-column>
+        <view style="line-height: 50px">男</view>
+        <view style="line-height: 50px">女</view>
+        <!-- <view  style="line-height: 50px">女</view> -->
+      </picker-view-column>
+    </picker-view>
+    <!-- <input class='normal-input' type='number' value='{{student.gender}}' /> -->
+  </view>  
+  <view class='group'>
+    <text>电话:</text>
+    <input class='normal-input' type='number' value='{{student.phone}}' bindinput='phoneInput' />
+  </view>
+  <view class='group'>
+    <text>联系人:</text>
+    <input class='normal-input' type='text' value='{{student.contactsName}}' bindinput='contactsNameInput' />
+  </view>
+  <view class='group'>
+    <text>联系人电话:</text>
+    <input class='normal-input' type='number' value='{{student.contacts}}' bindinput='contactsInput'/>
+  </view>
+  <view style='margin-top:50rpx'>
+    <button bindtap='toConfirm'>保存</button>
+  </view>
+</view>
