@@ -8,14 +8,22 @@ Page({
     student: { 
       _id: "", 
       age: "", 
-      clazzId: "", 
+      clazz: {
+        clazzId: '01' , 
+        clazzName: '测试'
+      }, 
       contacts: "", 
       contactsName: "", 
       gender: '' , 
       name: '' 
     },
     genderChecked: '',
-    toChooseClazz: false
+    toChooseClazz: false,
+    clazz: [{ _id: '01', name: '测试的' }],
+    checkedClazz: {
+      clazzId: '',
+      name: ''
+    }
   },
 
   /**
@@ -31,14 +39,30 @@ Page({
         prams: options.stuId
       },
       success: res => {
-        console.log(res);
+        console.log('xx' , res);
         that.setData({
           student: res.result.data[0],
-          genderChecked: res.result.data[0].gender
+          genderChecked: res.result.data[0].gender,
+          checkedClazz: res.result.data[0].clazz
         });
         console.log(that.data.student)
       },
       fail: console.error
+    });
+    wx.cloud.callFunction({
+      name: 'http',
+      data: {
+        type: 'getAll',
+        collectionName: 'clazz'
+        // prams: options.stuId
+      },
+      success: res =>{
+        // console.log(res);
+        this.setData({
+          clazz: res.result.data
+        })
+      },
+      fail: console.fail
     })
   },
 
@@ -91,9 +115,6 @@ Page({
   onShareAppMessage: function () {
 
   },
-  toConfirm: function () {
-    console.log(this.data.student);
-  },
   // 姓名
   nameInput: function (e) {
     // console.log(e.detail.value);
@@ -139,6 +160,43 @@ Page({
       })
     }
     // console.log(e)
+  },
+  clazzChange: function(e) {
+    const id = e.detail.value;
+    // console.log(id);
+    // 选中之后根据班级id查找班级名称
+    wx.cloud.callFunction({
+      name: 'http',
+      data: {
+        type: 'getById',
+        collectionName: 'clazz',
+        prams: id
+      },
+      success: res => {
+        const clazz = res.result.data[0];
+        // console.log(clazz);
+        this.setData({
+          ['student.clazz.clazzId']: clazz._id,
+          ['student.clazz.clazzName']: clazz.name
+        })
+      },
+      fail: console.fail
+    })
+  },
+  toConfirm: function() {
+    console.log(this.data.student);
+    wx.cloud.callFunction({
+      name: 'http',
+      data: {
+        type: 'updateStudent',
+        collectionName: 'clazz',
+        prams: this.data.student
+      },
+      success: res => {
+        console.log(res)
+      },
+      fail: console.fail
+    })
   }
 
 })

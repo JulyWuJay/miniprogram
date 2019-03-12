@@ -13,7 +13,18 @@
     </view>
   </view>
   <view wx:if="{{toChooseClazz}}" class='clazz-choose'>
-  
+    <radio-group class="clazz-main" bindchange="clazzChange">
+      <label class="clazz-item" wx:for="{{clazz}}">
+        <radio value="{{item._id}}" checked="{{item._id == checkedClazz.clazzId ? true : false}}" />
+        {{item.name}}
+      </label>
+    </radio-group>
+    <!-- <view class='clazz-main'>
+      <view class='clazz-item'></view>
+      <view class='clazz-item'></view>
+      <view class='clazz-item'></view>
+      <view class='clazz-item'></view>
+    </view> -->
   </view>
   <!-- 班级 -->
 

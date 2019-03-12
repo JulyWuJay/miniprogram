@@ -33,6 +33,9 @@ function chooseFunction(event){
     case 'getById' :{
       return getById(event);
     }
+    case 'updateStudent' : {
+      return updateStudent(event);
+    }
   }
 }
 
@@ -75,4 +78,27 @@ function getById(event){
     fail: console.error
   });
   return result;
+}
+
+function updateStudent(event){
+  // return 'ok'
+  // try {
+  //   return await db.collection('student').where({_id: 'XGpIe-SiwXKAQp9K'}).update({
+  //     // data 传入需要局部更新的数据
+  //     data: {
+  //       // _id: "",
+  //       age: "12",
+  //       clazz: {
+  //         clazzId: 'XIduyeSiwXKAQrZh',
+  //         clazzName: '三班'
+  //       },
+  //       contacts: "13511701064",
+  //       contactsName: "妈妈",
+  //       gender: '0',
+  //       name: '吴大哥' 
+  //     }
+  //   })
+  // } catch (e) {
+  //   console.log(e)
+  // }
 }
