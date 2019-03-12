@@ -2,38 +2,49 @@
 <view class='main'>
   <view class='group'>
     <text>姓名:</text>
-    <input class='normal-input' type='text' value='{{student.name}}' bindinput='nameInput' />
+    <input style='width:100rpx' class='normal-input' type='text' value='{{student.name}}' bindinput='nameInput' />
   </view>
-  <view class='group'>
+  <!-- 班级 -->
+
+  <view class='group' bindtap='toChooseClazz'>
     <text>班级:</text>
-    <input class='normal-input' type='text' value='{{student.clazzId}}' />
+    <view style='width:100rpx' id='clazz'>
+          {{student.clazz.clazzName}} 
+    </view>
   </view>
+  <view wx:if="{{toChooseClazz}}" class='clazz-choose'>
+  
+  </view>
+  <!-- 班级 -->
+
+
   <view class='group'>
     <text>年龄:</text>
-    <input class='normal-input' type='number' value='{{student.age}}'  bindinput='ageInput'/>
+    <input style='width:100rpx' class='normal-input' type='number' value='{{student.age}}'  bindinput='ageInput'/>
   </view>
   <view class='group'>
     <text>性别:</text>
-    <picker-view style="width: 200rpx; height: 100%;" value="{{student.gender}}" bindchange="genderChange">
-      <picker-view-column>
-        <view style="line-height: 50px">男</view>
-        <view style="line-height: 50px">女</view>
-        <!-- <view  style="line-height: 50px">女</view> -->
-      </picker-view-column>
-    </picker-view>
+    <radio-group bindchange="genderChange">
+      <label>
+        <radio value='0' checked="{{genderChecked === '0' ? true : false}}"/>女
+      </label>
+      <label>
+        <radio value='1' checked="{{genderChecked === '1' ? true : false}}"/>男
+      </label>
+  </radio-group>
     <!-- <input class='normal-input' type='number' value='{{student.gender}}' /> -->
   </view>  
   <view class='group'>
     <text>电话:</text>
-    <input class='normal-input' type='number' value='{{student.phone}}' bindinput='phoneInput' />
+    <input style='width:250rpx' class='normal-input' type='number' value='{{student.phone}}' bindinput='phoneInput' />
   </view>
   <view class='group'>
     <text>联系人:</text>
-    <input class='normal-input' type='text' value='{{student.contactsName}}' bindinput='contactsNameInput' />
+    <input style='width:100rpx' class='normal-input' type='text' value='{{student.contactsName}}' bindinput='contactsNameInput' />
   </view>
   <view class='group'>
     <text>联系人电话:</text>
-    <input class='normal-input' type='number' value='{{student.contacts}}' bindinput='contactsInput'/>
+    <input style='width:250rpx' class='normal-input' type='number' value='{{student.contacts}}' bindinput='contactsInput'/>
   </view>
   <view style='margin-top:50rpx'>
     <button bindtap='toConfirm'>保存</button>

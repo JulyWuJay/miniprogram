@@ -13,8 +13,9 @@ Page({
       contactsName: "", 
       gender: '' , 
       name: '' 
-    }
-      
+    },
+    genderChecked: '',
+    toChooseClazz: false
   },
 
   /**
@@ -32,7 +33,8 @@ Page({
       success: res => {
         console.log(res);
         that.setData({
-          student: res.result.data[0]
+          student: res.result.data[0],
+          genderChecked: res.result.data[0].gender
         });
         console.log(that.data.student)
       },
@@ -94,7 +96,7 @@ Page({
   },
   // 姓名
   nameInput: function (e) {
-    console.log(e.detail.value);
+    // console.log(e.detail.value);
     this.setData({
       ['student.name'] : e.detail.value
     });
@@ -120,8 +122,23 @@ Page({
     })
   },
   genderChange: function(e) {
-    const val = e.detail.value;
-    console.log(e);
+    // console.log(e.detail.value);
+    this.setData({
+      ['student.gender'] : e.detail.value
+    })
+  },
+  // 去选择班级
+  toChooseClazz: function() {
+    if (this.data.toChooseClazz) {
+      this.setData({
+        toChooseClazz: false
+      })
+    } else {
+      this.setData({
+        toChooseClazz: true
+      })
+    }
+    // console.log(e)
   }
 
 })

@@ -59,7 +59,7 @@ function getTotalNum(event){
 // 根据班级查询
 function getStudentByClazz(event){
   const result = db.collection(event.collectionName).where({
-    clazzId: event.prams
+    ['clazz.clazzId']: event.prams
   }).get({
     success: console.log,
     fail: console.error
