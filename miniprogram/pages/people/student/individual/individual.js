@@ -185,6 +185,21 @@ Page({
   },
   toConfirm: function() {
     console.log(this.data.student);
+    const that = this;
+    wx.showModal({
+      title: '提示',
+      content: '确认保存更新的信息吗',
+      success(res) {
+        if (res.confirm) {
+          // console.log('用户点击确定')
+          that.confirm();
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  confirm: function() {
     wx.cloud.callFunction({
       name: 'http',
       data: {
@@ -193,7 +208,22 @@ Page({
         prams: this.data.student
       },
       success: res => {
-        console.log(res)
+        // console.log(res.errMsg)
+        if (res.errMsg == 'cloud.callFunction:ok'){
+          // console.log('ok')
+          wx.showToast({
+            title: '保存成功',
+            icon: 'success',
+            duration: 2000,
+          })
+        } else {
+          // /pages/home / home
+          wx.showToast({
+            title: '出错了',
+            image: '/images/icon/fail.png',
+            duration: 2000
+          })
+        }
       },
       fail: console.fail
     })

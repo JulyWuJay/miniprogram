@@ -58,6 +58,6 @@
     <input style='width:250rpx' class='normal-input' type='number' value='{{student.contacts}}' bindinput='contactsInput'/>
   </view>
   <view style='margin-top:50rpx'>
-    <button bindtap='toConfirm'>保存</button>
+    <button style='background-color:rgb(0,112,173);color:#fff' bindtap='toConfirm'>保存</button>
   </view>
 </view>

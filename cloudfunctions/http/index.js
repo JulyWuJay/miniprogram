@@ -81,24 +81,20 @@ function getById(event){
 }
 
 function updateStudent(event){
-  // return 'ok'
-  // try {
-  //   return await db.collection('student').where({_id: 'XGpIe-SiwXKAQp9K'}).update({
-  //     // data 传入需要局部更新的数据
-  //     data: {
-  //       // _id: "",
-  //       age: "12",
-  //       clazz: {
-  //         clazzId: 'XIduyeSiwXKAQrZh',
-  //         clazzName: '三班'
-  //       },
-  //       contacts: "13511701064",
-  //       contactsName: "妈妈",
-  //       gender: '0',
-  //       name: '吴大哥' 
-  //     }
-  //   })
-  // } catch (e) {
-  //   console.log(e)
-  // }
+  const student = event.prams;
+
+  return db.collection('student').where({
+    _id: 'XGpIe-SiwXKAQp9K'
+  }).update({
+    data: {
+      age: student.age,
+      clazz: student.clazz,
+      contacts: student.contacts,
+      contactsName: student.contactsName,
+      gender: student.gender,
+      name: student.name 
+    },
+    success: console.log,
+    fail: console.fail
+  })
 }
