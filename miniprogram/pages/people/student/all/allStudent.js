@@ -1,4 +1,6 @@
 // miniprogram/pages/people/student/all/allStudent.js
+const url = require('../../../../js/url/url.js');
+
 Page({
 
   /**
@@ -12,8 +14,8 @@ Page({
     PAGESIZE: 8,
     pageNum:1 ,//页数
     imageUrl:{
-      boy: '../../../../images/icon/common/boy.png',
-      girl: '../../../../images/icon/common/girl.png'
+      // boy: '/images/icon/common/boy.png',
+      // girl: '/images/icon/common/girl.png'
     }
   },
 
@@ -21,6 +23,52 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 导入男女图标的url
+    const genderUrl = new url.URL();
+    this.setData({
+      imageUrl: genderUrl.genderUrl
+    })
+    wx.showLoading({
+      title: '加载中',
+    });
+    // let that = this;
+    // // 获取班级
+    // wx.cloud.callFunction({
+    //   // 云函数名称
+    //   name: 'http',
+    //   // 传给云函数的参数
+    //   data: {
+    //     type: 'getAll',
+    //     collectionName: 'clazz',
+    //     prams: null
+    //   },
+    //   success(res) {
+    //     wx.hideLoading()
+    //     // console.log(res);
+    //     that.setData({
+    //       // 第一个班级背景变白
+    //       leftChosed: res.result.data[0]._id,
+    //       allClazz: res.result.data
+    //     });
+    //     that.getStudentByClazz(res.result.data[0]._id);
+    //   },
+    //   fail: console.error
+    // })
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    // wx.showLoading({
+    //   title: '加载中',
+    // });
     let that = this;
     // 获取班级
     wx.cloud.callFunction({
@@ -33,6 +81,7 @@ Page({
         prams: null
       },
       success(res) {
+        wx.hideLoading()
         // console.log(res);
         that.setData({
           // 第一个班级背景变白
@@ -43,20 +92,6 @@ Page({
       },
       fail: console.error
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
   },
 
   /**

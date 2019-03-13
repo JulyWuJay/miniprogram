@@ -1,5 +1,6 @@
 //index.js
 const common = require('../../js/common/common.js');
+// 路径管理
 const url = require('../../js/url/url.js');
 const app = getApp();
 
@@ -33,7 +34,7 @@ Page({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
-              console.log(res);
+              // console.log(res);
 
               if (res.userInfo.nickName != '我不了地Jay'){
                 wx.redirectTo({
@@ -44,7 +45,7 @@ Page({
                 avatarUrl: res.userInfo.avatarUrl,
                 userInfo: res.userInfo
               });
-              console.log(res.userInfo);
+              // console.log(res.userInfo);
             }
           })
         }

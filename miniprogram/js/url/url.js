@@ -12,4 +12,9 @@ export class URL {
       people: '/images/icon/index-footer/people-chosed.png'
     }
   }
+  // 男女的图标
+  genderUrl = {
+    boy: '/images/icon/common/boy.png',
+    girl: '/images/icon/common/girl.png'
+  }
 }

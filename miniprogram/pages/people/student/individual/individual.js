@@ -30,6 +30,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 加载动画
+    wx.showLoading({
+      title: '加载中',
+    });
     const that = this;
     wx.cloud.callFunction({
       name: 'http',
@@ -39,7 +43,8 @@ Page({
         prams: options.stuId
       },
       success: res => {
-        console.log('xx' , res);
+        wx.hideLoading();
+        // console.log('xx' , res);
         that.setData({
           student: res.result.data[0],
           genderChecked: res.result.data[0].gender,
@@ -70,7 +75,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    // this.onLoad()
   },
 
 
@@ -78,14 +83,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // this.onLoad(this.data.stuId)
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    wx.showLoading({
+      title: '加载中',
+    });
   },
 
   /**
