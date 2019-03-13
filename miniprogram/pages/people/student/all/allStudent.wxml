@@ -1,10 +1,10 @@
 <!--miniprogram/pages/people/student/all/allStudent.wxml-->
-<view class='header-search'>
+<!-- <view class='header-search'>
   <view class='header-search-circle'>
     <image src='../../../../images/icon/common/search.png' class='header-search-circle-icon'></image>
     <text class='header-search-circle-text'>输入学生姓名搜索</text>
   </view>
-</view>
+</view> -->
 <view class='main'>
 
   <scroll-view scroll-y class='left-bar'>

@@ -17,7 +17,7 @@ page{
 }
 .left-bar{
   width:25%;
-  height: 92%;
+  height: 100%;
   /* flex-grow: 1; */
   background-color: #e6e6e6;
   padding-top: 5rpx;

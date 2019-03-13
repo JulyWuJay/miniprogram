@@ -16,6 +16,7 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "学员信息管理系统",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
   }
 }

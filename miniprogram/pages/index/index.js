@@ -1,5 +1,6 @@
 //index.js
 const common = require('../../js/common/common.js');
+const url = require('../../js/url/url.js');
 const app = getApp();
 
 Page({
@@ -9,22 +10,16 @@ Page({
     logged: false,
     takeSession: false,
     requestResult: '',
-    tabIconUrl: {
-        unchosed:{
-          school: '../../images/icon/index-footer/school.png',
-          thing: '../../images/icon/index-footer/thing.png',
-          people: '../../images/icon/index-footer/people.png'
-        },
-        chosed:{
-          school: '../../images/icon/index-footer/school-chosed.png',
-          thing: '../../images/icon/index-footer/thing-chosed.png',
-          people: '../../images/icon/index-footer/people-chosed.png'
-        }
-    },
+    tabIconUrl: {},
     footerChosed: 'school'   
   },  
   onLoad: function() {
-    if (wx.cloud) {
+    // 引入tab图片的路径
+    const tabUrl = new url.URL();
+    this.setData({
+      tabIconUrl: tabUrl.tabIconUrl
+    })
+    if (!wx.cloud) {
       wx.redirectTo({
         url: '../people/student/all/allStudent',
       })
@@ -143,7 +138,7 @@ Page({
   // 切换底部栏
   chooseTab: function(event){
     console.log(event.currentTarget.id);
-    common.sayHello();
+    // common.sayHello();
     this.setData({
       footerChosed: event.currentTarget.id
     });
