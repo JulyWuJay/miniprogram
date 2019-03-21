@@ -1,0 +1,39 @@
+/* miniprogram/pages/people/teacher/all/allTeacher.wxss */
+/* miniprogram/pages/people/student/all/allStudent.wxss */
+@import "../../../../style/common.wxss";
+page{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.content{
+  width: 100%;
+  height: 92%;
+  /* background-color: red; */
+}
+.teacher-item{
+  width: 100%;
+  height:200rpx;
+  margin-bottom: 10rpx;
+  border-bottom: 1rpx solid #cdcdcd;
+  display: flex;
+  flex-direction: row;
+}
+.teacher-item-img{
+  width: 30%;
+  height: 100%;
+  /* background-color: blue; */
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+.teacher-item-content{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* background-color: red; */
+}

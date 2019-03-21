@@ -33,8 +33,13 @@ function chooseFunction(event){
     case 'getById' :{
       return getById(event);
     }
+    // 更新学生信息
     case 'updateStudent' : {
       return updateStudent(event);
+    }
+    // 添加学生信息
+    case 'addStudent' : {
+      return addStudent(event);
     }
   }
 }
@@ -95,6 +100,22 @@ function updateStudent(event){
       name: student.name 
     },
     success: console.log,
+    fail: console.fail
+  })
+}
+
+function addStudent(event){
+  const student = event.prams;
+  return db.collection('student').add({
+    data:{
+      age: student.age,
+      clazz: student.clazz,
+      contacts: student.contacts,
+      contactsName: student.contactsName,
+      gender: student.gender,
+      name: student.name 
+    },
+    success: console.success,
     fail: console.fail
   })
 }

@@ -1,25 +1,30 @@
 // miniprogram/pages/people/student/individual/individual.js
-Page({
+const model = require('../../../../js/model/model.js');
 
+Page({
   /**
    * 页面的初始数据
    */
   data: {
-    student: { 
-      _id: "", 
-      age: "", 
-      clazz: {
-        clazzId: '01' , 
-        clazzName: '测试'
-      }, 
-      contacts: "", 
-      contactsName: "", 
-      gender: '' , 
-      name: '' 
+    // 传给后台的学生信息
+    student: {
+      // _id: "000",
+      // age: "0",
+      // clazz: {
+      //   clazzId: '',
+      //   clazzName: ''
+      // },
+      // contacts: "12345678910",
+      // contactsName: "测试",
+      // gender: '0',
+      // name: '空'
     },
-    genderChecked: '',
+
+    genderChecked: '0',
     toChooseClazz: false,
-    clazz: [{ _id: '01', name: '测试的' }],
+    // 所有的班级
+    clazz: [{ _id: '01', name: '测试' }],
+    // 选中的班级
     checkedClazz: {
       clazzId: '',
       name: ''
@@ -35,25 +40,13 @@ Page({
       title: '加载中',
     });
     const that = this;
-    wx.cloud.callFunction({
-      name: 'http',
-      data: {
-        type: 'getById',
-        collectionName: 'student',
-        prams: options.stuId
-      },
-      success: res => {
-        wx.hideLoading();
-        // console.log('xx' , res);
-        that.setData({
-          student: res.result.data[0],
-          genderChecked: res.result.data[0].gender,
-          checkedClazz: res.result.data[0].clazz
-        });
-        console.log(that.data.student)
-      },
-      fail: console.error
-    });
+    // 给student默认的值
+    const mod = new model.MODEL();
+    this.setData({
+      student: mod.student
+    })
+    console.log(this.data.student)
+    // 获取全部班级
     wx.cloud.callFunction({
       name: 'http',
       data: {
@@ -61,11 +54,17 @@ Page({
         collectionName: 'clazz'
         // prams: options.stuId
       },
-      success: res =>{
-        // console.log(res);
+      success: res => {
+        wx.hideLoading();
+        // console.log(res.result.data);
         this.setData({
-          clazz: res.result.data
-        })
+          clazz: res.result.data,
+          ['checkedClazz.clazzId']: res.result.data[0]._id,
+          ['checkedClazz.name']: res.result.data[0].name,
+          ['student.clazz.clazzId']: res.result.data[0]._id,
+          ['student.clazz.clazzName']: res.result.data[0].name
+        });
+        // console.log(this.data.checkedClazz)
       },
       fail: console.fail
     })
@@ -84,15 +83,16 @@ Page({
    */
   onShow: function () {
     // this.onLoad(this.data.stuId)
+    wx.hideLoading()
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    wx.showLoading({
-      title: '加载中',
-    });
+    // wx.showLoading({
+    //   title: '加载中',
+    // });
   },
 
   /**
@@ -125,37 +125,37 @@ Page({
   nameInput: function (e) {
     // console.log(e.detail.value);
     this.setData({
-      ['student.name'] : e.detail.value
+      ['student.name']: e.detail.value
     });
   },
   ageInput: function (e) {
     this.setData({
-      ['student.age'] : e.detail.value
+      ['student.age']: e.detail.value
     })
   },
   phoneInput: function (e) {
     this.setData({
-      ['student.phone'] : e.detail.value
+      ['student.phone']: e.detail.value
     })
   },
-  contactsNameInput: function(e) {
+  contactsNameInput: function (e) {
     this.setData({
-      ['student.contactsName'] : e.detail.value
+      ['student.contactsName']: e.detail.value
     })
   },
-  contactsInput: function(e) {
+  contactsInput: function (e) {
     this.setData({
-      ['student.contacts'] : e.detail.value
+      ['student.contacts']: e.detail.value
     })
   },
-  genderChange: function(e) {
+  genderChange: function (e) {
     // console.log(e.detail.value);
     this.setData({
-      ['student.gender'] : e.detail.value
+      ['student.gender']: e.detail.value
     })
   },
   // 去选择班级
-  toChooseClazz: function() {
+  toChooseClazz: function () {
     if (this.data.toChooseClazz) {
       this.setData({
         toChooseClazz: false
@@ -167,7 +167,7 @@ Page({
     }
     // console.log(e)
   },
-  clazzChange: function(e) {
+  clazzChange: function (e) {
     const id = e.detail.value;
     // console.log(id);
     // 选中之后根据班级id查找班级名称
@@ -189,7 +189,7 @@ Page({
       fail: console.fail
     })
   },
-  toConfirm: function() {
+  toConfirm: function () {
     console.log(this.data.student);
     const that = this;
     wx.showModal({
@@ -197,35 +197,38 @@ Page({
       content: '确认保存更新的信息吗',
       success(res) {
         if (res.confirm) {
-          // console.log('用户点击确定')
           that.confirm();
+          // console.log(that.data.student)
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
       }
     })
   },
-  confirm: function() {
+  confirm: function () {
     const that = this;
     wx.cloud.callFunction({
       name: 'http',
       data: {
-        type: 'updateStudent',
+        type: 'addStudent',
         collectionName: 'student',
         prams: this.data.student
       },
       success: res => {
         // console.log(res.errMsg)
-        if (res.errMsg == 'cloud.callFunction:ok'){
-          console.log('ok')
-          wx.showToast({
-            title: '保存成功',
-            icon: 'success',
-            duration: 2000
+        if (res.errMsg == 'cloud.callFunction:ok') {
+          wx.showModal({
+            title: '添加成功',
+            content: '继续添加信息吗',
+            success(res) {
+              if (res.confirm) {
+                that.onLoad();
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
           })
-
         } else {
-          // /pages/home / home
           wx.showToast({
             title: '出错了',
             image: '/images/icon/fail.png',

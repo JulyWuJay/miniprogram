@@ -19,6 +19,12 @@
         {{item.name}}
       </label>
     </radio-group>
+    <!-- <view class='clazz-main'>
+      <view class='clazz-item'></view>
+      <view class='clazz-item'></view>
+      <view class='clazz-item'></view>
+      <view class='clazz-item'></view>
+    </view> -->
   </view>
   <!-- 班级 -->
 
@@ -36,7 +42,7 @@
       <label>
         <radio value='1' checked="{{genderChecked === '1' ? true : false}}"/>男
       </label>
-    </radio-group>
+  </radio-group>
     <!-- <input class='normal-input' type='number' value='{{student.gender}}' /> -->
   </view>
   <view class='group'>

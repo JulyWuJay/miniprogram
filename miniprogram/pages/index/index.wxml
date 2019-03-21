@@ -27,24 +27,38 @@
     </view> -->
     <view class="uploader">
       <navigator url="../databaseGuide/databaseGuide" open-type="navigate" class="uploader-text">
-        <text>数据库</text>
+        <text>时间安排</text>
       </navigator>
     </view>
     <view class="uploader">
       <navigator url="../addFunction/addFunction" open-type="navigate" class="uploader-text">
-        <text>云函数</text>
+        <text>学科设置</text>
       </navigator>
     </view>
     <view class="uploader">
       <navigator url="../addFunction/addFunction" open-type="navigate" class="uploader-text">
-        <text>测试</text>
+        <text>班级设置</text>
       </navigator>
     </view>
   </view>
 
   <!-- 物品管理 -->
   <view class='main' style='display:{{footerChosed == "thing" ? "" : "none"}}'>
-    2
+    <view class="uploader">
+      <navigator url="../addFunction/addFunction" open-type="navigate" class="uploader-text">
+        <text>书本管理</text>
+      </navigator>
+    </view>
+    <view class="uploader">
+      <navigator url="../addFunction/addFunction" open-type="navigate" class="uploader-text">
+        <text>器械管理</text>
+      </navigator>
+    </view>
+    <view class="uploader">
+      <navigator url="../addFunction/addFunction" open-type="navigate" class="uploader-text">
+        <text>缴费情况</text>
+      </navigator>
+    </view>
   </view>
 
   <!-- 师生管理 -->
@@ -55,11 +69,10 @@
       </navigator>
     </view>
     <view class="uploader">
-      <navigator url="../databaseGuide/databaseGuide" open-type="navigate" class="uploader-text">
+      <navigator url="../people/teacher/all/allTeacher" open-type="navigate" class="uploader-text">
         <text>教员信息</text>
       </navigator>
     </view>
-    师生管理
   </view>
 
 <!-- 底部切换 -->
