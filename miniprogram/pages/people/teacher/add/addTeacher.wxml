@@ -1,2 +1,55 @@
 <!--miniprogram/pages/people/teacher/add/addTeacher.wxml-->
-<text>miniprogram/pages/people/teacher/add/addTeacher.wxml</text>
+<!-- main-start -->
+<view class='main'>
+  <view class='group'>
+    <text>姓名:</text>
+    <input style='width:150rpx' class='normal-input center' type='text' value='{{teacher.name}}' bindinput='nameInput'/>
+  </view>
+  <view class='group'>
+    <text>年龄:</text>
+    <input style='width:150rpx' class='normal-input center' type='number' value='{{teacher.age}}' bindinput='ageInput'/>
+  </view>
+  <view class='group' bindtap='toChooseSubject'>
+    <text>科目:</text>
+    <!-- <text style='width:150rpx' class='normal-input' type='text' value='{{teacher.subject}}' /> -->
+    <view style='width:200rpx;heighr:100%;' id='clazz' class='center'>
+          {{teacher.subject}} 
+    </view>
+  </view>
+  <!-- 选择科目 -->
+  <view wx:if="{{toChooseSubject}}" class='clazz-choose'>
+    <radio-group class="clazz-main" bindchange="subjectChange">
+      <label class="clazz-item" wx:for="{{subject}}">
+        <radio value="{{item.name}}" checked="{{item.name == teacher.subject ? true : false}}" />
+        {{item.name}}
+      </label>
+    </radio-group>
+  </view>
+  <!-- 科目 -->
+  <view class='group'>
+    <text>电话:</text>
+    <input style='width:250rpx' class='normal-input center' type='number' value='{{teacher.phone}}' bindinput='phoneInput'/>
+  </view>
+  <view class='group'>
+    <text>性别</text>
+    <!-- <input style='width:150rpx' class='normal-input' type='text' value='{{teacher.gender}}' /> -->
+    <radio-group bindchange="genderChange">
+      <label>
+        <radio value='女' checked="{{genderChecked === '女' ? true : false}}"/>女
+      </label>
+      <label>
+        <radio value='男' checked="{{genderChecked === '男' ? true : false}}"/>男
+      </label>
+    </radio-group>
+  </view>
+  <!-- 保存 -->
+  <view style='margin-top:50rpx'>
+    <button style='background-color:rgb(0,112,173);color:#fff' bindtap='toConfirm'>保存</button>
+  </view>
+
+
+
+
+
+</view>
+<!-- main-end -->

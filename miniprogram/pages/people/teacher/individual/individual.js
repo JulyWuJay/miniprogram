@@ -111,7 +111,7 @@ Page({
         this.setData({
           teacher: res.result.data[0]
         });
-        console.log(this.data.teacher);
+        // console.log(this.data.teacher);
         wx.hideLoading();
       },
       fail: console.fail
@@ -161,17 +161,51 @@ Page({
     }
   },
   toConfirm: function() {
-    console.log(this.data.teacher);
+    // console.log(this.data.teacher);
+    const that = this;
     wx.showModal({
       title: '提示',
       content: '确认保存更新的信息吗',
       success(res) {
         if (res.confirm) {
-          console.log('用户点击确定')
+          // console.log('用户点击确定');
+          that.confirm();
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          // console.log('用户点击取消')
         }
       }
+    })
+  },
+  confirm: function() {
+    console.log(this.data.teacher);
+    const that = this;
+    wx.cloud.callFunction({
+      name: 'http',
+      data: {
+        type: 'updateTeacher',
+        collectionName: 'teacher',
+        prams: this.data.teacher
+      },
+      success: res => {
+        // console.log(res.errMsg)
+        if (res.errMsg == 'cloud.callFunction:ok') {
+          console.log('ok')
+          wx.showToast({
+            title: '保存成功',
+            icon: 'success',
+            duration: 2000
+          })
+
+        } else {
+          // /pages/home / home
+          wx.showToast({
+            title: '出错了',
+            image: '/images/icon/fail.png',
+            duration: 2000
+          })
+        }
+      },
+      fail: console.fail
     })
   }
 })

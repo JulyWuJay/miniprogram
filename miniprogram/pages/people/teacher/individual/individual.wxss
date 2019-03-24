@@ -59,3 +59,8 @@ page{
 .group > text {
   font-size: 48rpx;
 }
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

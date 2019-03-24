@@ -8,7 +8,7 @@
   <!-- teacher-item 开始 -->
   <view class='teacher-item' wx:for="{{teacher}}" wx:key="_id">
       <view class='teacher-item-img'>
-        <image style='width:100rpx;height:100rpx' src='/images/icon/common/boy.png'></image>
+        <image style='width:100rpx;height:100rpx' src="{{item.gender === '男' ? imageUrl.boy : imageUrl.girl}}"></image>
       </view>
       <view class='teacher-item-content'>
         <view style='height:60rpx;'>

@@ -1,4 +1,5 @@
 // miniprogram/pages/people/teacher/all/allTeacher.js
+const url = require('../../../../js/url/url.js');
 Page({
 
   /**
@@ -14,17 +15,18 @@ Page({
     //   subject: '' , 
     // }
     teacher: [],
+    imageUrl: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading({
-      title: '加载中',
-    });
-    this.loadTeacher()
-
+    const genderUrl = new url.URL();
+    // this.loadTeacher()
+    this.setData({
+      imageUrl: genderUrl.genderUrl
+    })
   },
 
   /**
@@ -38,7 +40,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.showLoading({
+      title: '加载中',
+    });
+    this.loadTeacher();
   },
 
   /**

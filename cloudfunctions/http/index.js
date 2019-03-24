@@ -41,6 +41,13 @@ function chooseFunction(event){
     case 'addStudent' : {
       return addStudent(event);
     }
+    // 教师
+    case 'updateTeacher' : {
+      return updateTeacher(event);
+    }
+    case 'addTeacher' : {
+      return addTeacher(event);
+    }
   }
 }
 
@@ -89,7 +96,7 @@ function updateStudent(event){
   const student = event.prams;
 
   return db.collection('student').where({
-    _id: 'XGpIe-SiwXKAQp9K'
+    _id: student._id
   }).update({
     data: {
       age: student.age,
@@ -104,6 +111,7 @@ function updateStudent(event){
   })
 }
 
+// 添加学生
 function addStudent(event){
   const student = event.prams;
   return db.collection('student').add({
@@ -114,6 +122,40 @@ function addStudent(event){
       contactsName: student.contactsName,
       gender: student.gender,
       name: student.name 
+    },
+    success: console.success,
+    fail: console.fail
+  })
+}
+
+// 更新教师
+function updateTeacher(event){
+  const teacher = event.prams;
+  return db.collection('teacher').where({
+    _id: teacher._id
+  }).update({
+    data: {
+      age: teacher.age,
+      gender: teacher.gender,
+      name: teacher.name,
+      phone: teacher.phone,
+      subject: teacher.subject
+    },
+    success: console.log,
+    fail: console.fail
+  })
+}
+
+// 添加教师
+function addTeacher(event) {
+  const teacher = event.prams;
+  return db.collection('teacher').add({
+    data: {
+      name: teacher.name,
+      age: teacher.age,
+      gender: teacher.gender,
+      phone: teacher.phone,
+      subject: teacher.subject
     },
     success: console.success,
     fail: console.fail

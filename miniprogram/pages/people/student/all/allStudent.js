@@ -28,9 +28,6 @@ Page({
     this.setData({
       imageUrl: genderUrl.genderUrl
     })
-    wx.showLoading({
-      title: '加载中',
-    });
   },
 
   /**
@@ -43,6 +40,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showLoading({
+      title: '加载中',
+    });
     let that = this;
     // 获取班级
     wx.cloud.callFunction({
