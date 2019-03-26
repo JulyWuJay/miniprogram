@@ -153,7 +153,7 @@ Page({
           title: '出错了',
           image: '/images/icon/fail.png',
           duration: 2000
-        })
+        });
       }
     })
   }

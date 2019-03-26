@@ -102,6 +102,7 @@ Page({
     })
   },
   toConfirm: function () {
+    const that = this;
     console.log(this.data.clazz);
     wx.cloud.callFunction({
       name: 'http',
@@ -111,10 +112,39 @@ Page({
         prams: this.data.clazz
       },
       success: res => {
-        console.log(res);
+        // console.log(res);
+        if (res.result.errMsg == 'collection.add:ok') {
+          wx.showModal({
+            title: '添加成功',
+            content: '继续添加信息吗',
+            success(res) {
+              if (res.confirm) {
+                // that.onLoad();
+                that.setData({
+                  ['clazz.name']: '添加',
+                  ['clazz.admin'] : '选择',
+                  allTeacher: []
+                })
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+        } else {
+          wx.showToast({
+            title: '出错了',
+            image: '/images/icon/fail.png',
+            duration: 2000
+          });
+        }
       },
       fail: fail => {
-        consol.log(fail)
+        consol.log(fail);
+        wx.showToast({
+          title: '出错了',
+          image: '/images/icon/fail.png',
+          duration: 2000
+        });
       }
     })
   }
