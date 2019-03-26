@@ -36,7 +36,7 @@
       </navigator>
     </view>
     <view class="uploader">
-      <navigator url="../addFunction/addFunction" open-type="navigate" class="uploader-text">
+      <navigator url="../school/clazz/all/allClazz" open-type="navigate" class="uploader-text">
         <text>班级设置</text>
       </navigator>
     </view>

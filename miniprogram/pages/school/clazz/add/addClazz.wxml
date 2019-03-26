@@ -1,0 +1,24 @@
+<!--miniprogram/pages/school/clazz/add/addClazz.wxml-->
+<view class='main'>
+  <view class='group'>
+    <text>班级名:</text>
+    <input style='width:150rpx' class='normal-input center' type='text' value='{{clazz.name}}' bindinput='nameInput'/>
+  </view>
+  <view class='group'>
+    <text>班主任:</text>
+    <text>{{clazz.admin}}</text>
+  </view>
+    <!-- 选择班主任 -->
+  <view class='teacher-choose'>
+    <radio-group class="teacher-main" bindchange="teacherChange">
+      <label class="teacher-item" wx:for="{{allTeacher}}">
+        <radio value="{{item.name}}"/>
+        {{item.name}}
+      </label>
+    </radio-group>
+  </view>
+    <!-- 保存 -->
+  <view style='margin-top:50rpx'>
+    <button style='background-color:rgb(0,112,173);color:#fff' bindtap='toConfirm'>添加</button>
+  </view>
+</view>

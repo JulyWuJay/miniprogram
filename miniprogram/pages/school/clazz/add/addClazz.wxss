@@ -1,5 +1,4 @@
-/* miniprogram/pages/people/teacher/individual/individual.wxss */
-/* miniprogram/pages/people/student/individual/individual.wxss */
+/* miniprogram/pages/school/clazz/add/addClazz.wxss */
 @import "../../../../style/common.wxss";
 
 page{
@@ -26,26 +25,19 @@ page{
   align-items: center;
   border-bottom: 1px solid #f6f6f6;
 }
-#clazz{
-  width: 100rpx;
-  height: 100%;
-  display: flex;
-  /* justify-content: center; */
-  align-items: center;
-}
-.clazz-choose{
+.teacher-choose{
   width: 100%;
   /* height: 400rpx; */
   /* background-color:#f6f6f6; */
 }
-.clazz-main{
+.teacher-main{
   width: 80%;
   /* height: 400rpx; */
   margin: 0 auto;
   /* background-color: #fff; */
   border-radius: 0 8rpx 8rpx 0;
 }
-.clazz-item{
+.teacher-item{
   float: left;
   width: 50%;
   height: 80rpx;
@@ -55,12 +47,4 @@ page{
   align-items: center;
   padding: 0 30rpx;
   box-sizing: border-box;
-}
-.group > text {
-  font-size: 48rpx;
-}
-.center{
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

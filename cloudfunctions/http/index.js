@@ -48,6 +48,13 @@ function chooseFunction(event){
     case 'addTeacher' : {
       return addTeacher(event);
     }
+    // 班级
+    case 'updateClazz' : {
+      return updateClazz(event);
+    }
+    case 'addClazz' : {
+      return addClazz(event);
+    }
   }
 }
 
@@ -91,10 +98,9 @@ function getById(event){
   });
   return result;
 }
-
+// 更新学生
 function updateStudent(event){
   const student = event.prams;
-
   return db.collection('student').where({
     _id: student._id
   }).update({
@@ -156,6 +162,33 @@ function addTeacher(event) {
       gender: teacher.gender,
       phone: teacher.phone,
       subject: teacher.subject
+    },
+    success: console.success,
+    fail: console.fail
+  })
+}
+
+// 更新班级
+function updateClazz(event) {
+  const clazz = event.prams;
+  return db.collection('clazz').where({
+    _id: clazz._id
+  }).update({
+    data: {
+      name: clazz.name,
+      admin: clazz.admin
+    },
+    success: res => console.log(res),
+    fail: fail => console.log(fail)
+  })
+}
+// 添加班级
+function addClazz(event) {
+  const clazz = event.prams;
+  return db.collection('clazz').add({
+    data: {
+      name: clazz.name,
+      admin: clazz.admin
     },
     success: console.success,
     fail: console.fail
