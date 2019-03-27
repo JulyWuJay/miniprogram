@@ -25,7 +25,7 @@
   </view>
   <view class='btn-group'>
     <input class='input'></input>
-    <button class='btn-primary flex-center' style='width:150rpx;height:60%;color:#fff'>进货</button>
+    <button class='btn-primary flex-center' style='width:150rpx;height:60%;color:#fff' bindtap='addBook'>进货</button>
   </view>
 </view>
 <!-- main -->

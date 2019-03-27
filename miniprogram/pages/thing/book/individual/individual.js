@@ -96,5 +96,21 @@ Page({
         console.log(fail)
       }
     })
+  },
+  addBook: function(num) {
+    wx.cloud.callFunction({
+      name: 'book',
+      data: {
+        type: 'addBook',
+        bookId: this.data.bookId,
+        num: 3
+      },
+      success: res => {
+        console.log('webadd', res);
+      },
+      fail: fail => {
+        console.log(fail);
+      }
+    })
   }
 })

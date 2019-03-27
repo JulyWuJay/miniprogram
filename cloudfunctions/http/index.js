@@ -55,6 +55,10 @@ function chooseFunction(event){
     case 'addClazz' : {
       return addClazz(event);
     }
+    // 根据id更新书籍
+    case 'updateBook' : {
+      return updateBook(event);
+    }
   }
 }
 
@@ -88,15 +92,14 @@ function getStudentByClazz(event){
   });
   return result;
 }
-
+// 根据id查询
 function getById(event){
-  const result = db.collection(event.collectionName).where({
+  return db.collection(event.collectionName).where({
     _id: event.prams
   }).get({
-    success: console.log,
+    success: res => console.log("get success"),
     fail: console.error
   });
-  return result;
 }
 // 更新学生
 function updateStudent(event){
@@ -149,6 +152,25 @@ function updateTeacher(event){
     },
     success: console.log,
     fail: console.fail
+  })
+}
+
+function updateBook(event){
+  const book = event.prams;
+  return db.collection('book').where({
+    _id: book._id
+  }).update({
+    data: {
+      all: book.all,
+      stock: book.stock,
+      using: book.using
+    },
+    success: res => {
+      console.log(res);
+    },
+    fail: fail => {
+      console.log(fail)
+    }
   })
 }
 
