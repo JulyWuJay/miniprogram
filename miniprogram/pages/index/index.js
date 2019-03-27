@@ -20,10 +20,10 @@ Page({
     this.setData({
       tabIconUrl: tabUrl.tabIconUrl
     })
-    // if (wx.cloud) {
-    if (!wx.cloud) {
+    if (wx.cloud) {
+    // if (!wx.cloud) {
       wx.redirectTo({
-        url: '../school/clazz/all/allClazz',
+        url: '../thing/book/all/allBook',
       })
       return
     }

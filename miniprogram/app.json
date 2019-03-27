@@ -16,7 +16,12 @@
     "pages/people/teacher/individual/individual",
     "pages/school/clazz/all/allClazz",
     "pages/school/clazz/add/addClazz",
-    "pages/school/clazz/individual/individual"
+    "pages/school/clazz/individual/individual",
+    "pages/school/subject/all/allSubject",
+    "pages/school/subject/add/addSubject",
+    "pages/thing/book/all/allBook",
+    "pages/thing/book/individual/individual",
+    "pages/thing/book/add/addBookKind"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

@@ -55,7 +55,6 @@ Page({
         prams: null
       },
       success(res) {
-        wx.hideLoading()
         // console.log(res);
         that.setData({
           // 第一个班级背景变白
@@ -121,6 +120,7 @@ Page({
         prams: id
       },
       success: res => {
+        wx.hideLoading()
         // console.log(res);
         that.setData({
           student: res.result.data

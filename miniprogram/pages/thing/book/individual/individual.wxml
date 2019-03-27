@@ -1,0 +1,31 @@
+<!--miniprogram/pages/thing/book/individual/individual.wxml-->
+<!-- main -->
+<view class='main'>
+  <view class='group'>
+    <text>书名:</text>
+    <text>{{book.name}}</text>
+  </view>
+  <view class='group'>
+    <text>总数量:</text>
+    <text>{{book.all}}</text>
+  </view>
+  <view class='group'>
+    <text>使用中:</text>
+    <text>{{book.using}}</text>
+  </view>
+  <view class='group'>
+    <text>库存:</text>
+    <text>{{book.stock}}</text>
+  </view>
+  <view class='btn-group'>
+    <input class='input'></input>
+    <button class='btn-warning flex-center' style='width:150rpx;height:60%;color:#fff'>报废</button>
+    <!-- <input class='input'></input>
+    <button class='btn-primary flex-center' style='width:150rpx;height:60%;color:#fff'>进货</button> -->
+  </view>
+  <view class='btn-group'>
+    <input class='input'></input>
+    <button class='btn-primary flex-center' style='width:150rpx;height:60%;color:#fff'>进货</button>
+  </view>
+</view>
+<!-- main -->

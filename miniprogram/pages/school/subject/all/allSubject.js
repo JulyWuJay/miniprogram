@@ -1,4 +1,4 @@
-// miniprogram/pages/school/clazz/all/allClazz.js
+// miniprogram/pages/school/subject/all/allSubject.js
 const url = require('../../../../js/url/url.js');
 
 Page({
@@ -56,10 +56,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    // wx.showLoading({
-    //   title: '加载中',
-    // });
     this.loadClazz();
+
   },
 
   /**

@@ -1,4 +1,4 @@
-/* miniprogram/pages/people/teacher/all/allTeacher.wxss */
+/* miniprogram/pages/school/subject/all/allSubject.wxss */
 @import "../../../../style/common.wxss";
 page{
   width: 100%;
@@ -11,28 +11,33 @@ page{
   height: 92%;
   /* background-color: red; */
 }
-.teacher-item{
-  width: 100%;
+.clazz-item{
+  float: left;
+  width: 50%;
   height:200rpx;
-  margin-bottom: 10rpx;
-  border-bottom: 1rpx solid #cdcdcd;
+  /* margin-bottom: 10rpx; */
+  /* border-bottom: 1rpx solid #cdcdcd; */
   display: flex;
   flex-direction: row;
+  /* background-color: red; */
 }
-.teacher-item-img{
-  width: 30%;
+.clazz-item-img{
+  width: 100%;
   height: 100%;
   /* background-color: blue; */
   display: flex;
-
   align-items: center;
   justify-content: center;
 }
-.teacher-item-content{
-  width: 70%;
+.clazz-item-content{
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  /* justify-content: space-around; */
+  justify-content: center;
+  align-items: center;
   /* background-color: red; */
+  border-bottom: 1rpx solid #cdcdcd;
+  border-right: 1rpx solid #cdcdcd;
 }

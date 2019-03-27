@@ -1,5 +1,4 @@
 <!--miniprogram/pages/school/clazz/all/allClazz.wxml-->
-<!-- <text>miniprogram/pages/school/clazz/all/allClazz.wxml</text> -->
 <view class='header-search'>
   <navigator url="../add/addClazz" open-type="navigate" class="header-search-circle">
       <image src='../../../../images/icon/common/add.png' class='header-search-circle-icon'></image>

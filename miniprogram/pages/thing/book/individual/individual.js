@@ -1,24 +1,25 @@
-// miniprogram/pages/school/clazz/all/allClazz.js
-const url = require('../../../../js/url/url.js');
-
+// miniprogram/pages/thing/book/individual/individual.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    clazz: [],
-    imageUrl: {}
+    bookId: '',
+    book: {
+
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const genderUrl = new url.URL();
     this.setData({
-      imageUrl: genderUrl.genderUrl
-    })
+      bookId: options.bookId
+    });
+    // this.getBookById(options.bookId)
+    // console.log(this.data.bookId)
   },
 
   /**
@@ -34,8 +35,9 @@ Page({
   onShow: function () {
     wx.showLoading({
       title: '加载中',
-    });
-    this.loadClazz();
+    })
+    this.getBookById(this.data.bookId)
+    console.log(this.data.bookId)
   },
 
   /**
@@ -56,10 +58,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    // wx.showLoading({
-    //   title: '加载中',
-    // });
-    this.loadClazz();
+
   },
 
   /**
@@ -75,29 +74,27 @@ Page({
   onShareAppMessage: function () {
 
   },
-  // 加载全部老师信息
-  loadClazz: function () {
-    let that = this;
-    // 获取班级
+  // 根据id查询书籍
+  getBookById: function (id) {
     wx.cloud.callFunction({
-      // 云函数名称
       name: 'http',
-      // 传给云函数的参数
       data: {
-        type: 'getAll',
-        collectionName: 'clazz',
-        prams: null
+        type: 'getById',
+        collectionName: 'book',
+        prams: id
       },
-      success(res) {
-        wx.hideLoading()
-        console.log(res);
-        that.setData({
-          clazz: res.result.data
+      success: res => {
+        const book = res.result.data[0];
+        this.setData({
+          book : book
         });
-        // console.log(that.data.clazz)
+        wx.hideLoading();
+        console.log(book);
+        console.log(this.data.book);
       },
-      fail: console.error
-    });
+      fail: fail => {
+        console.log(fail)
+      }
+    })
   }
-
 })
