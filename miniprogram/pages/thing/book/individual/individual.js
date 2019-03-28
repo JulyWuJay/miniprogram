@@ -8,7 +8,9 @@ Page({
     bookId: '',
     book: {
 
-    }
+    },
+    deleteNum: 0,
+    addNum: 0
   },
 
   /**
@@ -36,7 +38,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    this.getBookById(this.data.bookId)
+    this.getBookById(this.data.bookId);
     console.log(this.data.bookId)
   },
 
@@ -74,6 +76,20 @@ Page({
   onShareAppMessage: function () {
 
   },
+  deleteInput: function (e) {
+    console.log(e.detail.value);
+    const num = Number(e.detail.value);
+    this.setData({
+      deleteNum: num
+    });
+  },
+  addInput: function (e) {
+    const num = Number(e.detail.value);
+    this.setData({
+      addNum: num
+    });
+  },
+
   // 根据id查询书籍
   getBookById: function (id) {
     wx.cloud.callFunction({
@@ -89,13 +105,51 @@ Page({
           book : book
         });
         wx.hideLoading();
-        console.log(book);
-        console.log(this.data.book);
+        // console.log(book);
+        // console.log(this.data.book);
       },
       fail: fail => {
         console.log(fail)
       }
     })
+  },
+  toAddBook: function () {
+    const that = this;
+    console.log(this.data.addNum);
+    wx.showModal({
+      title: '进货',
+      content: '确认增加' + this.data.addNum +'本书籍吗',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定');
+          wx.showLoading({
+            title: '处理中',
+          });
+          that.addBook(that.data.addNum);
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    });
+  },
+  toDeleteBook: function () {
+    const that = this;
+    console.log(this.data.deleteNum);
+    wx.showModal({
+      title: '报废',
+      content: '确认报废' + this.data.deleteNum + '本书籍吗',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定');
+          wx.showLoading({
+            title: '处理中',
+          });
+          that.deleteBook(that.data.deleteNum);
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    });
   },
   addBook: function(num) {
     wx.cloud.callFunction({
@@ -103,14 +157,54 @@ Page({
       data: {
         type: 'addBook',
         bookId: this.data.bookId,
-        num: 3
+        num: num
       },
       success: res => {
+        wx.hideLoading();
+        this.getBookById(this.data.bookId);
+        wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000
+        });
         console.log('webadd', res);
       },
       fail: fail => {
         console.log(fail);
+        wx.showToast({
+          title: '出错了',
+          image: '/images/icon/fail.png',
+          duration: 2000
+        });
       }
-    })
+    });
+  },
+  deleteBook: function(num) {
+    wx.cloud.callFunction({
+      name: 'book',
+      data: {
+        type: 'deleteBook',
+        bookId: this.data.bookId,
+        num: num
+      },
+      success: res => {
+        wx.hideLoading();
+        this.getBookById(this.data.bookId);
+        wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000
+        });
+        console.log('webadd', res);
+      },
+      fail: fail => {
+        console.log(fail);
+        wx.showToast({
+          title: '出错了',
+          image: '/images/icon/fail.png',
+          duration: 2000
+        });
+      }
+    });
   }
 })
