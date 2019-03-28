@@ -37,11 +37,11 @@ Page({
             success: res => {
               // console.log(res);
 
-              if (res.userInfo.nickName != '我不了地Jay'){
-                wx.redirectTo({
-                  url: '../error/needLogin/needLogin',
-                })
-              }
+              // if (res.userInfo.nickName != '我不了地Jay'){
+              //   wx.redirectTo({
+              //     url: '../error/needLogin/needLogin',
+              //   })
+              // }
               this.setData({
                 avatarUrl: res.userInfo.avatarUrl,
                 userInfo: res.userInfo

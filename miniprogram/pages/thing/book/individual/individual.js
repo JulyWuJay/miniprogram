@@ -35,11 +35,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.showLoading({
-      title: '加载中',
-    })
     this.getBookById(this.data.bookId);
-    console.log(this.data.bookId)
+    // console.log(this.data.bookId)
   },
 
   /**
@@ -92,6 +89,9 @@ Page({
 
   // 根据id查询书籍
   getBookById: function (id) {
+    wx.showLoading({
+      title: '加载中',
+    });
     wx.cloud.callFunction({
       name: 'http',
       data: {
@@ -105,8 +105,6 @@ Page({
           book : book
         });
         wx.hideLoading();
-        // console.log(book);
-        // console.log(this.data.book);
       },
       fail: fail => {
         console.log(fail)
@@ -140,7 +138,7 @@ Page({
       content: '确认报废' + this.data.deleteNum + '本书籍吗',
       success(res) {
         if (res.confirm) {
-          console.log('用户点击确定');
+          // console.log('用户点击确定');
           wx.showLoading({
             title: '处理中',
           });
@@ -152,6 +150,7 @@ Page({
     });
   },
   addBook: function(num) {
+    const that = this;
     wx.cloud.callFunction({
       name: 'book',
       data: {
@@ -160,13 +159,12 @@ Page({
         num: num
       },
       success: res => {
-        wx.hideLoading();
-        this.getBookById(this.data.bookId);
-        wx.showToast({
-          title: '成功',
-          icon: 'success',
-          duration: 2000
-        });
+        that.getBookById(that.data.bookId);
+        // wx.showToast({
+        //   title: '成功',
+        //   icon: 'success',
+        //   duration: 2000
+        // });
         console.log('webadd', res);
       },
       fail: fail => {
@@ -180,6 +178,7 @@ Page({
     });
   },
   deleteBook: function(num) {
+    const that = this;
     wx.cloud.callFunction({
       name: 'book',
       data: {
@@ -188,13 +187,13 @@ Page({
         num: num
       },
       success: res => {
-        wx.hideLoading();
-        this.getBookById(this.data.bookId);
-        wx.showToast({
-          title: '成功',
-          icon: 'success',
-          duration: 2000
-        });
+        that.getBookById(that.data.bookId);
+        // wx.showToast({
+        //   title: '成功',
+        //   icon: 'success',
+        //   duration: 2000
+        // });
+        // this.getBookById(this.data.bookId);
         console.log('webadd', res);
       },
       fail: fail => {
