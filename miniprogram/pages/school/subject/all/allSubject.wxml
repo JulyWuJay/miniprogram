@@ -7,15 +7,15 @@
 <!-- 主题部分 -->
 <scroll-view scroll-y class='content'>
   <!-- clazz-item 开始 -->
-  <view class='clazz-item' wx:for="{{clazz}}" wx:key="_id">
+  <view class='item' wx:for="{{clazz}}" wx:key="_id">
 
-    <view class='clazz-item-content'>
+    <view class='item-content'>
       <view style='height:60rpx;'>
-        <text style='font-size:24rpx'>班级:  </text>
+        <text style='font-size:24rpx'>课程名:  </text>
         <text>{{item.name}}</text>
       </view>
       <view style='height:60rpx;'>
-        <navigator url="../individual/individual?clazzId={{item._id}}" open-type="navigate" class="uploader-text">
+        <navigator url="../individual/individual?subjectId={{item._id}}" open-type="navigate" class="uploader-text">
           <text style='font-size:24rpx;color:#bfbfbf'>更多操作>></text>
         </navigator>    
       </view>

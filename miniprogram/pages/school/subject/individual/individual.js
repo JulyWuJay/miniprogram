@@ -1,25 +1,24 @@
-// miniprogram/pages/school/subject/add/addSubject.js
+// miniprogram/pages/school/subject/individual/individual.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    subject: {
-      name: '科目',
-      book: {
-        bookId: 'x',
-        name: '添加书籍'
-      }
-    },
+    subjectId: '',
+    subject: {},
     bookList: [],
     isShowBook: false
   },
 
   /**
-  * 生命周期函数--监听页面加载
-  */
+   * 生命周期函数--监听页面加载
+   */
   onLoad: function (options) {
+    this.setData({
+      subjectId: options.subjectId
+    });
+    // console.log(this.data.subjectId)
 
   },
   /**
@@ -33,6 +32,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showLoading({
+      title: '加载中',
+    });
+    this.getSubjectById(this.data.subjectId);
     this.getBook();
   },
 
@@ -70,6 +73,28 @@ Page({
   onShareAppMessage: function () {
 
   },
+  // 根据id查科目
+  getSubjectById: function (id) {
+    wx.cloud.callFunction({
+      name: 'http',
+      data: {
+        type: 'getById',
+        collectionName: 'subject',
+        prams: id
+      },
+      success: res => {
+        // console.log(res);
+        wx.hideLoading();
+        this.setData({
+          subject: res.result.data[0]
+        });
+        console.log('subject' , this.data.subject);
+      },
+      fail: fail => {
+        console.log(fail);
+      }
+    });
+  },
   getBook: function () {
     wx.cloud.callFunction({
       name: 'http',
@@ -79,7 +104,7 @@ Page({
         prams: null
       },
       success: res => {
-        console.log('bookList', res.result.data);
+        console.log('bookList' , res.result.data);
         this.setData({
           bookList: res.result.data
         });
@@ -90,7 +115,7 @@ Page({
     })
   },
   toChooseBook: function () {
-    if (this.data.isShowBook) {
+    if ( this.data.isShowBook ) {
       this.setData({
         isShowBook: false
       })
@@ -127,7 +152,7 @@ Page({
     // console.log(e)
     const name = e.detail.value;
     this.setData({
-      ['subject.name']: name
+      ['subject.name'] : name
     });
   },
   toConfirm: function () {
@@ -135,10 +160,10 @@ Page({
     // console.log(this.data.subject);
     wx.showModal({
       title: '保存',
-      content: '确认添加信息吗?',
+      content: '确认保存更新吗?',
       success(res) {
         if (res.confirm) {
-          // console.log(that.data.subject);
+          console.log(that.data.subject);
           that.confirm();
           // console.log('用户点击确定')
         } else if (res.cancel) {
@@ -152,28 +177,26 @@ Page({
     wx.cloud.callFunction({
       name: 'http',
       data: {
-        type: 'addSubject',
+        type: 'updateSubject',
         collectionName: 'subject',
         prams: that.data.subject
       },
       success: res => {
-        // console.log(res);
-        wx.showModal({
-          title: '成功',
-          content: '继续添加吗?',
-          success(res) {
-            if (res.confirm) {
-              console.log('用户点击确定');
-              that.setData({
-                ['subject.name']: '添加课程',
-                ['subject.book.name']: '选择书籍',
-                ['subject.book.bookId']: 'x'
-              })
-            } else if (res.cancel) {
-              console.log('用户点击取消')
-            }
-          }
-        })
+        console.log(res.errMsg);
+        if (res.errMsg == 'cloud.callFunction:ok') {
+          console.log('ok')
+          wx.showToast({
+            title: '保存成功',
+            icon: 'success',
+            duration: 2000
+          });
+        } else {
+          wx.showToast({
+            title: '出错了',
+            image: '/images/icon/fail.png',
+            duration: 2000
+          });
+        }
       },
       fail: fail => {
         console.log(fail);

@@ -23,7 +23,7 @@ Page({
     // if (wx.cloud) {
     if (!wx.cloud) {
       wx.redirectTo({
-        url: '../thing/book/all/allBook',
+        url: '../school/subject/all/allSubject',
       })
       return
     }

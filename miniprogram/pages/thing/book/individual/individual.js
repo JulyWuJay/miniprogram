@@ -7,7 +7,6 @@ Page({
   data: {
     bookId: '',
     book: {
-
     },
     deleteNum: 0,
     addNum: 0

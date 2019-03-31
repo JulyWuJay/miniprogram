@@ -1,2 +1,18 @@
 <!--miniprogram/pages/thing/book/add/addBookKind.wxml-->
-<text>miniprogram/pages/thing/book/add/addBookKind.wxml</text>
+<!-- main -->
+<view class='main'>
+  <view class='group'></view>
+  <view class='group'>
+    <text>书名:</text>
+    <input style='width:300rpx' class='normal-input center' type='text' bindinput='nameInput'/>
+  </view>
+  <view class='group'>
+    <text>数量:</text>
+    <input style='width:300rpx' class='normal-input center' type='number' bindinput='numInput'/>
+  </view>
+  <!-- <view class='btn-group'> -->
+  <button class='btn-primary flex-center' style='width:150rpx;height:60rpx;color:#fff;margin-top:200rpx;' bindtap='toAddNewBook'>保存</button>
+  <!-- </view> -->
+</view>
+<!-- main -->
+

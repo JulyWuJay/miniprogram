@@ -59,6 +59,15 @@ function chooseFunction(event){
     case 'updateBook' : {
       return updateBook(event);
     }
+    case 'addNewBook' : {
+      return addNewBook(event);
+    }
+    case 'updateSubject' : {
+      return updateSubject(event);
+    }
+    case 'addSubject' : {
+      return addSubect(event);
+    }
   }
 }
 
@@ -190,6 +199,7 @@ function addTeacher(event) {
   })
 }
 
+
 // 更新班级
 function updateClazz(event) {
   const clazz = event.prams;
@@ -204,6 +214,7 @@ function updateClazz(event) {
     fail: fail => console.log(fail)
   })
 }
+
 // 添加班级
 function addClazz(event) {
   const clazz = event.prams;
@@ -211,6 +222,52 @@ function addClazz(event) {
     data: {
       name: clazz.name,
       admin: clazz.admin
+    },
+    success: console.success,
+    fail: console.fail
+  })
+}
+// 添加书籍
+function addNewBook(event) {
+  const book = event.prams;
+  return db.collection('book').add({
+    data: {
+      name: book.name,
+      all: book.all,
+      stock: book.stock,
+      using: 0
+    },
+    success: console.success,
+    fail: console.fail
+  })
+}
+
+  
+// 更新学科
+function updateSubject(event) {
+  const subject = event.prams;
+  return db.collection('subject').where({
+    _id: subject._id
+  }).update({
+    data: {
+      name: subject.name,
+      ['book.bookId']: subject.book.bookId,
+      ['book.name']: subject.book.name
+    },
+    success: res => console.log(res),
+    fail: fail => console.log(fail)
+  })
+}
+// 添加学科
+function addSubect(event) {
+  const subject = event.prams;
+  return db.collection('subject').add({
+    data: {
+      name: subject.name,
+      book: {
+        name: subject.book.name,
+        bookId: subject.book.bookId
+      }
     },
     success: console.success,
     fail: console.fail

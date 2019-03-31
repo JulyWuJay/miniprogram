@@ -64,3 +64,27 @@ page{
   justify-content: center;
   align-items: center;
 }
+
+.clazz-choose{
+  width: 100%;
+  /* height: 400rpx; */
+  /* background-color:#f6f6f6; */
+}
+.clazz-main{
+  width: 80%;
+  /* height: 400rpx; */
+  margin: 0 auto;
+  /* background-color: #fff; */
+  border-radius: 0 8rpx 8rpx 0;
+}
+.clazz-item{
+  float: left;
+  width: 50%;
+  height: 80rpx;
+  /* background-color: red; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}

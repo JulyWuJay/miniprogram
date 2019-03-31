@@ -83,7 +83,7 @@ Page({
       // 传给云函数的参数
       data: {
         type: 'getAll',
-        collectionName: 'clazz',
+        collectionName: 'subject',
         prams: null
       },
       success(res) {

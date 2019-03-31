@@ -1,4 +1,4 @@
-/* miniprogram/pages/thing/book/add/addBookKind.wxss */
+/* miniprogram/pages/school/subject/individual/individual.wxss */
 @import "../../../../style/common.wxss";
 
 page{
@@ -41,6 +41,28 @@ page{
   border-bottom: 1rpx solid #e6e6e6;
   /* padding: 5rpx; */
   border-radius: 4rpx;
-  /* display: flex; */
-  /* flex-direction: row-reverse; */
+}
+/* 选择书籍 */
+.radio-choose{
+  width: 98%;
+  /* height: 400rpx; */
+  background-color:#f6f6f6;
+}
+.choose-main{
+  width: 100%;
+  /* height: 400rpx; */
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 0 8rpx 8rpx 0;
+}
+.choose-item{
+  float: left;
+  width: 50%;
+  height: 80rpx;
+  /* background-color: red; */
+  display: flex;
+  /* justify-content: space-around; */
+  align-items: center;
+  padding: 0 30rpx;
+  box-sizing: border-box;
 }
