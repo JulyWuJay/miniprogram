@@ -221,7 +221,59 @@ function addClazz(event) {
   return db.collection('clazz').add({
     data: {
       name: clazz.name,
-      admin: clazz.admin
+      admin: clazz.admin,
+      time: {
+        monday: {
+          morning: {
+            subjectId: '',
+            subjectName: ''
+          },
+          afternoon: {
+            subjectId: '',
+            subjectName: ''
+          }
+        },
+        tuesday: {
+          morning: {
+            subjectId: '',
+            subjectName: ''
+          },
+          afternoon: {
+            subjectId: '',
+            subjectName: ''
+          }
+        },
+        wednesday: {
+          morning: {
+            subjectId: '',
+            subjectName: ''
+          },
+          afternoon: {
+            subjectId: '',
+            subjectName: ''
+          }
+        },
+        thursday: {
+          morning: {
+            subjectId: '',
+            subjectName: ''
+          },
+          afternoon: {
+            subjectId: '',
+            subjectName: ''
+          }
+        },
+        friday: {
+          morning: {
+            subjectId: '',
+            subjectName: ''
+          },
+          afternoon: {
+            subjectId: '',
+            subjectName: ''
+          }
+        }
+      }
     },
     success: console.success,
     fail: console.fail

@@ -1,5 +1,4 @@
 /* miniprogram/pages/people/teacher/individual/individual.wxss */
-/* miniprogram/pages/people/student/individual/individual.wxss */
 @import "../../../../style/common.wxss";
 
 page{
