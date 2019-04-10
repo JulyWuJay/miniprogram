@@ -8,7 +8,11 @@ Page({
   data: {
     clazzId: '',
     clazz: undefined ,
-    plusUrl: ''
+    plusUrl: '',
+    timeInfo: {
+      day: '', // 星期几
+      time: '' //上午下午
+    }
   },
 
   /**
@@ -92,5 +96,8 @@ Page({
       },
       fail: res => console.log(res)
     })
+  },
+  confirmTime: function (e) {
+    console.log(e)
   }
 })

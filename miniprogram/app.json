@@ -24,7 +24,8 @@
     "pages/thing/book/add/addBookKind",
     "pages/school/subject/individual/individual",
     "pages/school/time/all/all",
-    "pages/school/time/individual/individual"
+    "pages/school/time/individual/individual",
+    "pages/school/time/chooseSubject/chooseSubject"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

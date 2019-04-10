@@ -1,6 +1,6 @@
 <!--miniprogram/pages/school/time/individual/individual.wxml-->
 <view class='header'>
-  <text style='font-size:60rpx;'>{{clazz.name}}</text>
+  <text style='font-size:60rpx;color:#fff'>{{clazz.name}}</text>
   <!-- <button class='normal-btn'>保存</button> -->
 </view>
 <view class='title'>
@@ -10,32 +10,80 @@
   </view>
   <view class='three'>下午</view>
 </view>
+<!--星期一开始  -->
 <view class='main'>
   <view class='one'>星期一</view>
-  <view class='two green'>
-    <!-- 上午 -->
-    <image wx:if="{{clazz.time.friday.morning.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
-    <text wx:if="{{clazz.time.friday.morning.subjectName != ''}}">上午</text>           
+  <view class='two green' bindtap='confirmTime'>
+    <navigator wx:if="{{clazz.time.monday.morning.subjectName == ''}}" url="../chooseSubject/chooseSubject" open-type="navigate" class='plus-out'>
+      <image src="{{plusUrl}}" class="plus-img"></image> 
+    </navigator>
+    <view wx:if="{{clazz.time.monday.morning.subjectName != ''}}" class='plus-out'>
+      <text>{{clazz.time.monday.morning.subjectName}}</text>           
+    </view>
   </view>
-  <view class='three pink'>下午</view>
+  <view class='three pink'>
+    <image wx:if="{{clazz.time.monday.afternoon.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
+    <text wx:if="{{clazz.time.monday.afternoon.subjectName != ''}}">下午</text>
+  </view>
 </view>
+<!--星期一结束  -->
+
+<!-- 星期二开始 -->
 <view class='main'>
   <view class='one'>星期二</view>
-  <view class='two pink'>上午</view>
-  <view class='three green'>下午</view>
+  <view class='two green' bindtap='confirmTime'>
+    <navigator wx:if="{{clazz.time.tuesday.afternoon.subjectName == ''}}" url="../chooseSubject/chooseSubject" open-type="navigate" class='plus-out'>
+      <image src="{{plusUrl}}" class="plus-img"></image> 
+    </navigator>
+    <view wx:if="{{clazz.time.tuesday.afternoon.subjectName != ''}}" class='plus-out'>
+      <text>上午</text>           
+    </view>
+  </view>
+  <view class='three pink'>
+    <image wx:if="{{clazz.time.monday.afternoon.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
+    <text wx:if="{{clazz.time.monday.afternoon.subjectName != ''}}">下午</text>
+  </view>
 </view>
+<!-- 星期二结束 -->
+
+<!-- 星期三开始 -->
 <view class='main'>
   <view class='one'>星期三</view>
-  <view class='two green'>上午</view>
-  <view class='three pink'>下午</view>
+  <view class='two green'>
+    <image wx:if="{{clazz.time.friday.morning.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
+    <text wx:if="{{clazz.time.friday.morning.subjectName != ''}}">上午</text>
+  </view>
+  <view class='three pink'>
+    <image wx:if="{{clazz.time.friday.afternoon.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
+    <text wx:if="{{clazz.time.friday.afternoon.subjectName != ''}}">下午</text>
+  </view>
 </view>
+<!-- 星期三结束 -->
+
+<!-- 星期四开始 -->
 <view class='main'>
   <view class='one'>星期四</view>
-  <view class='two pink'>上午</view>
-  <view class='three green'>下午</view>
+  <view class='two pink'>
+    <image wx:if="{{clazz.time.friday.morning.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
+    <text wx:if="{{clazz.time.friday.morning.subjectName != ''}}">上午</text>
+  </view>
+  <view class='three green'>
+    <image wx:if="{{clazz.time.friday.afternoon.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
+    <text wx:if="{{clazz.time.friday.afternoon.subjectName != ''}}">下午</text>
+  </view>
 </view>
+<!-- 星期四结束 -->
+
+<!-- 星期五开始 -->
 <view class='main'>
   <view class='one'>星期五</view>
-  <view class='two green'>上午</view>
-  <view class='three pink'>下午</view>
+  <view class='two green'>
+    <image wx:if="{{clazz.time.friday.morning.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
+    <text wx:if="{{clazz.time.friday.morning.subjectName != ''}}">上午</text>
+  </view>
+  <view class='three pink'>
+    <image wx:if="{{clazz.time.friday.afternoon.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
+    <text wx:if="{{clazz.time.friday.afternoon.subjectName != ''}}">下午</text>
+  </view>
 </view>
+<!-- 星期五结束 -->
