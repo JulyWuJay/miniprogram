@@ -1,23 +1,29 @@
+// miniprogram/pages/school/time/individual/individual.js
 const url = require('../../../../js/url/url.js');
-
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    clazz: [],
-    imageUrl: {}
+    clazzId: '',
+    clazz: undefined ,
+    plusUrl: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const genderUrl = new url.URL();
     this.setData({
-      imageUrl: genderUrl.genderUrl
-    })
+      clazzId: options.clazzId
+    });
+    this.getClazzById(this.data.clazzId);
+    const imgUrl = new url.URL();
+    this.setData({
+      plusUrl: imgUrl.plusUrl
+    });
+    // console.log(imgUrl);
   },
 
   /**
@@ -31,10 +37,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.showLoading({
-      title: '加载中',
-    });
-    this.loadClazz();
+
   },
 
   /**
@@ -55,10 +58,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    // wx.showLoading({
-    //   title: '加载中',
-    // });
-    this.loadClazz();
+
   },
 
   /**
@@ -74,29 +74,23 @@ Page({
   onShareAppMessage: function () {
 
   },
-  // 加载全部老师信息
-  loadClazz: function () {
-    let that = this;
-    // 获取班级
+  getClazzById: function (id) {
+    console.log(id);
     wx.cloud.callFunction({
-      // 云函数名称
       name: 'http',
-      // 传给云函数的参数
       data: {
-        type: 'getAll',
+        type: 'getById',
         collectionName: 'clazz',
-        prams: null
+        prams: id
       },
-      success(res) {
-        wx.hideLoading()
-        console.log(res);
-        that.setData({
-          clazz: res.result.data
-        });
-        // console.log(that.data.clazz)
+      success: res => {
+        const result = res.result.data[0];
+        this.setData({
+          clazz: result
+        })
+        console.log(this.data.clazz);
       },
-      fail: console.error
-    });
+      fail: res => console.log(res)
+    })
   }
-
 })

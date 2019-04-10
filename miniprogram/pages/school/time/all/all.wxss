@@ -1,1 +1,43 @@
 /* miniprogram/pages/school/time/all/all.wxss */
+@import "../../../../style/common.wxss";
+page{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.content{
+  width: 100%;
+  height: 92%;
+  /* background-color: red; */
+}
+.clazz-item{
+  float: left;
+  width: 50%;
+  height:200rpx;
+  /* margin-bottom: 10rpx; */
+  /* border-bottom: 1rpx solid #cdcdcd; */
+  display: flex;
+  flex-direction: row;
+  /* background-color: red; */
+}
+.clazz-item-img{
+  width: 100%;
+  height: 100%;
+  /* background-color: blue; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.clazz-item-content{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+  justify-content: center;
+  align-items: center;
+  /* background-color: red; */
+  border-bottom: 1rpx solid #cdcdcd;
+  border-right: 1rpx solid #cdcdcd;
+}

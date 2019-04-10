@@ -1,0 +1,41 @@
+<!--miniprogram/pages/school/time/individual/individual.wxml-->
+<view class='header'>
+  <text style='font-size:60rpx;'>{{clazz.name}}</text>
+  <!-- <button class='normal-btn'>保存</button> -->
+</view>
+<view class='title'>
+  <view class='one'>星期</view>
+  <view class='two'>
+    上午
+  </view>
+  <view class='three'>下午</view>
+</view>
+<view class='main'>
+  <view class='one'>星期一</view>
+  <view class='two green'>
+    <!-- 上午 -->
+    <image wx:if="{{clazz.time.friday.morning.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
+    <text wx:if="{{clazz.time.friday.morning.subjectName != ''}}">上午</text>           
+  </view>
+  <view class='three pink'>下午</view>
+</view>
+<view class='main'>
+  <view class='one'>星期二</view>
+  <view class='two pink'>上午</view>
+  <view class='three green'>下午</view>
+</view>
+<view class='main'>
+  <view class='one'>星期三</view>
+  <view class='two green'>上午</view>
+  <view class='three pink'>下午</view>
+</view>
+<view class='main'>
+  <view class='one'>星期四</view>
+  <view class='two pink'>上午</view>
+  <view class='three green'>下午</view>
+</view>
+<view class='main'>
+  <view class='one'>星期五</view>
+  <view class='two green'>上午</view>
+  <view class='three pink'>下午</view>
+</view>
