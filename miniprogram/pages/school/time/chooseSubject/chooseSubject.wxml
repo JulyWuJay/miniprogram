@@ -1,6 +1,6 @@
 <!--miniprogram/pages/school/time/chooseSubject/chooseSubject.wxml-->
 <view class='header'>
-  <view class='title'>班级</view>
+  <view class='title'>选择课程</view>
   <view class='confirm' bindtap='toConfirm'>保存</view>
 </view>
 <radio-group bindchange="subjectChange">

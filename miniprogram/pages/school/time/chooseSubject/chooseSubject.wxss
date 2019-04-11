@@ -15,12 +15,16 @@ page{
   padding: 0 20rpx;
 }
 .title{
-  width:80rpx;
-  height: 60rpx;
+  width:400rpx;
+  height: 100%;
+  font-size: 60rpx;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
 }
 .confirm{
   width:120rpx;
-  height: 60rpx;
+  height: 80rpx;
   background: rgb(0, 112, 173);
   color: #fff;
   display: flex;

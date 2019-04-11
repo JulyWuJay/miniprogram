@@ -223,60 +223,91 @@ Page({
       },
       success: res => {
         console.log(res);
-        // 移除书籍
-        // that.removeUsingBook(subjectId, clazzId);
+        wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000
+        });
       },
       fail: res => console.log(res)
     })
   },
   addUsingBook: function (subjectId, clazzId) {
     const that = this;
-    // 根据subjectId获取bookId
-    wx.cloud.callFunction({
-      name: 'http',
-      data: {
-        type: 'getById',
-        collectionName: 'subject',
-        prams: subjectId
-      },
-      success: res => {
-        // console.log(res);
-        const bookId = res.result.data[0].book.bookId;
-        // 获取到了bookId
-        // 根据clazzId获取学生数量
-        wx.cloud.callFunction({
-          name: 'http',
-          data: {
-            type: 'getStudentByClazz',
-            collectionName: 'student',
-            prams: clazzId
-          },
-          success: res => {
-            // 学生数量
-            const stuNum = res.result.data.length;
-            // 加上学生数量的book 
-            wx.cloud.callFunction({
-              name: 'book',
-              data: {
-                type: 'addUsingBook',
-                bookId: bookId,
-                num: stuNum
-              },
-              success: res => {
-                console.log('webadd', res);
-              },
-              fail: fail => {
-                console.log(fail);
-              }
-            });
+    // 判断是否已经选过该课程 选过true 如果选过，就不添加usingbook
+    const target = this.checkHadSubject(subjectId);
+    if ( target ) {
+      console.log('已经选过，无需在添加usingbook')
+    } else {
+      // 根据subjectId获取bookId
+      wx.cloud.callFunction({
+        name: 'http',
+        data: {
+          type: 'getById',
+          collectionName: 'subject',
+          prams: subjectId
+        },
+        success: res => {
+          // console.log(res);
+          const bookId = res.result.data[0].book.bookId;
+          // 获取到了bookId
+          // 根据clazzId获取学生数量
+          wx.cloud.callFunction({
+            name: 'http',
+            data: {
+              type: 'getStudentByClazz',
+              collectionName: 'student',
+              prams: clazzId
+            },
+            success: res => {
+              // 学生数量
+              const stuNum = res.result.data.length;
+              // 加上学生数量的book 
+              wx.cloud.callFunction({
+                name: 'book',
+                data: {
+                  type: 'addUsingBook',
+                  bookId: bookId,
+                  num: stuNum
+                },
+                success: res => {
+                  console.log('webadd', res);
+                },
+                fail: fail => {
+                  console.log(fail);
+                }
+              });
 
-          },
-          fail: console.error
-        });
-        // 根据clazzId获取学生数量结束
-      },
-      fail: res => console.log(res)
-    });
-  }
+            },
+            fail: console.error
+          });
+          // 根据clazzId获取学生数量结束
+        },
+        fail: res => console.log(res)
+      });
+    }
+  },
+  // 检查是否已经选了该课程了 
+  checkHadSubject: function (subjectId) {
+    const time = this.data.clazz.time;
+    console.log(time);
+    let target = 0;
+    for (let day in time) {
+      for (let noon in time[day]) {
+        for (let subject in time[day][noon]) {
+          // console.log(id)
+          if (time[day][noon][subject] === subjectId) {
+            target++;
+            // console.log('y', day)
+          }
+        }
+      }
+    };
+    if (target >= 2) {
+      return true;
+    } else {
+      return false;
+    }
+  } 
 
 })

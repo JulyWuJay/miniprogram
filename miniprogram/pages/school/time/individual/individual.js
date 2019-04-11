@@ -121,77 +121,112 @@ Page({
   },
   deleteSubject: function (target) {
     const that = this;
-    const subjectId = that.data.clazz.time.monday.morning.subjectId;
-    const clazzId = that.data.clazz._id;
+    const clazzId = this.data.clazz._id;
+    // console.log(typeof target);
     switch (target) {
       case '11' : {
+        const subjectId = that.data.clazz.time.monday.morning.subjectId;
+        that.removeUsingBook(subjectId, clazzId);
         that.setData({
           ['clazz.time.monday.morning.subjectId']: '',
           ['clazz.time.monday.morning.subjectName']: '',
-        });
+        })
         break;
       }
       case '12': {
+        const subjectId = that.data.clazz.time.monday.afternoon.subjectId;
+        that.removeUsingBook(subjectId, clazzId);
         that.setData({
           ['clazz.time.monday.afternoon.subjectId']: '',
           ['clazz.time.monday.afternoon.subjectName']: '',
         });
+        //  减少usingbook
         break;
       }
       case '21': {
+        const subjectId = that.data.clazz.time.tuesday.morning.subjectId;
+        that.removeUsingBook(subjectId, clazzId);
         that.setData({
           ['clazz.time.tuesday.morning.subjectId']: '',
           ['clazz.time.tuesday.morning.subjectName']: '',
         });
+        //  减少usingbook
         break;
-      } case '22': {
+      } 
+      case '22': {
+        const subjectId = that.data.clazz.time.tuesday.afternoon.subjectId;
+        that.removeUsingBook(subjectId, clazzId);
         that.setData({
           ['clazz.time.tuesday.afternoon.subjectId']: '',
           ['clazz.time.tuesday.afternoon.subjectName']: '',
         });
+        //  减少usingbook
         break;
-      } case '31': {
+      } 
+
+      case '31': {
+        const subjectId = that.data.clazz.time.wednesday.morning.subjectId;
+        that.removeUsingBook(subjectId, clazzId);
         that.setData({
           ['clazz.time.wednesday.morning.subjectId']: '',
           ['clazz.time.wednesday.morning.subjectName']: '',
         });
+        //  减少usingbook
         break;
-      } case '32': {
+      } 
+      case '32': {
+        const subjectId = that.data.clazz.time.wednesday.afternoon.subjectId;
+        that.removeUsingBook(subjectId, clazzId);
         that.setData({
           ['clazz.time.wednesday.afternoon.subjectId']: '',
           ['clazz.time.wednesday.afternoon.subjectName']: '',
         });
+        //  减少usingbook
         break;
-      } case '41': {
+      } 
+      case '41': {
+        const subjectId = that.data.clazz.time.thursday.morning.subjectId;
+        that.removeUsingBook(subjectId, clazzId);
         that.setData({
-          ['clazz.time.monday.morning.subjectId']: '',
-          ['clazz.time.monday.morning.subjectName']: '',
+          ['clazz.time.thursday.morning.subjectId']: '',
+          ['clazz.time.thursday.morning.subjectName']: '',
         });
+        //  减少usingbook
         break;
-      } case '42': {
+      } 
+      case '42': {
+        const subjectId = that.data.clazz.time.thursday.afternoon.subjectId;
+        that.removeUsingBook(subjectId, clazzId);
         that.setData({
           ['clazz.time.thursday.afternoon.subjectId']: '',
           ['clazz.time.thursday.afternoon.subjectName']: '',
         });
+        //  减少usingbook
         break;
-      } case '51': {
+      } 
+      case '51': {
+        const subjectId = that.data.clazz.time.friday.morning.subjectId;
+        that.removeUsingBook(subjectId, clazzId);
         that.setData({
           ['clazz.time.friday.morning.subjectId']: '',
           ['clazz.time.friday.morning.subjectName']: '',
         });
+        //  减少usingbook
         break;
-      } case '52': {
+      } 
+      case '52': {
+        const subjectId = that.data.clazz.time.friday.afternoon.subjectId;
+        that.removeUsingBook(subjectId, clazzId);
         that.setData({
           ['clazz.time.friday.afternoon.subjectId']: '',
           ['clazz.time.friday.afternoon.subjectName']: '',
         });
+        //  减少usingbook
         break;
       }
     }
     // 更新数据库
     this.updateClazzTime();
-    //  减少usingbook
-    this.removeUsingBook( subjectId , clazzId);
   },
   updateClazzTime: function () {
     const that = this;
@@ -211,53 +246,83 @@ Page({
   },
   removeUsingBook: function ( subjectId , clazzId ) {
     const that = this;
-    // 根据subjectId获取bookId
-    wx.cloud.callFunction({
-      name: 'http',
-      data: {
-        type: 'getById',
-        collectionName: 'subject',
-        prams: subjectId
-      },
-      success: res => {
-        // console.log(res);
-        const bookId = res.result.data[0].book.bookId;
-        // console.log(bookId);
-        // 获取到了bookId
-        // 根据clazzId获取学生数量
-        wx.cloud.callFunction({
-          name: 'http',
-          data: {
-            type: 'getStudentByClazz',
-            collectionName: 'student',
-            prams: clazzId
-          },
-          success: res => {
-            // 学生数量
-            const stuNum = res.result.data.length;
-            // 加上学生数量的book 
-            wx.cloud.callFunction({
-              name: 'book',
-              data: {
-                type: 'removeUsingBook',
-                bookId: bookId,
-                num: stuNum
-              },
-              success: res => {
-                console.log('webadd', res);
-              },
-              fail: fail => {
-                console.log(fail);
-              }
-            });
+    //  检查课程是否已经被选过 true 代表有相同的
+    // 如果有相同的 就不减去usingbook
+    const target = this.checkHadSubject( subjectId );
+    if ( target ) {
+      console.log('多次该课程，无需再操作usingbook')
+    } else {
+      // 根据subjectId获取bookId
+      wx.cloud.callFunction({
+        name: 'http',
+        data: {
+          type: 'getById',
+          collectionName: 'subject',
+          prams: subjectId
+        },
+        success: res => {
+          console.log(res);
+          const bookId = res.result.data[0].book.bookId;
+          // 获取到了bookId
+          // 根据clazzId获取学生数量
+          wx.cloud.callFunction({
+            name: 'http',
+            data: {
+              type: 'getStudentByClazz',
+              collectionName: 'student',
+              prams: clazzId
+            },
+            success: res => {
+              // 学生数量
+              const stuNum = res.result.data.length;
+              // 加上学生数量的book 
+              wx.cloud.callFunction({
+                name: 'book',
+                data: {
+                  type: 'removeUsingBook',
+                  bookId: bookId,
+                  num: stuNum
+                },
+                success: res => {
+                  console.log('webadd', res);
+                },
+                fail: fail => {
+                  console.log(fail);
+                }
+              });
 
-          },
-          fail: console.error
-        });
-        // 根据clazzId获取学生数量结束
-      },
-      fail: res => console.log(res)
-    });
-  }
+            },
+            fail: console.error
+          });
+          // 根据clazzId获取学生数量结束
+        },
+        fail: res => console.log(res)
+      });
+    }
+    // console.log(subjectId);
+  },
+  // 检查是否已经选了该课程了 
+  checkHadSubject: function ( subjectId ) {
+    const time = this.data.clazz.time;
+    console.log(time);
+    let target = 0;
+    for (let day in time) {
+      for (let noon in time[day]) {
+        for (let subject in time[day][noon] ){
+          // console.log(id)
+          if (time[day][noon][subject] === subjectId) {
+            target++;
+            // console.log('y', day)
+          }
+        }
+      }
+    };
+    if ( target >= 2) {
+      return true;
+    } else {
+      return false;
+    }
+  } 
+  // 检查是否已经选了该课程了
 
 })
