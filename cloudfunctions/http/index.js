@@ -55,6 +55,9 @@ function chooseFunction(event){
     case 'addClazz' : {
       return addClazz(event);
     }
+    case 'updateClazzTime' : {
+      return updateClazzTime(event);
+    }
     // 根据id更新书籍
     case 'updateBook' : {
       return updateBook(event);
@@ -279,6 +282,44 @@ function addClazz(event) {
     fail: console.fail
   })
 }
+// 更新班级
+function updateClazzTime(event) {
+  const clazz = event.prams;
+  return db.collection('clazz').where({
+    _id: clazz._id
+  }).update({
+    data: {
+      ['time.monday.morning.subjectId']: clazz.time.monday.morning.subjectId,
+      ['time.monday.morning.subjectName']: clazz.time.monday.morning.subjectName,
+      ['time.tuesday.morning.subjectId']: clazz.time.tuesday.morning.subjectId,
+      ['time.tuesday.morning.subjectName']: clazz.time.tuesday.morning.subjectName,
+      ['time.thursday.morning.subjectId']: clazz.time.thursday.morning.subjectId,
+      ['time.thursday.morning.subjectName']: clazz.time.thursday.morning.subjectName,
+      ['time.wednesday.morning.subjectId']: clazz.time.wednesday.morning.subjectId,
+      ['time.wednesday.morning.subjectName']: clazz.time.wednesday.morning.subjectName,
+      ['time.friday.morning.subjectId']: clazz.time.friday.morning.subjectId,
+      ['time.friday.morning.subjectName']: clazz.time.friday.morning.subjectName,
+
+      ['time.monday.afternoon.subjectId']: clazz.time.monday.afternoon.subjectId,
+      ['time.monday.afternoon.subjectName']: clazz.time.monday.afternoon.subjectName,
+      ['time.tuesday.afternoon.subjectId']: clazz.time.tuesday.afternoon.subjectId,
+      ['time.tuesday.afternoon.subjectName']: clazz.time.tuesday.afternoon.subjectName,
+      ['time.thursday.afternoon.subjectId']: clazz.time.thursday.afternoon.subjectId,
+      ['time.thursday.afternoon.subjectName']: clazz.time.thursday.afternoon.subjectName,
+      ['time.wednesday.afternoon.subjectId']: clazz.time.wednesday.afternoon.subjectId,
+      ['time.wednesday.afternoon.subjectName']: clazz.time.wednesday.afternoon.subjectName,
+      ['time.friday.afternoon.subjectId']: clazz.time.friday.afternoon.subjectId,
+      ['time.friday.afternoon.subjectName']: clazz.time.friday.afternoon.subjectName,
+
+    },
+    success: res => console.log(res),
+    fail: fail => console.log(fail)
+  })
+}
+
+
+
+
 // 添加书籍
 function addNewBook(event) {
   const book = event.prams;

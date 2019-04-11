@@ -1,1 +1,46 @@
 /* miniprogram/pages/school/time/chooseSubject/chooseSubject.wxss */
+page{
+  height: 100%;
+  width: 100%;
+  background: #f6f6f6;
+}
+.header{
+  width: 100%;
+  height: 100rpx;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+}
+.title{
+  width:80rpx;
+  height: 60rpx;
+}
+.confirm{
+  width:120rpx;
+  height: 60rpx;
+  background: rgb(0, 112, 173);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10rpx;
+}
+.item{
+  margin-top: 10rpx;
+  /* height: 10%; */
+  width: 100%;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: none;
+  border-right: none;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  padding: 15rpx 30rpx;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 300ms ease;
+}

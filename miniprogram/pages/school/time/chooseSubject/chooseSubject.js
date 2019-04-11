@@ -5,7 +5,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    target: '',
+    clazz: {},
+    allSubject: [],
+    chosedSubject: {
+      id: '',
+      name: ''
+    }
   },
 
   /**
@@ -15,7 +21,15 @@ Page({
     const pages = getCurrentPages();
     // 上一个页面
     const prePage = pages[pages.length - 2];
-    console.log(prePage.data.clazz);
+    // console.log(prePage.data.clazz);
+    const target = options.target;
+    this.setData({
+      target: target,
+      clazz: prePage.data.clazz
+    });
+    console.log(this.data);
+    // 加载学科
+    this.loadSubject();
   },
 
   /**
@@ -65,5 +79,204 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  // 加载学科信息
+  loadSubject: function () {
+    let that = this;
+    // 获取班级
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'http',
+      // 传给云函数的参数
+      data: {
+        type: 'getAll',
+        collectionName: 'subject',
+        prams: null
+      },
+      success(res) {
+        that.setData({
+          allSubject: res.result.data
+        });
+      },
+      fail: console.error
+    });
+  },
+  subjectChange: function (e) {
+    const that = this;
+    const id = e.detail.value;
+    wx.cloud.callFunction({
+      name: 'http',
+      data: {
+        type: 'getById',
+        collectionName: 'subject',
+        prams: id
+      },
+      success: res => {
+        console.log(res);
+        that.setData({
+          ['chosedSubject.id']: id,
+          ['chosedSubject.name']: res.result.data[0].name
+        });
+        console.log(that.data.chosedSubject);
+      },
+      fail: fail => {
+        console.log(fail)
+      }
+    })
+  },
+  toConfirm: function () {
+    const that = this;
+    wx.showModal({
+      title: '保存',
+      content: '确定选择该课程吗？',
+      success(res) {
+        if (res.confirm) {
+          // console.log('用户点击确定')
+          // console.log(that.data)
+          that.confirm();
+        } else if (res.cancel) {
+          // console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  confirm: function () {
+    const target = this.data.target;
+    const chosedSubject = this.data.chosedSubject;
+    const clazzId = this.data.clazz._id;
+    const that = this;
+    switch (target) {
+      case '11': {
+        that.setData({
+          ['clazz.time.monday.morning.subjectId']: chosedSubject.id,
+          ['clazz.time.monday.morning.subjectName']: chosedSubject.name,
+        });
+        break;
+      }
+      case '12': {
+        that.setData({
+          ['clazz.time.monday.afternoon.subjectId']: chosedSubject.id,
+          ['clazz.time.monday.afternoon.subjectName']: chosedSubject.name,
+        });
+        break;
+      }
+      case '21': {
+        that.setData({
+          ['clazz.time.tuesday.morning.subjectId']: chosedSubject.id,
+          ['clazz.time.tuesday.morning.subjectName']: chosedSubject.name,
+        });
+        break;
+      } case '22': {
+        that.setData({
+          ['clazz.time.tuesday.afternoon.subjectId']: chosedSubject.id,
+          ['clazz.time.tuesday.afternoon.subjectName']: chosedSubject.name,
+        });
+        break;
+      } case '31': {
+        that.setData({
+          ['clazz.time.wednesday.morning.subjectId']: chosedSubject.id,
+          ['clazz.time.wednesday.morning.subjectName']: chosedSubject.name,
+        });
+        break;
+      } case '32': {
+        that.setData({
+          ['clazz.time.wednesday.afternoon.subjectId']: chosedSubject.id,
+          ['clazz.time.wednesday.afternoon.subjectName']: chosedSubject.name,
+        });
+        break;
+      } case '41': {
+        that.setData({
+          ['clazz.time.thursday.morning.subjectId']: chosedSubject.id,
+          ['clazz.time.thursday.morning.subjectName']: chosedSubject.name,
+        });
+        break;
+      } case '42': {
+        that.setData({
+          ['clazz.time.thursday.afternoon.subjectId']: chosedSubject.id,
+          ['clazz.time.thursday.afternoon.subjectName']: chosedSubject.name,
+        });
+        break;
+      } case '51': {
+        that.setData({
+          ['clazz.time.friday.morning.subjectId']: chosedSubject.id,
+          ['clazz.time.friday.morning.subjectName']: chosedSubject.name,
+        });
+        break;
+      } case '52': {
+        that.setData({
+          ['clazz.time.friday.afternoon.subjectId']: chosedSubject.id,
+          ['clazz.time.friday.afternoon.subjectName']: chosedSubject.name,
+        });
+        break;
+      }
+    }
+    that.updateClazzTime();
+    that.addUsingBook( chosedSubject.id , clazzId);
+  },
+  updateClazzTime: function () {
+    const that = this;
+    wx.cloud.callFunction({
+      name: 'http',
+      data: {
+        type: 'updateClazzTime',
+        prams: that.data.clazz
+      },
+      success: res => {
+        console.log(res);
+        // 移除书籍
+        // that.removeUsingBook(subjectId, clazzId);
+      },
+      fail: res => console.log(res)
+    })
+  },
+  addUsingBook: function (subjectId, clazzId) {
+    const that = this;
+    // 根据subjectId获取bookId
+    wx.cloud.callFunction({
+      name: 'http',
+      data: {
+        type: 'getById',
+        collectionName: 'subject',
+        prams: subjectId
+      },
+      success: res => {
+        // console.log(res);
+        const bookId = res.result.data[0].book.bookId;
+        // 获取到了bookId
+        // 根据clazzId获取学生数量
+        wx.cloud.callFunction({
+          name: 'http',
+          data: {
+            type: 'getStudentByClazz',
+            collectionName: 'student',
+            prams: clazzId
+          },
+          success: res => {
+            // 学生数量
+            const stuNum = res.result.data.length;
+            // 加上学生数量的book 
+            wx.cloud.callFunction({
+              name: 'book',
+              data: {
+                type: 'addUsingBook',
+                bookId: bookId,
+                num: stuNum
+              },
+              success: res => {
+                console.log('webadd', res);
+              },
+              fail: fail => {
+                console.log(fail);
+              }
+            });
+
+          },
+          fail: console.error
+        });
+        // 根据clazzId获取学生数量结束
+      },
+      fail: res => console.log(res)
+    });
   }
+
 })

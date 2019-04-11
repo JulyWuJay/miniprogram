@@ -13,17 +13,23 @@
 <!--星期一开始  -->
 <view class='main'>
   <view class='one'>星期一</view>
-  <view class='two green' bindtap='confirmTime'>
-    <navigator wx:if="{{clazz.time.monday.morning.subjectName == ''}}" url="../chooseSubject/chooseSubject" open-type="navigate" class='plus-out'>
+
+  <view class='two green'>
+    <navigator bindtap='confirmTime' wx:if="{{clazz.time.monday.morning.subjectName == ''}}" url="../chooseSubject/chooseSubject?target=11" open-type="navigate" class='plus-out'>
       <image src="{{plusUrl}}" class="plus-img"></image> 
     </navigator>
-    <view wx:if="{{clazz.time.monday.morning.subjectName != ''}}" class='plus-out'>
+    <view wx:if="{{clazz.time.monday.morning.subjectName != ''}}" id='11' bindlongpress='toDeleteSubject' class='plus-out'>
       <text>{{clazz.time.monday.morning.subjectName}}</text>           
     </view>
   </view>
+
   <view class='three pink'>
-    <image wx:if="{{clazz.time.monday.afternoon.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
-    <text wx:if="{{clazz.time.monday.afternoon.subjectName != ''}}">下午</text>
+    <navigator bindtap='confirmTime' wx:if="{{clazz.time.monday.afternoon.subjectName == ''}}" url="../chooseSubject/chooseSubject?target=12" open-type="navigate" class='plus-out'>
+      <image src="{{plusUrl}}" class="plus-img"></image> 
+    </navigator>
+    <view wx:if="{{clazz.time.monday.afternoon.subjectName != ''}}" id='12' bindlongpress='toDeleteSubject' class='plus-out'>
+      <text>{{clazz.time.monday.afternoon.subjectName}}</text>           
+    </view>
   </view>
 </view>
 <!--星期一结束  -->
@@ -31,17 +37,23 @@
 <!-- 星期二开始 -->
 <view class='main'>
   <view class='one'>星期二</view>
-  <view class='two green' bindtap='confirmTime'>
-    <navigator wx:if="{{clazz.time.tuesday.afternoon.subjectName == ''}}" url="../chooseSubject/chooseSubject" open-type="navigate" class='plus-out'>
+
+  <view class='two pink'>
+    <navigator bindtap='confirmTime' wx:if="{{clazz.time.tuesday.morning.subjectName == ''}}" url="../chooseSubject/chooseSubject?target=21" open-type="navigate" class='plus-out'>
       <image src="{{plusUrl}}" class="plus-img"></image> 
     </navigator>
-    <view wx:if="{{clazz.time.tuesday.afternoon.subjectName != ''}}" class='plus-out'>
-      <text>上午</text>           
+    <view wx:if="{{clazz.time.tuesday.morning.subjectName != ''}}" id='21' bindlongpress='toDeleteSubject' class='plus-out'>
+      <text>{{clazz.time.tuesday.morning.subjectName}}</text>           
     </view>
   </view>
-  <view class='three pink'>
-    <image wx:if="{{clazz.time.monday.afternoon.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
-    <text wx:if="{{clazz.time.monday.afternoon.subjectName != ''}}">下午</text>
+
+  <view class='three green'>
+    <navigator bindtap='confirmTime' wx:if="{{clazz.time.tuesday.afternoon.subjectName == ''}}" url="../chooseSubject/chooseSubject?target=22" open-type="navigate" class='plus-out'>
+      <image src="{{plusUrl}}" class="plus-img"></image> 
+    </navigator>
+    <view wx:if="{{clazz.time.tuesday.afternoon.subjectName != ''}}" id='22' bindlongpress='toDeleteSubject' class='plus-out'>
+      <text>{{clazz.time.tuesday.afternoon.subjectName}}</text>           
+    </view>
   </view>
 </view>
 <!-- 星期二结束 -->
@@ -49,13 +61,23 @@
 <!-- 星期三开始 -->
 <view class='main'>
   <view class='one'>星期三</view>
+
   <view class='two green'>
-    <image wx:if="{{clazz.time.friday.morning.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
-    <text wx:if="{{clazz.time.friday.morning.subjectName != ''}}">上午</text>
+    <navigator bindtap='confirmTime' wx:if="{{clazz.time.thursday.morning.subjectName == ''}}" url="../chooseSubject/chooseSubject?target=31" open-type="navigate" class='plus-out'>
+      <image src="{{plusUrl}}" class="plus-img"></image> 
+    </navigator>
+    <view wx:if="{{clazz.time.thursday.morning.subjectName != ''}}" id='31' bindlongpress='toDeleteSubject' class='plus-out'>
+      <text>{{clazz.time.thursday.morning.subjectName}}</text>           
+    </view>
   </view>
+
   <view class='three pink'>
-    <image wx:if="{{clazz.time.friday.afternoon.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
-    <text wx:if="{{clazz.time.friday.afternoon.subjectName != ''}}">下午</text>
+    <navigator bindtap='confirmTime' wx:if="{{clazz.time.thursday.afternoon.subjectName == ''}}" url="../chooseSubject/chooseSubject?target=32" open-type="navigate" class='plus-out'>
+      <image src="{{plusUrl}}" class="plus-img"></image> 
+    </navigator>
+    <view wx:if="{{clazz.time.thursday.afternoon.subjectName != ''}}" id='32' bindlongpress='toDeleteSubject' class='plus-out'>
+      <text>{{clazz.time.thursday.afternoon.subjectName}}</text>           
+    </view>
   </view>
 </view>
 <!-- 星期三结束 -->
@@ -64,12 +86,21 @@
 <view class='main'>
   <view class='one'>星期四</view>
   <view class='two pink'>
-    <image wx:if="{{clazz.time.friday.morning.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
-    <text wx:if="{{clazz.time.friday.morning.subjectName != ''}}">上午</text>
+    <navigator bindtap='confirmTime' wx:if="{{clazz.time.wednesday.morning.subjectName == ''}}" url="../chooseSubject/chooseSubject?target=41" open-type="navigate" class='plus-out'>
+      <image src="{{plusUrl}}" class="plus-img"></image> 
+    </navigator>
+    <view wx:if="{{clazz.time.wednesday.morning.subjectName != ''}}" id='41' bindlongpress='toDeleteSubject' class='plus-out'>
+      <text>{{clazz.time.wednesday.morning.subjectName}}</text>           
+    </view>
   </view>
+
   <view class='three green'>
-    <image wx:if="{{clazz.time.friday.afternoon.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
-    <text wx:if="{{clazz.time.friday.afternoon.subjectName != ''}}">下午</text>
+    <navigator bindtap='confirmTime' wx:if="{{clazz.time.wednesday.afternoon.subjectName == ''}}" url="../chooseSubject/chooseSubject?target=42" open-type="navigate" class='plus-out'>
+      <image src="{{plusUrl}}" class="plus-img"></image> 
+    </navigator>
+    <view wx:if="{{clazz.time.wednesday.afternoon.subjectName != ''}}" id='42' bindlongpress='toDeleteSubject' class='plus-out'>
+      <text>{{clazz.time.wednesday.afternoon.subjectName}}</text>           
+    </view>
   </view>
 </view>
 <!-- 星期四结束 -->
@@ -77,13 +108,23 @@
 <!-- 星期五开始 -->
 <view class='main'>
   <view class='one'>星期五</view>
+
   <view class='two green'>
-    <image wx:if="{{clazz.time.friday.morning.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
-    <text wx:if="{{clazz.time.friday.morning.subjectName != ''}}">上午</text>
+    <navigator bindtap='confirmTime' wx:if="{{clazz.time.friday.morning.subjectName == ''}}" url="../chooseSubject/chooseSubject?target=51" open-type="navigate" class='plus-out'>
+      <image src="{{plusUrl}}" class="plus-img"></image> 
+    </navigator>
+    <view wx:if="{{clazz.time.friday.morning.subjectName != ''}}" id='51' bindlongpress='toDeleteSubject' class='plus-out'>
+      <text>{{clazz.time.friday.morning.subjectName}}</text>           
+    </view>
   </view>
+
   <view class='three pink'>
-    <image wx:if="{{clazz.time.friday.afternoon.subjectName == ''}}" class='plus-img' src="{{plusUrl}}"></image> 
-    <text wx:if="{{clazz.time.friday.afternoon.subjectName != ''}}">下午</text>
+    <navigator bindtap='confirmTime' wx:if="{{clazz.time.friday.afternoon.subjectName == ''}}" url="../chooseSubject/chooseSubject?target=52" open-type="navigate" class='plus-out'>
+      <image src="{{plusUrl}}" class="plus-img"></image> 
+    </navigator>
+    <view wx:if="{{clazz.time.friday.afternoon.subjectName != ''}}" id='52' bindlongpress='toDeleteSubject' class='plus-out'>
+      <text>{{clazz.time.friday.afternoon.subjectName}}</text>           
+    </view>
   </view>
 </view>
 <!-- 星期五结束 -->

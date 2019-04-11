@@ -73,7 +73,7 @@ Page({
   onShareAppMessage: function () {
 
   },
-  // 加载全部老师信息
+  // 加载信息
   loadClazz: function () {
     let that = this;
     // 获取班级

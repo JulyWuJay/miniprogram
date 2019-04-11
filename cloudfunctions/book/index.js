@@ -22,7 +22,12 @@ function chooseFunction(event) {
       return addBook(event);
     case 'deleteBook':
       return deleteBook(event);
+    case 'removeUsingBook': 
+      return removeUsingBook(event);
+    case 'addUsingBook':
+      return addUsingBook(event);
   }
+
 }
 
 async function addBook(event) {
@@ -53,6 +58,7 @@ async function addBook(event) {
         type: 'updateBook',
         collectionName: 'book',
         prams: {
+          _id: event.bookId,
           all: newAll,
           stock: newStock,
           using: newUsing
@@ -77,6 +83,7 @@ async function deleteBook(event) {
     const getBookById = await cloud.callFunction({
       name: 'http',
       data: {
+        _id: event.bookId,
         type: 'getById',
         collectionName: 'book',
         prams: event.bookId
@@ -99,6 +106,7 @@ async function deleteBook(event) {
         type: 'updateBook',
         collectionName: 'book',
         prams: {
+          _id: event.bookId,          
           all: newAll,
           stock: newStock,
           using: newUsing
@@ -114,5 +122,100 @@ async function deleteBook(event) {
     return updateBook.result;
   } catch (err) {
     return err;
+  }
+}
+
+
+async function removeUsingBook(event) {
+  // 调用 根据id获取数据 获得书籍的数目
+  try {
+    const getBookById = await cloud.callFunction({
+      name: 'http',
+      data: {
+        type: 'getById',
+        collectionName: 'book',
+        prams: event.bookId
+      },
+      success: res => {
+        console.log(res)
+      },
+      fail: fail => {
+        console.log(fail);
+      }
+    });
+    const databaseBook = getBookById.result.data[0];
+    // 加上传来的需要添加的书本之后的值
+    const newAll = databaseBook.all;
+    const newStock = databaseBook.stock + event.num;
+    const newUsing = databaseBook.using - event.num;
+    const updateBook = await cloud.callFunction({
+      name: 'http',
+      data: {
+        type: 'updateBook',
+        collectionName: 'book',
+        prams: {
+          _id: event.bookId,
+          all: newAll,
+          stock: newStock,
+          using: newUsing
+        },
+        success: res => {
+          console.log(res);
+        },
+        fail: fail => {
+          console.log(fail)
+        }
+      }
+    });
+    return updateBook.result;
+  } catch (err) {
+    return 'fail';
+  }
+}
+
+async function addUsingBook(event) {
+  // 调用 根据id获取数据 获得书籍的数目
+  try {
+    const getBookById = await cloud.callFunction({
+      name: 'http',
+      data: {
+        type: 'getById',
+        collectionName: 'book',
+        prams: event.bookId
+      },
+      success: res => {
+        console.log(res)
+      },
+      fail: fail => {
+        console.log(fail);
+      }
+    });
+    const databaseBook = getBookById.result.data[0];
+    // 加上传来的需要添加的书本之后的值
+    const newAll = databaseBook.all;
+    const newStock = databaseBook.stock - event.num;
+    const newUsing = databaseBook.using + event.num;
+    const updateBook = await cloud.callFunction({
+      name: 'http',
+      data: {
+        type: 'updateBook',
+        collectionName: 'book',
+        prams: {
+          _id: event.bookId,
+          all: newAll,
+          stock: newStock,
+          using: newUsing
+        },
+        success: res => {
+          console.log(res);
+        },
+        fail: fail => {
+          console.log(fail)
+        }
+      }
+    });
+    return updateBook.result;
+  } catch (err) {
+    return 'fail';
   }
 }
