@@ -18,5 +18,6 @@ export class URL {
     girl: '/images/icon/common/girl.png'
   }
   // 添加课程的图标
-  plusUrl = '/images/icon/common/plus.png'
+  plusUrl = '/images/icon/common/plus.png' ;
+  bookUrl = '/images/icon/common/book.png'
 }

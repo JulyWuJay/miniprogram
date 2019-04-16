@@ -44,3 +44,12 @@ page{
   /* display: flex; */
   /* flex-direction: row-reverse; */
 }
+.charts{
+  width:100%;
+  height: 500rpx;
+  /* background-color: red; */
+}
+.canvas{
+  width:100%;
+  height: 100%
+}

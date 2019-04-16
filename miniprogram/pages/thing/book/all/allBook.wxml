@@ -9,7 +9,7 @@
   <!-- item 开始 -->
   <view class='item' wx:for="{{book}}" wx:key="_id">
       <view class='item-img'>
-        <image style='width:100rpx;height:100rpx' src="{{imageUrl.boy}}"></image>
+        <image style='width:100rpx;height:100rpx' src="{{imageUrl}}"></image>
       </view>
       <view class='item-content'>
         <view style='height:60rpx;'>

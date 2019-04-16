@@ -8,17 +8,17 @@ Page({
    */
   data: {
     book: [],
-    imageUrl: {}
+    imageUrl: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const genderUrl = new url.URL();
+    const Url = new url.URL();
     // this.loodBook()
     this.setData({
-      imageUrl: genderUrl.genderUrl
+      imageUrl: Url.bookUrl
     })
   },
 

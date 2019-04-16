@@ -1,4 +1,7 @@
 // miniprogram/pages/thing/book/individual/individual.js
+var wxCharts = require('../../../../js/wx-charts-master/dist/wxcharts.js');
+var app = getApp();
+var ringChart = null;
 Page({
 
   /**
@@ -19,23 +22,22 @@ Page({
     this.setData({
       bookId: options.bookId
     });
-    // this.getBookById(options.bookId)
-    // console.log(this.data.bookId)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showLoading({
+      title: '加载中',
+    });
     this.getBookById(this.data.bookId);
-    // console.log(this.data.bookId)
   },
 
   /**
@@ -88,9 +90,6 @@ Page({
 
   // 根据id查询书籍
   getBookById: function (id) {
-    wx.showLoading({
-      title: '加载中',
-    });
     wx.cloud.callFunction({
       name: 'http',
       data: {
@@ -103,6 +102,7 @@ Page({
         this.setData({
           book : book
         });
+        this.draw();
         wx.hideLoading();
       },
       fail: fail => {
@@ -159,11 +159,11 @@ Page({
       },
       success: res => {
         that.getBookById(that.data.bookId);
-        // wx.showToast({
-        //   title: '成功',
-        //   icon: 'success',
-        //   duration: 2000
-        // });
+        wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000
+        });
         console.log('webadd', res);
       },
       fail: fail => {
@@ -187,12 +187,12 @@ Page({
       },
       success: res => {
         that.getBookById(that.data.bookId);
-        // wx.showToast({
-        //   title: '成功',
-        //   icon: 'success',
-        //   duration: 2000
-        // });
-        // this.getBookById(this.data.bookId);
+        wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000
+        });
+        this.getBookById(this.data.bookId);
         console.log('webadd', res);
       },
       fail: fail => {
@@ -203,6 +203,28 @@ Page({
           duration: 2000
         });
       }
+    });
+  },
+  draw: function(){
+    const using = this.data.book.using;
+    const stock = this.data.book.stock;
+    new wxCharts({
+      animation: true,
+      canvasId: 'pieCanvas',
+      type: 'pie',
+      series:[
+        {
+          name: '使用中的书本',
+          data: using,
+        },
+        {
+          name: '库存的书本',
+          data: stock,
+        }
+      ],
+      width: 320,
+      height: 300,
+      dataLabel: true
     });
   }
 })

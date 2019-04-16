@@ -19,13 +19,18 @@
   </view>
   <view class='btn-group'>
     <input class='input' type='number' bindinput='deleteInput'></input>
-    <button class='btn-warning flex-center' style='width:150rpx;height:60%;color:#fff' bindtap='toDeleteBook'>报废</button>
+    <view class='btn-warning flex-center' style='width:150rpx;height:60%;color:#fff' bindtap='toDeleteBook'>报废</view>
     <!-- <input class='input'></input>
     <button class='btn-primary flex-center' style='width:150rpx;height:60%;color:#fff'>进货</button> -->
   </view>
   <view class='btn-group'>
     <input class='input' type='number' bindinput='addInput'></input>
-    <button class='btn-primary flex-center' style='width:150rpx;height:60%;color:#fff' bindtap='toAddBook'>进货</button>
+    <view class='btn-primary flex-center' style='width:150rpx;height:60%;color:#fff' bindtap='toAddBook'>进货</view>
+  </view>
+  <view class='flex-center' style='width:100%;height:500rpx;'>
+    <view style='width:80%;height:100%'>
+      <canvas canvas-id='pieCanvas' class='flex-center' style='width:100%;height:300px;'></canvas>
+    </view>
   </view>
 </view>
 <!-- main -->
