@@ -134,5 +134,50 @@ Page({
   // 更多操作
   toStudentDetail: function(event){
     console.log(event)
+  },
+  toDelete: function(event) {
+    console.log(event);
+    const id = event.currentTarget.id;
+    const collectionName = 'student';
+    const that = this;
+    wx.showModal({
+      title: '删除',
+      content: '确定删除吗',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定');
+          that.deleteById(id, collectionName);
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  deleteById: function(id , collectionName) {
+    const that = this;
+    // 根据id删除信息
+    wx.cloud.callFunction({
+      name: 'http',
+      data: {
+        type: 'deleteById',
+        collectionName: collectionName,
+        prams: id
+      },
+      success: res => {
+        console.log(res);
+        // 如果成功
+        if (res.result.errMsg == 'collection.remove:ok') {
+          // wx.showToast({
+          //   title: '成功',
+          //   icon: 'success',
+          //   duration: 2000
+          // });
+          that.onShow();
+        } else {
+          console.log('失败')
+        }
+      },
+      fail: console.error
+    })
   }
 })

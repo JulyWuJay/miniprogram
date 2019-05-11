@@ -109,7 +109,12 @@ Page({
         }
       },
       success: res => {
-        console.log(res)
+        // console.log(res)
+        wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000
+        });
       },
       fail: fail => console.log(fail)
     })

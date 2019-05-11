@@ -303,16 +303,14 @@ Page({
   },
   // 检查是否已经选了该课程了 
   checkHadSubject: function ( subjectId ) {
-    const time = this.data.clazz.time;
     console.log(time);
+    const time = this.data.clazz.time;
     let target = 0;
     for (let day in time) {
       for (let noon in time[day]) {
         for (let subject in time[day][noon] ){
-          // console.log(id)
           if (time[day][noon][subject] === subjectId) {
             target++;
-            // console.log('y', day)
           }
         }
       }

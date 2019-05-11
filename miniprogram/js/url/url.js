@@ -21,3 +21,4 @@ export class URL {
   plusUrl = '/images/icon/common/plus.png' ;
   bookUrl = '/images/icon/common/book.png'
 }
+

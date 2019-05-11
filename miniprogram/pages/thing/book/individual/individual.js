@@ -208,23 +208,32 @@ Page({
   draw: function(){
     const using = this.data.book.using;
     const stock = this.data.book.stock;
-    new wxCharts({
-      animation: true,
-      canvasId: 'pieCanvas',
-      type: 'pie',
-      series:[
-        {
-          name: '使用中的书本',
-          data: using,
-        },
-        {
-          name: '库存的书本',
-          data: stock,
-        }
-      ],
-      width: 320,
-      height: 300,
-      dataLabel: true
-    });
+    // 判断是否有负值
+    if ( stock > 0) {
+      new wxCharts({
+        animation: true,
+        canvasId: 'pieCanvas',
+        type: 'pie',
+        series:[
+          {
+            name: '使用中的书本',
+            data: using,
+          },
+          {
+            name: '库存的书本',
+            data: stock,
+          }
+        ],
+        width: 320,
+        height: 300,
+        dataLabel: true
+      });
+    } else {
+      wx.showToast({
+        title: '有负值，饼状图无法显示',
+        image: '/images/icon/fail.png',
+        duration: 2000
+      });
+    }
   }
 })

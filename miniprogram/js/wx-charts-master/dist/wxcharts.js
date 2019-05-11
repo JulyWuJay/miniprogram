@@ -1014,7 +1014,6 @@ function drawToolTip(textList, offset, opts, config, context) {
         context.fillRect(startX, startY, legendWidth, config.fontSize);
         context.closePath();
     });
-
     // draw text list
     context.beginPath();
     context.setFontSize(config.fontSize);

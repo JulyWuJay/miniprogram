@@ -6,7 +6,7 @@
 <!-- 主题部分 -->
 <scroll-view scroll-y class='content'>
   <!-- teacher-item 开始 -->
-  <view class='teacher-item' wx:for="{{teacher}}" wx:key="_id">
+  <view class='teacher-item' wx:for="{{teacher}}" wx:key="_id" id='{{item._id}}' bindlongpress='toDelete'>
       <view class='teacher-item-img'>
         <image style='width:100rpx;height:100rpx' src="{{item.gender === '男' ? imageUrl.boy : imageUrl.girl}}"></image>
       </view>

@@ -7,7 +7,7 @@
 <!-- 主题部分 -->
 <scroll-view scroll-y class='content'>
   <!-- item 开始 -->
-  <view class='item' wx:for="{{book}}" wx:key="_id">
+  <view class='item' wx:for="{{book}}" wx:key="_id" id='{{item._id}}' bindlongpress='toDelete'>
       <view class='item-img'>
         <image style='width:100rpx;height:100rpx' src="{{imageUrl}}"></image>
       </view>

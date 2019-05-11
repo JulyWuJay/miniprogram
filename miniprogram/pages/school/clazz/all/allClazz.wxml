@@ -7,7 +7,7 @@
 <!-- 主题部分 -->
 <scroll-view scroll-y class='content'>
   <!-- clazz-item 开始 -->
-  <view class='clazz-item' wx:for="{{clazz}}" wx:key="_id">
+  <view class='clazz-item' wx:for="{{clazz}}" wx:key="_id" id='{{item._id}}' bindlongpress='toDelete'>
       <!-- <view class='clazz-item-img'>
         <image style='width:100rpx;height:100rpx' src="{{item.gender === '男' ? imageUrl.boy : imageUrl.girl}}"></image>
       </view> -->

@@ -5,7 +5,6 @@ cloud.init()
 
 const db = cloud.database();
 
-// const MAX_LIMIT = 100
 // 云函数入口函数
 exports.main = (event, context) => {
   // event: {
@@ -41,6 +40,10 @@ function chooseFunction(event){
     case 'addStudent' : {
       return addStudent(event);
     }
+    // 根据id删除
+    case 'deleteById' : {
+      return deleteById(event);
+    }
     // 教师
     case 'updateTeacher' : {
       return updateTeacher(event);
@@ -75,11 +78,11 @@ function chooseFunction(event){
 }
 
 
-// 获取集合的全部数据  20条
+// 获取集合的全部数据
 function getAll(collectionName){
   const result = db.collection(collectionName).get({
     success: res => {
-      // res.data 是一个包含集合中有权限访问的所有记录的数据，不超过 20 条
+      // res.data 是一个包含集合中有权限访问的所有记录的数据
       console.log(res.data);
     }
   });
@@ -113,6 +116,13 @@ function getById(event){
     fail: console.error
   });
 }
+// 根据id删除
+function deleteById(event){
+  return db.collection(event.collectionName).where({
+    _id: event.prams
+  }).remove();
+}
+
 // 更新学生
 function updateStudent(event){
   const student = event.prams;

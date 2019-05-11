@@ -21,7 +21,6 @@ Page({
     const pages = getCurrentPages();
     // 上一个页面
     const prePage = pages[pages.length - 2];
-    // console.log(prePage.data.clazz);
     const target = options.target;
     this.setData({
       target: target,
