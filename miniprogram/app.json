@@ -1,0 +1,38 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "backgroundColor": "#f759ab",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f759ab",
+    "navigationBarTitleText": "DTS",
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#f759ab",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "./images/tabbar/integration.png",
+        "iconPath": "./images/tabbar/integration.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "./images/tabbar/integration.png",
+        "iconPath": "./images/tabbar/integration.png",
+        "pagePath": "pages/index/index",
+        "text": "一元投"
+      },
+      {
+        "selectedIconPath": "./images/tabbar/integration.png",
+        "iconPath": "./images/tabbar/integration.png",
+        "pagePath": "pages/index/index",
+        "text": "我的"
+      }
+    ]
+  }
+}
