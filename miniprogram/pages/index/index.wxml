@@ -1,4 +1,8 @@
 <!--index.wxml-->
 <view class="container">
-  <view>iii</view>
+  <view class="top">
+    <view class="card">
+    </view>
+  </view>
 </view>
+

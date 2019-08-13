@@ -1,0 +1,64 @@
+<!--miniprogram/pages/application/application.wxml-->
+<view>
+  <i-panel title="加分">
+    <i-cell style="margin-left:10px;" title="手势touch选择星">
+      <i-rate bind:change="chooseRate" value="{{rate}}" count="10" size="32">
+        {{integration_apply.integration}}
+      </i-rate>
+    </i-cell>
+    <i-input value="{{ integration_apply.description }}" bind:change="descriptionInput" type="textarea" title="加分原因" placeholder="请输入最多50字" maxlength="50" />
+    <i-button bind:click="handleClick" type="primary" size="default" bindtap="toApply">加分申请</i-button>
+  </i-panel>
+  <!-- 申请详情 -->
+  <view class="caption-wrap text-normal">
+    <text class="text-normal" style="margin:5px 10px;">申请记录</text>
+    <i-collapse name="{{name}}">
+      <i-collapse-item title="史蒂夫·乔布斯" name="name1">
+        <view slot="content">
+          史蒂夫·乔布斯（Steve Jobs
+        </view>
+      </i-collapse-item>
+      <i-collapse-item title="斯蒂夫·盖瑞·沃兹尼亚克" name="name2">
+        <view slot="content" i-class-content="green-text">
+          斯蒂夫·盖瑞·沃兹尼亚克（Stephen Gary
+        </view>
+      </i-collapse-item>
+      <i-collapse-item title="乔纳森·伊夫" name="name3">
+        <view slot="content">
+          乔纳森·伊夫是一位工业
+        </view>
+      </i-collapse-item>
+      <i-collapse-item title="乔纳森·伊夫" name="name3">
+        <view slot="content">
+          乔纳森·伊夫是一位工业
+        </view>
+      </i-collapse-item>
+      <i-collapse-item title="乔纳森·伊夫" name="name3">
+        <view slot="content">
+          乔纳森·伊夫是一位工业
+        </view>
+      </i-collapse-item>
+    </i-collapse>
+  </view>
+
+</view>
+<!-- 分页 -->
+<i-page current="{{ current }}" total="5" bind:change="pageChange">
+    <view slot="prev">Prev</view>
+    <view slot="next">Next</view>
+</i-page>
+<i-load-more loading="{{ false }}" />
+
+<!-- 加载 -->
+<view class="container" wx:if="{{ spinShow }}">
+  <i-spin fix></i-spin>
+</view>
+<!-- 确认是否申请加分的对话框 -->
+<!-- <i-modal title="确认申请" visible="{{ isApplication }}" bind:ok="confirmApplication" bind:cancel="cancleApplication">
+    <view>确定要申请加{{integration_apply.integration}}分吗?</view>
+</i-modal> -->
+<i-modal title="确认申请" visible="{{ isApplication }}" actions="{{ applyAction }}" bind:click="confirmApplication">
+    <view>确定要申请加{{integration_apply.integration}}分吗?</view>
+</i-modal>
+<!-- 全局提示 -->
+<i-message id="message" />

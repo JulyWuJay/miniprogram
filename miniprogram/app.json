@@ -1,6 +1,9 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/application/application",
+    "pages/integration/integration",
+    "pages/dts/dts"
   ],
   "window": {
     "backgroundColor": "#f759ab",
@@ -19,20 +22,34 @@
         "selectedIconPath": "./images/tabbar/integration.png",
         "iconPath": "./images/tabbar/integration.png",
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "积分"
       },
       {
-        "selectedIconPath": "./images/tabbar/integration.png",
-        "iconPath": "./images/tabbar/integration.png",
-        "pagePath": "pages/index/index",
-        "text": "一元投"
+        "selectedIconPath": "./images/tabbar/add.png",
+        "iconPath": "./images/tabbar/add.png",
+        "pagePath": "pages/application/application",
+        "text": "加分"
       },
       {
-        "selectedIconPath": "./images/tabbar/integration.png",
-        "iconPath": "./images/tabbar/integration.png",
-        "pagePath": "pages/index/index",
-        "text": "我的"
+        "selectedIconPath": "./images/tabbar/dts.png",
+        "iconPath": "./images/tabbar/dts.png",
+        "pagePath": "pages/dts/dts",
+        "text": "DTS"
       }
     ]
+  },
+  "usingComponents": {
+    "i-button": "./dist/button/index",
+    "i-input": "./dist/input/index",
+    "i-rate": "./dist/rate/index",
+    "i-panel": "./dist/panel/index",
+    "i-spin": "./dist/spin/index",
+    "i-collapse": "./dist/collapse/index",
+    "i-collapse-item": "./dist/collapse-item/index",
+    "i-page": "./dist/page/index",
+    "i-load-more": "./dist/load-more/index",
+    "i-modal": "./dist/modal/index",
+    "i-toast": "./dist/toast/index",
+    "i-message": "./dist/message/index"
   }
 }
