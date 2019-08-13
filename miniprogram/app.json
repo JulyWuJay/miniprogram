@@ -50,6 +50,7 @@
     "i-load-more": "./dist/load-more/index",
     "i-modal": "./dist/modal/index",
     "i-toast": "./dist/toast/index",
-    "i-message": "./dist/message/index"
+    "i-message": "./dist/message/index",
+    "i-tag": "./dist/tag/index"
   }
 }

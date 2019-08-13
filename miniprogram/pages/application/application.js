@@ -16,7 +16,9 @@ Page({
       status: "待审批"
     },
     spinShow: true,
-    current: 1,
+    currentPage: 1,
+    totalPage: 1,
+    allListNum: 0,
     isApplication: false,
     // 确认添加积分的模态框异步按钮
     applyAction: [
@@ -28,14 +30,16 @@ Page({
         color: '#1c2438',
         loading: false
       }
-    ]
+    ],
+    // 申请记录
+    applicationList: []
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-
+    this.searchUndoApplication()
   },
 
   /**
@@ -47,9 +51,6 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-    this.setData({
-      spinShow: false
-    });
   },
 
   /**
@@ -100,12 +101,14 @@ Page({
     const type = detail.type;
     if (type === 'next') {
       this.setData({
-        current: this.data.current + 1
+        currentPage: this.data.currentPage + 1
       });
+      this.searchUndoApplication()
     } else if (type === 'prev') {
       this.setData({
-        current: this.data.current - 1
+        currentPage: this.data.currentPage - 1
       });
+      this.searchUndoApplication()
     }
   },
   // 点击加分申请按钮
@@ -116,9 +119,8 @@ Page({
         type: 'warning'
       });
     } else {
-      const time = timer.changeTime(new Date())
+      const time = timer.changeTime(new Date());
       this.setData({
-        // ['integration_apply.application_date']: 't',
         ['integration_apply.application_date']: time,
         isApplication: true
       })
@@ -149,9 +151,11 @@ Page({
       this.setData({
         applyAction: action
       });
+      console.log(this.data.integration_apply)
       this.apply();
     }
   },
+  // 提交加分申请
   apply() {
     wx.cloud.callFunction({
       name: 'apply',
@@ -173,6 +177,8 @@ Page({
           applyAction: action,
           isApplication: false
         });
+        // 提交积分申请成功后，再查询一下
+        this.searchUndoApplication()
       },
       fail: fail => {
         $Message({
@@ -188,6 +194,35 @@ Page({
         });
         console.log(fail)
       }
+    })
+  },
+  searchUndoApplication() {
+    // 加载圈
+    this.setData({
+      spinShow: true
+    });
+    console.log(this.data.currentPage)
+    wx.cloud.callFunction({
+      name: 'apply',
+      data: {
+        type: 'searchUndoApplication',
+        props: {
+          currentPage: this.data.currentPage
+        }
+      },
+      success: res => {
+        console.log('查询', res);
+        this.setData({
+          spinShow: false,
+          applicationList: res.result.list,
+          totalPage: res.result.totalPage,
+          allListNum: res.result.allListNum
+        });
+      },
+      fail: err => {
+        console.log('错误', err)
+      }
+
     })
   }
 

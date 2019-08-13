@@ -7,35 +7,17 @@
       </i-rate>
     </i-cell>
     <i-input value="{{ integration_apply.description }}" bind:change="descriptionInput" type="textarea" title="加分原因" placeholder="请输入最多50字" maxlength="50" />
-    <i-button bind:click="handleClick" type="primary" size="default" bindtap="toApply">加分申请</i-button>
+    <i-button type="primary" size="default" bindtap="toApply">加分申请</i-button>
   </i-panel>
   <!-- 申请详情 -->
   <view class="caption-wrap text-normal">
-    <text class="text-normal" style="margin:5px 10px;">申请记录</text>
+    <i-tag class="i-tags" name="标签一" color="yellow">待审批的加分申请</i-tag>
+    <i-tag class="i-tags" name="标签一" color="blue">共{{allListNum}}条</i-tag>
+    <!-- <text class="text-normal" style="margin:5px 10px;">申请记录</text> -->
     <i-collapse name="{{name}}">
-      <i-collapse-item title="史蒂夫·乔布斯" name="name1">
+      <i-collapse-item wx:for="{{applicationList}}" wx:key="{{item._id}}" title="{{item.application_date + '   ' + item.integration + '分'}}" name="{{item._id}}">
         <view slot="content">
-          史蒂夫·乔布斯（Steve Jobs
-        </view>
-      </i-collapse-item>
-      <i-collapse-item title="斯蒂夫·盖瑞·沃兹尼亚克" name="name2">
-        <view slot="content" i-class-content="green-text">
-          斯蒂夫·盖瑞·沃兹尼亚克（Stephen Gary
-        </view>
-      </i-collapse-item>
-      <i-collapse-item title="乔纳森·伊夫" name="name3">
-        <view slot="content">
-          乔纳森·伊夫是一位工业
-        </view>
-      </i-collapse-item>
-      <i-collapse-item title="乔纳森·伊夫" name="name3">
-        <view slot="content">
-          乔纳森·伊夫是一位工业
-        </view>
-      </i-collapse-item>
-      <i-collapse-item title="乔纳森·伊夫" name="name3">
-        <view slot="content">
-          乔纳森·伊夫是一位工业
+          {{item.description}}
         </view>
       </i-collapse-item>
     </i-collapse>
@@ -43,7 +25,7 @@
 
 </view>
 <!-- 分页 -->
-<i-page current="{{ current }}" total="5" bind:change="pageChange">
+<i-page current="{{ currentPage }}" total="{{totalPage}}" bind:change="pageChange">
     <view slot="prev">Prev</view>
     <view slot="next">Next</view>
 </i-page>
