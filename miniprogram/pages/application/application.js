@@ -3,6 +3,7 @@ const {
   $Message
 } = require('../../dist/base/index');
 const timer = require('../../js/changeTime.js')
+
 Page({
   /**
    * Page initial data

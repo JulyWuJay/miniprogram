@@ -1,13 +1,14 @@
 //index.js
-const app = getApp()
-
+const app = getApp();
 Page({
   data: {
     avatarUrl: './user-unlogin.png',
     userInfo: {},
     logged: false,
     takeSession: false,
-    requestResult: ''
+    requestResult: '',
+    integration: 0,
+    spinShow: false
   },
 
   onLoad: function() {
@@ -17,6 +18,8 @@ Page({
     //   })
     //   return
     // }
+    // 获取积分数量
+    this.getIntegration();
     this.onGetOpenid()
     // 获取用户信息
     wx.getSetting({
@@ -25,7 +28,7 @@ Page({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
-              console.log('u',res)
+              // console.log('u',res)
               this.setData({
                 avatarUrl: res.userInfo.avatarUrl,
                 userInfo: res.userInfo
@@ -115,5 +118,25 @@ Page({
       }
     })
   },
+  getIntegration () {
+    const that = this;
+    this.setData({
+      spinShow: true
+    });
+    wx.cloud.callFunction({
+      name: 'apply',
+      data: {
+        type: 'searchIntegration'
+      }
+    }).then(
+      res => {
+        console.log('查询积分成功')
+        that.setData({
+          integration: res.result.data[0].integration,
+          spinShow: false
+        })
+      }
+    )
+  }
 
 })

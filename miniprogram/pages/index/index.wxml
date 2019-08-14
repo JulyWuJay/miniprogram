@@ -2,7 +2,13 @@
 <view class="container">
   <view class="top">
     <view class="card">
+    {{integration}}
     </view>
   </view>
+</view>
+
+<!-- 加载 -->
+<view class="container" wx:if="{{ spinShow }}">
+  <i-spin fix></i-spin>
 </view>
 

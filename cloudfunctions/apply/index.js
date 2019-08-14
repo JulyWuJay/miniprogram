@@ -15,6 +15,7 @@ function chooseFunction(event) {
     case 'searchUndoApplication': return searchUndoApplication(event.props);
     case 'agreeApply': return agreeApply(event.props);
     case 'refuseApply': return refuseApply(event.props);
+    case 'searchIntegration': return searchIntegration(); 
   }
 }
 // 添加申请
@@ -133,4 +134,8 @@ async function refuseApply(props) {
     // msg: 'ok'
   }
   return result;
+}
+
+function searchIntegration() {
+  return db.collection('integration').get()
 }
