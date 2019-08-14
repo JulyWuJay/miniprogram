@@ -13,7 +13,8 @@ Page({
       application_date: null,
       description: null,
       integration: 10,
-      status: "待审批"
+      status: "待审批",
+      time: ''
     },
     spinShow: true,
     currentPage: 1,
@@ -32,14 +33,30 @@ Page({
       }
     ],
     // 申请记录
-    applicationList: []
+    applicationList: [],
+    isWJ: false
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    this.searchUndoApplication()
+    this.searchUndoApplication();
+    // 判断是不是吴杰
+    try {
+      var value = wx.getStorageSync('openId')
+      if (value) {
+        // Do something with return value
+        const d = ( value === 'oGVOe4nP51bXMbxoHQAAV5rby_dg')
+        this.setData({
+          isWJ: d
+        });
+        console.log('isWJ', this.data.isWJ)
+      }
+    } catch (e) {
+      // Do something when catch error
+    }
+
   },
 
   /**
@@ -71,7 +88,6 @@ Page({
    * Page event handler function--Called when user drop down
    */
   onPullDownRefresh: function () {
-
   },
 
   /**
@@ -115,13 +131,15 @@ Page({
   toApply() {
     if (!this.data.integration_apply.description) {
       $Message({
-        content: '请填写申请原因',
+        content: '请填写加分原因',
         type: 'warning'
       });
     } else {
       const time = timer.changeTime(new Date());
+      const now = Date.now();
       this.setData({
         ['integration_apply.application_date']: time,
+        ['integration_apply.time']: now,
         isApplication: true
       })
     }
@@ -223,6 +241,63 @@ Page({
         console.log('错误', err)
       }
 
+    })
+  },
+  // 去同意
+  toAgreeApply ({currentTarget:{id}}) {
+    const that = this;
+    console.log('去同意',id)
+    wx.showModal({
+      title: '同意',
+      content: '确认同意吗',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定');
+          that.agreeApply(id)
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  toRefuseApply (e) {
+    console.log('去拒绝',e)
+    wx.showModal({
+      title: '拒绝',
+      content: '确认拒绝吗',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  agreeApply (id) {
+    this.setData({
+      spinShow: true
+    });
+    wx.cloud.callFunction({
+      name: 'apply',
+      data: {
+        type: 'agreeApply',
+        props: {
+          id: id
+        }
+      },
+      success: res => {
+        console.log('agree',res)
+        this.setData({
+          spinShow: false
+        });
+      },
+      fail: err => {
+        console.log('agreeerr',err)
+        this.setData({
+          spinShow: false
+        });
+      }
     })
   }
 
