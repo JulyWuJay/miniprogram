@@ -260,14 +260,15 @@ Page({
       }
     })
   },
-  toRefuseApply (e) {
-    console.log('去拒绝',e)
+  toRefuseApply({ currentTarget: { id } }) {
+    const that = this;
     wx.showModal({
       title: '拒绝',
       content: '确认拒绝吗',
       success(res) {
         if (res.confirm) {
           console.log('用户点击确定')
+          that.refuseApply(id)
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
@@ -291,9 +292,38 @@ Page({
         this.setData({
           spinShow: false
         });
+        this.searchUndoApplication()
       },
       fail: err => {
         console.log('agreeerr',err)
+        this.setData({
+          spinShow: false
+        });
+      }
+    })
+  },
+  // 拒绝加分
+  refuseApply (id) {
+    this.setData({
+      spinShow: true
+    });
+    wx.cloud.callFunction({
+      name: 'apply',
+      data: {
+        type: 'refuseApply',
+        props: {
+          id: id
+        }
+      },
+      success: res => {
+        console.log('refuse', res)
+        this.setData({
+          spinShow: false
+        });
+        this.searchUndoApplication()
+      },
+      fail: err => {
+        console.log('refuseErr', err)
         this.setData({
           spinShow: false
         });

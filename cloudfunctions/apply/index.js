@@ -14,6 +14,7 @@ function chooseFunction(event) {
     case 'integrationApply': return integrationApply(event.props);
     case 'searchUndoApplication': return searchUndoApplication(event.props);
     case 'agreeApply': return agreeApply(event.props);
+    case 'refuseApply': return refuseApply(event.props);
   }
 }
 // 添加申请
@@ -76,13 +77,60 @@ async function agreeApply (props) {
   const nowIntegrationData = nowIntegration.data[0];
   const trueIntegration = applyInfoData.integration + nowIntegrationData.integration;
   // 更新分数
-  // const result =  await db.collection('integration').where({
-  //   _id: nowIntegrationData._id
-  // }).update({
-  //   integration: trueIntegration
-  // })
+  const updateIntegration =  await db.collection('integration').where({
+      _id: nowIntegrationData._id
+  }).update({
+    data:{
+      integration: trueIntegration
+    }
+  });
   // 加分记录写进detail
+  const addDetail = await db.collection('integration_detail').add({
+    data: {
+      integration: applyInfo.data[0].integration,
+      date: applyInfo.data[0].application_date,
+      time: applyInfo.data[0].time,
+      status: '同意加分'
+    }
+  })
   // 删除申请的信息
-  return nowIntegrationData;
-
+  const removeAdded = await db.collection(dbName).where({
+    _id: id
+  }).remove();
+  const result = {
+    searchById: applyInfo.errMsg,
+    getNowInteg: nowIntegration.errMsg,
+    updateInteg: updateIntegration.errMsg,
+    addIntegDetail: addDetail.errMsg,
+    removeApply: removeAdded.errMsg
+  }
+  return result;
 } 
+
+async function refuseApply(props) {
+  const id = props.id;
+  // 先根据id查申请的信息
+  const applyInfo = await db.collection(dbName).where({
+    _id: id
+  }).get()
+  // 拒绝记录写进detail
+  const refuseDetail = await db.collection('integration_detail').add({
+    data: {
+      integration: applyInfo.data[0].integration,
+      date: applyInfo.data[0].application_date,
+      time: applyInfo.data[0].time,
+      status: '拒绝加分'
+    }
+  })
+  // 删除申请的信息
+  const removeAdded = await db.collection(dbName).where({
+    _id: id
+  }).remove();
+  const result = {
+    searchById: applyInfo.errMsg,
+    refuseDetail: refuseDetail.errMsg,
+    removeApply: removeAdded.errMsg
+    // msg: 'ok'
+  }
+  return result;
+}
