@@ -8,7 +8,11 @@ Page({
     takeSession: false,
     requestResult: '',
     integration: 0,
-    spinShow: false
+    spinShow: false,
+    currentPage: 0,
+    totalPage: 1,
+    detailList: [],
+    detailLoading: true
   },
 
   onLoad: function() {
@@ -20,6 +24,8 @@ Page({
     // }
     // 获取积分数量
     this.getIntegration();
+    // 查询积分详情
+    this.searchDoneApplication()
     this.onGetOpenid()
     // 获取用户信息
     wx.getSetting({
@@ -39,7 +45,18 @@ Page({
       }
     })
   },
-
+  // 触底
+  onReachBottom() {
+    // 先判断当前页码是不是大于总页码，大于就不加载了
+    if( this.data.currentPage < this.data.totalPage ){
+      this.searchDoneApplication();
+    } else {
+      console.log('不加载')
+      this.setData({
+        detailLoading: false
+      })
+    }
+  },
   onGetUserInfo: function(e) {
     if (!this.logged && e.detail.userInfo) {
       this.setData({
@@ -49,7 +66,28 @@ Page({
       })
     }
   },
-
+  onPullDownRefresh: function() {
+    const that = this;
+    this.setData({
+      currentPage: 0
+    })
+    this.searchDoneApplication()
+    wx.cloud.callFunction({
+      name: 'apply',
+      data: {
+        type: 'searchIntegration'
+      }
+    }).then(
+      res => {
+        console.log('查询积分成功')
+        wx.stopPullDownRefresh()
+        that.setData({
+          integration: res.result.data[0].integration,
+          spinShow: false
+        })
+      }
+    )
+  },
   onGetOpenid: function() {
     // 调用云函数
     wx.cloud.callFunction({
@@ -65,56 +103,6 @@ Page({
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)
-      }
-    })
-  },
-
-  // 上传图片
-  doUpload: function () {
-    // 选择图片
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-
-        wx.showLoading({
-          title: '上传中',
-        })
-
-        const filePath = res.tempFilePaths[0]
-        
-        // 上传图片
-        const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
-        wx.cloud.uploadFile({
-          cloudPath,
-          filePath,
-          success: res => {
-            console.log('[上传文件] 成功：', res)
-
-            app.globalData.fileID = res.fileID
-            app.globalData.cloudPath = cloudPath
-            app.globalData.imagePath = filePath
-            
-            wx.navigateTo({
-              url: '../storageConsole/storageConsole'
-            })
-          },
-          fail: e => {
-            console.error('[上传文件] 失败：', e)
-            wx.showToast({
-              icon: 'none',
-              title: '上传失败',
-            })
-          },
-          complete: () => {
-            wx.hideLoading()
-          }
-        })
-
-      },
-      fail: e => {
-        console.error(e)
       }
     })
   },
@@ -135,6 +123,33 @@ Page({
           integration: res.result.data[0].integration,
           spinShow: false
         })
+      }
+    )
+  },
+  // 查询处理过的积分详情
+  searchDoneApplication() {
+    const that =this;
+    this.setData({
+      detailLoading: true
+    })
+    wx.cloud.callFunction({
+      name: 'apply',
+      data: {
+        type:'searchDoneApplication',
+        props: {
+          currentPage: that.data.currentPage + 1
+        }
+      }
+    }).then(
+      res => {
+        console.log(res.result)
+        that.setData({
+          detailList: res.result.list,
+          totalPage: res.result.totalPage,
+          currentPage: res.result.currentPage,
+          detailLoading: false
+        })
+        console.log(that.data.currentPage)
       }
     )
   }

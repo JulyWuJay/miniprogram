@@ -16,6 +16,7 @@ function chooseFunction(event) {
     case 'agreeApply': return agreeApply(event.props);
     case 'refuseApply': return refuseApply(event.props);
     case 'searchIntegration': return searchIntegration(); 
+    case 'searchDoneApplication': return searchDoneApplication(event.props);
   }
 }
 // 添加申请
@@ -138,4 +139,23 @@ async function refuseApply(props) {
 
 function searchIntegration() {
   return db.collection('integration').get()
+}
+
+// 查询已经处理过的申请 要分页 每页10条数据
+// props currentPage 
+async function searchDoneApplication(props) {
+  const MAX = 10;
+  const LIMIT = MAX * props.currentPage;
+  // return 'search ok'
+  const count = await db.collection('integration_detail').count();
+  const total = (count.total > MAX) ? Math.ceil(count.total / MAX) : 1;
+  const all = await db.collection('integration_detail').orderBy('time', 'desc').limit(LIMIT).get();
+  const result = {
+    totalPage: total,
+    list: all.data,
+    currentPage: props.currentPage,
+    allListNum: count.total,
+    status: 'ok'
+  }
+  return result
 }

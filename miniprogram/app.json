@@ -10,7 +10,8 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f759ab",
     "navigationBarTitleText": "DTS",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {
@@ -51,6 +52,6 @@
     "i-modal": "./dist/modal/index",
     "i-toast": "./dist/toast/index",
     "i-message": "./dist/message/index",
-    "i-tag": "./dist/tag/index"
+    "i-tag": "./dist/tag/index"  
   }
 }

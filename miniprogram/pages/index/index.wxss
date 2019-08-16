@@ -6,18 +6,40 @@ page {
   flex-direction: column;
   justify-content: flex-start;
 }
-.top{
-  width:100%;
+
+.top {
+  width: 100%;
   height: 250px;
   background: #f759ab;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.card{
-  width:90%;
-  height:180px;
+
+.card {
+  width: 90%;
+  height: 180px;
   /* border: 1px solid black; */
   border-radius: 4px;
   background: #f8f8f9;
+}
+
+.detail-title {
+  width: 90%;
+  margin: 0 auto;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  color: #1c2438;
+}
+
+.detail-item {
+  width: 90%;
+  margin: 0 auto;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #1c2438;
+  border-bottom: 1px #e9eaec solid
 }

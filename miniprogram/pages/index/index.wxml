@@ -2,13 +2,30 @@
 <view class="container">
   <view class="top">
     <view class="card">
-    {{integration}}
+      {{integration}}
     </view>
   </view>
 </view>
+<view>
+  <view class="detail-title">
+    <i-tag class="i-tags" name="标签一" color="green" type="border">
+    申请积分详情
+    </i-tag>
+  </view>
+  <view class="detail-item" wx:for="{{detailList}}" wx:key="{{item._id}}">
+    <text>{{item.date}}</text>
+    <text>{{item.integration}}分</text>
+    <i-tag wx:if="{{item.status === '拒绝加分'}}" class="i-tags" name="{{item.status}}" color="red">
+      {{item.status}}
+    </i-tag>
+    <i-tag  wx:if="{{item.status === '同意加分'}}" class="i-tags" name="{{item.status}}" color="blue">
+      {{item.status}}
+    </i-tag>
+  </view>
+</view>
+<i-load-more tip="笨蛋到底啦" loading="{{ detailLoading }}" />
 
 <!-- 加载 -->
 <view class="container" wx:if="{{ spinShow }}">
   <i-spin fix></i-spin>
 </view>
-
