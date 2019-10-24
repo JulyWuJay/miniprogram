@@ -2,20 +2,42 @@
 <view class="container">
   <view class="top">
     <view class="card">
-      {{integration}}
+      <view class="card-header">
+        <image class="avatar" src="{{ avatarUrl }}"></image>
+        <view>欢迎亲爱的 
+         {{userInfo.nickName}}
+        </view>
+      </view>
+      <view class="card-bottom">
+        <view class="card-bottom-left">
+            <view>
+              可用积分
+            </view>
+            <view>
+              {{integration}}
+            </view>
+            <view bindtap="toExchange">兑换</view>
+        </view>
+        <view class="card-bottom-right">
+            总积分:
+            {{all}}
+          <!-- <image src="../../images/gift.png" style="width:128px;height:128px"></image> -->
+          <!-- 积分兑换 -->
+        </view>
+      </view>
     </view>
   </view>
 </view>
 <view>
   <view class="detail-title">
     <i-tag class="i-tags" name="标签一" color="green" type="border">
-    申请积分详情
+    积分详情
     </i-tag>
   </view>
   <view class="detail-item" wx:for="{{detailList}}" wx:key="{{item._id}}">
     <text>{{item.date}}</text>
     <text>{{item.integration}}分</text>
-    <i-tag wx:if="{{item.status === '拒绝加分'}}" class="i-tags" name="{{item.status}}" color="red">
+    <i-tag wx:if="{{item.status !== '同意加分'}}" class="i-tags" name="{{item.status}}" color="red">
       {{item.status}}
     </i-tag>
     <i-tag  wx:if="{{item.status === '同意加分'}}" class="i-tags" name="{{item.status}}" color="blue">

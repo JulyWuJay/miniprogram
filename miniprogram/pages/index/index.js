@@ -1,5 +1,7 @@
 //index.js
 const app = getApp();
+const timer = require('../../js/changeTime.js')
+
 Page({
   data: {
     avatarUrl: './user-unlogin.png',
@@ -8,6 +10,7 @@ Page({
     takeSession: false,
     requestResult: '',
     integration: 0,
+    all: 0,
     spinShow: false,
     currentPage: 0,
     totalPage: 1,
@@ -34,7 +37,7 @@ Page({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
-              // console.log('u',res)
+              console.table('userinfo',res)
               this.setData({
                 avatarUrl: res.userInfo.avatarUrl,
                 userInfo: res.userInfo
@@ -67,26 +70,7 @@ Page({
     }
   },
   onPullDownRefresh: function() {
-    const that = this;
-    this.setData({
-      currentPage: 0
-    })
-    this.searchDoneApplication()
-    wx.cloud.callFunction({
-      name: 'apply',
-      data: {
-        type: 'searchIntegration'
-      }
-    }).then(
-      res => {
-        console.log('查询积分成功')
-        wx.stopPullDownRefresh()
-        that.setData({
-          integration: res.result.data[0].integration,
-          spinShow: false
-        })
-      }
-    )
+    this.init()
   },
   onGetOpenid: function() {
     // 调用云函数
@@ -105,6 +89,29 @@ Page({
         console.error('[云函数] [login] 调用失败', err)
       }
     })
+  },
+  init() {
+    const that = this;
+    this.setData({
+      currentPage: 0
+    })
+    this.searchDoneApplication()
+    wx.cloud.callFunction({
+      name: 'apply',
+      data: {
+        type: 'searchIntegration'
+      }
+    }).then(
+      res => {
+        console.log('查询积分成功')
+        wx.stopPullDownRefresh()
+        that.setData({
+          integration: res.result.data[0].integration,
+          all: res.result.data[0].all,
+          spinShow: false
+        })
+      }
+    )
   },
   getIntegration () {
     const that = this;
@@ -142,7 +149,7 @@ Page({
       }
     }).then(
       res => {
-        console.log(res.result)
+        console.log('datalist',res.result)
         that.setData({
           detailList: res.result.list,
           totalPage: res.result.totalPage,
@@ -150,6 +157,54 @@ Page({
           detailLoading: false
         })
         console.log(that.data.currentPage)
+      }
+    )
+  },
+  toExchange() {
+    const that = this;
+    if (this.data.integration < 1000){
+      // console.log(this.data.integration)
+      wx.showToast({
+        title: '笨蛋，积分不足，要攒到1000分',
+        icon: 'none',
+        duration: 2000
+      })
+    } else {
+      wx.showModal({
+        title: '兑换',
+        content: '确定用1000积分兑换一个DTS吗',
+        success(res) {
+          if (res.confirm) {
+            that.exchange()
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    }
+  },
+  exchange() {
+    const that = this;
+    console.log('exchange')
+    const date = timer.changeTime(new Date());
+    const time = Date.now();
+    // const time = Date.now()
+    console.log(time)
+    wx.cloud.callFunction({
+      name: 'apply',
+      data: {
+        type: 'exchangeIntegration',
+        props: {
+          time: time,
+          date: date
+          // currentPage: that.data.currentPage + 1
+        }
+      }
+    }).then(
+      res => {
+        console.log(res)
+        that.init()
       }
     )
   }

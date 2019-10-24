@@ -17,6 +17,10 @@ function chooseFunction(event) {
     case 'refuseApply': return refuseApply(event.props);
     case 'searchIntegration': return searchIntegration(); 
     case 'searchDoneApplication': return searchDoneApplication(event.props);
+    case 'exchangeIntegration': return exchangeIntegration(event.props);
+    case 'searchDtsDetail': return searchDtsDetail(event.props);
+    case 'searchDts': return searchDts();
+    case 'useDts': return useDts(event.props);
   }
 }
 // 添加申请
@@ -77,13 +81,16 @@ async function agreeApply (props) {
   const nowIntegration = await db.collection('integration').get();
   // 当前的分数
   const nowIntegrationData = nowIntegration.data[0];
+
   const trueIntegration = applyInfoData.integration + nowIntegrationData.integration;
+  const trueAll = applyInfoData.integration + nowIntegrationData.all;
   // 更新分数
   const updateIntegration =  await db.collection('integration').where({
       _id: nowIntegrationData._id
   }).update({
     data:{
-      integration: trueIntegration
+      integration: trueIntegration,
+      all: trueAll
     }
   });
   // 加分记录写进detail
@@ -92,7 +99,8 @@ async function agreeApply (props) {
       integration: applyInfo.data[0].integration,
       date: applyInfo.data[0].application_date,
       time: applyInfo.data[0].time,
-      status: '同意加分'
+      status: '同意加分',
+      description: applyInfo.data[0].description
     }
   })
   // 删除申请的信息
@@ -121,7 +129,8 @@ async function refuseApply(props) {
       integration: applyInfo.data[0].integration,
       date: applyInfo.data[0].application_date,
       time: applyInfo.data[0].time,
-      status: '拒绝加分'
+      status: '拒绝加分',
+      description: applyInfo.data[0].description
     }
   })
   // 删除申请的信息
@@ -158,4 +167,117 @@ async function searchDoneApplication(props) {
     status: 'ok'
   }
   return result
+}
+
+async function exchangeIntegration(props) {
+  const nowIntegration = await db.collection('integration').get();
+  // 当前的分数
+  const nowIntegrationData = nowIntegration.data[0];
+
+  const trueIntegration = nowIntegrationData.integration - 1000;
+  // const trueAll = applyInfoData.integration + nowIntegrationData.all;
+  // 更新分数
+  const updateIntegration = await db.collection('integration').where({
+    _id: nowIntegrationData._id
+  }).update({
+    data: {
+      integration: trueIntegration
+    }
+  });
+  // 加分记录写进detail
+  const addIntegrationDetail = await db.collection('integration_detail').add({
+    data: {
+      integration: 1000,
+      date: props.date,
+      time: props.time,
+      status: '兑换DTS'
+    }
+  })
+
+  // 扣掉积分
+  // 获取现在的dts分数
+  const nowDtsInfo = await db.collection('dts').get();
+  const nowDtsInfoId = nowDtsInfo._id;
+  const nowDts = nowDtsInfo.data[0];
+  const dtsAll = nowDts.all;
+  const dts = nowDts.dts;
+  //dts + 1
+  const updateDts = await db.collection('dts').where({
+    _id: nowDtsInfoId
+  }).update({
+    data: {
+      all: dtsAll + 1,
+      dts: dts + 1
+    }
+  });
+  // dts记录
+  // 记录写进detail
+  const addDtsDetail = await db.collection('dts_detail').add({
+    data: {
+      dts: 1,
+      date:props.date,
+      time: props.time,
+      type: '兑换'
+    }
+  })
+  return addDtsDetail
+  // dts加1
+}
+
+// 查询dts detail 要分页 每页10条数据
+// props currentPage 
+async function searchDtsDetail(props) {
+  const MAX = 10;
+  const LIMIT = MAX * props.currentPage;
+  // return 'search ok'
+  const count = await db.collection('dts_detail').count();
+  const total = (count.total > MAX) ? Math.ceil(count.total / MAX) : 1;
+  const all = await db.collection('dts_detail').orderBy('time', 'desc').limit(LIMIT).get();
+  const result = {
+    totalPage: total,
+    list: all.data,
+    currentPage: props.currentPage,
+    allListNum: count.total,
+    status: 'ok'
+  }
+  return result
+}
+
+async function searchDts() {
+  const result = await db.collection('dts').get();
+  return result.data[0]
+
+}
+
+async function useDts(props) {
+  // 扣掉dts
+  // 添加进detail
+
+  // 扣掉积分
+  // 获取现在的dts分数
+  const nowDtsInfo = await db.collection('dts').get();
+  const nowDtsInfoId = nowDtsInfo._id;
+  const nowDts = nowDtsInfo.data[0];
+  // const dtsAll = nowDts.all;
+  const dts = nowDts.dts;
+  //dts + 1
+  const updateDts = await db.collection('dts').where({
+    _id: nowDtsInfoId
+  }).update({
+    data: {
+      dts: dts - 1
+    }
+  });
+  // dts记录
+  // 记录写进detail
+  const addDtsDetail = await db.collection('dts_detail').add({
+    data: {
+      dts: 1,
+      date: props.date,
+      time: props.time,
+      type: '使用'
+    }
+  })
+  return addDtsDetail
+
 }
