@@ -25,6 +25,7 @@ Page({
     //   })
     //   return
     // }
+    this.init()
     // 获取积分数量
     this.getIntegration();
     // 查询积分详情
