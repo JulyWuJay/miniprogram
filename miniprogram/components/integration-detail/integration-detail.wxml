@@ -1,0 +1,19 @@
+<!--components/integration-detail/integration-detail.wxml-->
+<view class='out'>
+  <view class='top' bindtap='showDetail'>
+    <view class='date'>
+      {{detail.date}}
+      <!-- 2019-12-17 00:06 -->
+    </view>
+    <view class='integration'>
+      {{detail.integration}}
+      分
+    </view>
+    <view class="{{detail.status == '同意加分' ? 'agree' : 'disagree'}}">
+      {{detail.status}}      
+    </view>
+  </view>
+  <view class='description' wx-if="{{isShow}}">
+      {{detail.description}}
+  </view>
+</view>

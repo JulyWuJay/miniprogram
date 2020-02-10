@@ -1,32 +1,57 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/error/needLogin/needLogin",
-    "pages/people/student/all/allStudent",
-    "pages/people/student/individual/individual",
-    "pages/people/student/add/addStudent",
-    "pages/people/teacher/all/allTeacher",
-    "pages/people/teacher/add/addTeacher",
-    "pages/people/teacher/individual/individual",
-    "pages/school/clazz/all/allClazz",
-    "pages/school/clazz/add/addClazz",
-    "pages/school/clazz/individual/individual",
-    "pages/school/subject/all/allSubject",
-    "pages/school/subject/add/addSubject",
-    "pages/thing/book/all/allBook",
-    "pages/thing/book/individual/individual",
-    "pages/thing/book/add/addBookKind",
-    "pages/school/subject/individual/individual",
-    "pages/school/time/all/all",
-    "pages/school/time/individual/individual",
-    "pages/school/time/chooseSubject/chooseSubject"
+    "pages/application/application",
+    "pages/integration/integration",
+    "pages/dts/dts"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
+    "backgroundColor": "#f759ab",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "学员信息管理系统",
-    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#f759ab",
+    "navigationBarTitleText": "DTS",
+    "navigationBarTextStyle": "white",
     "enablePullDownRefresh": true
+  },
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#f759ab",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "./images/tabbar/integration.png",
+        "iconPath": "./images/tabbar/integration.png",
+        "pagePath": "pages/index/index",
+        "text": "积分"
+      },
+      {
+        "selectedIconPath": "./images/tabbar/add.png",
+        "iconPath": "./images/tabbar/add.png",
+        "pagePath": "pages/application/application",
+        "text": "加分"
+      },
+      {
+        "selectedIconPath": "./images/tabbar/dts.png",
+        "iconPath": "./images/tabbar/dts.png",
+        "pagePath": "pages/dts/dts",
+        "text": "DTS"
+      }
+    ]
+  },
+  "usingComponents": {
+    "i-button": "./dist/button/index",
+    "i-input": "./dist/input/index",
+    "i-rate": "./dist/rate/index",
+    "i-panel": "./dist/panel/index",
+    "i-spin": "./dist/spin/index",
+    "i-collapse": "./dist/collapse/index",
+    "i-collapse-item": "./dist/collapse-item/index",
+    "i-page": "./dist/page/index",
+    "i-load-more": "./dist/load-more/index",
+    "i-modal": "./dist/modal/index",
+    "i-toast": "./dist/toast/index",
+    "i-message": "./dist/message/index",
+    "i-tag": "./dist/tag/index"  
   }
 }

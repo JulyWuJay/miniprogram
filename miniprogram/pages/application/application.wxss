@@ -1,0 +1,6 @@
+/* miniprogram/pages/application/application.wxss */
+.rate{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

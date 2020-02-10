@@ -1,0 +1,53 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="top">
+    <view class="card">
+      <view class="card-header">
+        <!-- <image class="avatar" src="{{ avatarUrl }}"></image> -->
+        <view>
+        喜欢小森森呀
+        </view>
+      </view>
+      <view class="card-bottom">
+        <view class="card-bottom-left">
+            <view>
+              可用积分
+            </view>
+            <view>
+              {{dts.dts}}
+            </view>
+            <view bindtap="toUseDts">使用DTS</view>
+        </view>
+        <view class="card-bottom-right">
+            历史DTS数量:
+            {{dts.all}}
+          <!-- <image src="../../images/gift.png" style="width:128px;height:128px"></image> -->
+          <!-- 积分兑换 -->
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view>
+  <view class="detail-title">
+    <i-tag class="i-tags" name="标签一" color="green" type="border">
+    DTS详情
+    </i-tag>
+  </view>
+  <view class="detail-item" wx:for="{{detailList}}" wx:key="{{item._id}}">
+    <text>{{item.date}}</text>
+    <text>{{item.dts}}DTS</text>
+    <i-tag wx:if="{{item.type === '使用'}}" class="i-tags" name="{{item.status}}" color="red">
+      {{item.type}}
+    </i-tag>
+    <i-tag  wx:if="{{item.type === '兑换'}}" class="i-tags" name="{{item.status}}" color="blue">
+      {{item.type}}
+    </i-tag>
+  </view>
+</view>
+<i-load-more tip="笨蛋到底啦" loading="{{ detailLoading }}"/>
+
+<!-- 加载 -->
+<!-- <view class="container" wx:if="{{ spinShow }}">
+  <i-spin fix></i-spin>
+</view> -->

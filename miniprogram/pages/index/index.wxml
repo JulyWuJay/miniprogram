@@ -1,85 +1,45 @@
+<!--index.wxml-->
 <view class="container">
-
-  <!-- 用户 openid -->
-  <view class="userinfo">
-    <button 
-      open-type="getUserInfo" 
-      bindgetuserinfo="onGetUserInfo"
-      class="userinfo-avatar"
-      style="background-image: url({{avatarUrl}})"
-    ></button>
-    <view>
-      <!-- <button class="userinfo-nickname" bindtap="onGetOpenid">点击获取 openid</button> -->
-      <text>欢迎：{{userInfo.nickName}}</text>
+  <view class="top">
+    <view class="card">
+      <view class="card-header">
+        <image class="avatar" src="{{ avatarUrl }}"></image>
+        <view>欢迎亲爱的 
+         {{userInfo.nickName}}
+        </view>
+      </view>
+      <view class="card-bottom">
+        <view class="card-bottom-left">
+            <view>
+              可用积分
+            </view>
+            <view>
+              {{integration}}
+            </view>
+            <view bindtap="toExchange">兑换</view>
+        </view>
+        <view class="card-bottom-right">
+            总积分:
+            {{all}}
+          <!-- <image src="../../images/gift.png" style="width:128px;height:128px"></image> -->
+          <!-- 积分兑换 -->
+        </view>
+      </view>
     </view>
   </view>
-
-  <!-- 教学管理 -->
-  <view class='main' style='display:{{footerChosed == "school" ? "" : "none"}}'>
-    <view class="uploader">
-      <navigator url="../school/time/all/all" open-type="navigate" class="uploader-text">
-        <text>时间安排</text>
-      </navigator>
-    </view>
-    <view class="uploader">
-      <navigator url="../school/subject/all/allSubject" open-type="navigate" class="uploader-text">
-        <text>学科设置</text>
-      </navigator>
-    </view>
-    <view class="uploader">
-      <navigator url="../school/clazz/all/allClazz" open-type="navigate" class="uploader-text">
-        <text>班级设置</text>
-      </navigator>
-    </view>
+</view>
+<view>
+  <view class="detail-title">
+    <i-tag class="i-tags" name="标签一" color="green" type="border">
+    积分详情
+    </i-tag>
   </view>
+  <view style='width:100%;height:10rpx;'></view>
+  <detail wx:for="{{detailList}}" wx:key="{{item._id}}" wx:for-item="item" detail="{{item}}"></detail>
+</view>
+<i-load-more tip="笨蛋到底啦" loading="{{ detailLoading }}" />
 
-  <!-- 物品管理 -->
-  <view class='main' style='display:{{footerChosed == "thing" ? "" : "none"}}'>
-    <view class="uploader">
-      <navigator url="../thing/book/all/allBook" open-type="navigate" class="uploader-text">
-        <text>书本管理</text>
-      </navigator>
-    </view>
-    <!-- <view class="uploader">
-      <navigator url="../addFunction/addFunction" open-type="navigate" class="uploader-text">
-        <text>器械管理</text>
-      </navigator>
-    </view>
-    <view class="uploader">
-      <navigator url="../addFunction/addFunction" open-type="navigate" class="uploader-text">
-        <text>缴费情况</text>
-      </navigator>
-    </view> -->
-  </view>
-
-  <!-- 师生管理 -->
-  <view class='main' style='display:{{footerChosed == "people" ? "" : "none"}}'>
-    <view class="uploader">
-      <navigator url="../people/student/all/allStudent" open-type="navigate" class="uploader-text">
-        <text>学生信息</text>
-      </navigator>
-    </view>
-    <view class="uploader">
-      <navigator url="../people/teacher/all/allTeacher" open-type="navigate" class="uploader-text">
-        <text>教员信息</text>
-      </navigator>
-    </view>
-  </view>
-
-<!-- 底部切换 -->
-  <view class='footer-nav'>
-    <view class='footer-nav-child' id='school' bindtap='chooseTab'>
-      <image class='footer-icon' src='{{footerChosed == "school" ? tabIconUrl.chosed.school : tabIconUrl.unchosed.school}}'></image>      
-      <text class='{{footerChosed == "school" ? "tab-text-chosed" : ""}}'>教学管理</text>
-    </view>
-    <view class='footer-nav-child' id='thing' bindtap='chooseTab'>
-      <image class='footer-icon' src="{{footerChosed == 'thing' ? tabIconUrl.chosed.thing : tabIconUrl.unchosed.thing}}"></image>      
-      <text class='{{footerChosed == "thing" ? "tab-text-chosed" : "" }}'>物品管理</text>      
-    </view>
-    <view class='footer-nav-child' id='people' bindtap='chooseTab'>
-      <image class='footer-icon' src="{{footerChosed == 'people' ? tabIconUrl.chosed.people : tabIconUrl.unchosed.people}}"></image>            
-      <text class='{{footerChosed == "people" ? "tab-text-chosed" : ""}}'>师生管理</text>
-    </view>
-  </view>
-
+<!-- 加载 -->
+<view class="container" wx:if="{{ spinShow }}">
+  <i-spin fix></i-spin>
 </view>

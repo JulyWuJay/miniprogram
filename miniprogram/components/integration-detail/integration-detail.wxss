@@ -1,0 +1,66 @@
+/* components/integration-detail/integration-detail.wxss */
+.out{
+  /* width: 100%; */
+  /* height: 100rpx; */
+  /* background: red; */
+  border-bottom: 1rpx solid #e9eaec;
+
+  width: 90%;
+  margin: 0 auto;
+  /* height: 80rpx; */
+}
+.top{
+  width:100%;
+  height: 70rpx;
+  /* background: red; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.date{
+  width: 350rpx;
+  height: 70rpx;
+}
+.integration{
+  width: 120rpx;
+  height: 70rpx;
+}
+.status{
+  width: 106rpx;
+  height: 40rpx;
+  font-size: 22rpx;
+  background: #2d8cf0;
+  color: #fff;
+  text-align: center;
+  line-height: 40rpx;
+  border:1rpx solid #2d8cf0;
+  border-radius: 4rpx;
+}
+.description{
+  /* width: 100%; */
+  width: calc(100% - 40rpx);
+  padding: 20rpx;
+  background: #fff;
+}
+.agree{
+  width: 106rpx;
+  height: 40rpx;
+  font-size: 22rpx;
+  background: #2d8cf0;
+  color: #fff;
+  text-align: center;
+  line-height: 40rpx;
+  border:1rpx solid #2d8cf0;
+  border-radius: 4rpx;
+}
+.disagree{
+  width: 106rpx;
+  height: 40rpx;
+  font-size: 22rpx;
+  background: #ed3f14;
+  color: #fff;
+  text-align: center;
+  line-height: 40rpx;
+  border:1rpx solid #ed3f14;
+  border-radius: 4rpx;
+}
