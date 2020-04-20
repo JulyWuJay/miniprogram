@@ -1,0 +1,16 @@
+<!--pages/welcome/welcome.wxml-->
+<view class='main'>
+  <view class='head-box'>
+    <open-data class="headIcon" type="userAvatarUrl" />
+  </view>
+  <view class='tips-box'>
+    <view class='tips-blod'>DTS申请获得以下权限：</view>
+    <view>获得你的公开信息(昵称，头像等)</view>
+  </view>
+  <view class='btn-box'>
+    <button lang='zh_CN' open-type='getUserInfo' bindgetuserinfo="getUserInfo" class='auth-btn'>确认授权</button>
+  </view>
+  <view class='btn-box' style="margin-top:30rpx;">
+    <button bindtap="back" class='auth-btn' style="background:#999;">拒绝</button>
+  </view>
+</view>
